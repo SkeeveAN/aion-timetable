@@ -12,6 +12,7 @@ apps/overlay/dist/
 # Backend
 apps/backend/data/*.sqlite
 apps/backend/data/*.sqlite-*
+apps/backend/.playwright-browsers/
 
 # Logs
 *.log
