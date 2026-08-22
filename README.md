@@ -88,6 +88,20 @@ Da das Fenster bewusst ohne Titelleiste/Schließen-Button läuft, gibt es zusät
 
 Aktuell produktiv unter `timetable.skeeve.tv` betrieben: Node.js + systemd-Service (kein Docker), SQLite lokal auf dem Server, nginx als TLS-Reverse-Proxy (inkl. WebSocket-Upgrade für `/ws`), Zertifikat via certbot. Der Scraper läuft stündlich als Teil des Backend-Prozesses (`node-cron`).
 
+Das Server-Verzeichnis (`/opt/timetable`) ist ein normaler Git-Checkout dieses Repos. Updates laufen über das Skript unter [`deploy/timetable_install.sh`](deploy/timetable_install.sh): es zieht den aktuellen `main`-Branch, installiert die Backend-Abhängigkeiten, wendet ausstehende DB-Migrationen an, aktualisiert die systemd-Unit ([`deploy/aion-timetable-backend.service`](deploy/aion-timetable-backend.service)) und startet den Service neu.
+
+Einmalig einrichten (als root auf dem Server):
+
+```bash
+ln -s /opt/timetable/deploy/timetable_install.sh /usr/local/bin/timetable_install
+```
+
+Danach reicht für jedes Update:
+
+```bash
+timetable_install
+```
+
 ## Offene Punkte
 
 - Level-Anforderungen für Dredgions sind noch von einem anderen 4.6-Server übernommen (Arena-Werte sind für originaion.com bereits direkt bestätigt) und sollten final gegen den echten Server verifiziert werden, sobald er wieder online ist.

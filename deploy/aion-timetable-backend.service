@@ -1,0 +1,21 @@
+[Unit]
+Description=AION Timetable Overlay - Backend API/WS/Scraper
+After=network.target
+
+[Service]
+Type=simple
+User=aion-timetable
+Group=aion-timetable
+WorkingDirectory=/opt/timetable/apps/backend
+EnvironmentFile=/opt/timetable/apps/backend/.env
+ExecStart=/opt/timetable/apps/backend/node_modules/.bin/tsx /opt/timetable/apps/backend/src/index.ts
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/timetable/apps/backend/data
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
