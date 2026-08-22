@@ -109,6 +109,20 @@ timetable_install
 
 `deploy/timetable_install` bir gün değişirse, yukarıdaki `cp` adımını bir kez daha tekrarlayın.
 
+## Yayınlar (Releases)
+
+`v0.1.0` gibi bir etiketi push etmek (veya iş akışını Actions sekmesinden manuel olarak çalıştırmak) [`.github/workflows/release.yml`](.github/workflows/release.yml)'i tetikler; bu da Windows yükleyicisini derler ve şunları içeren bir GitHub Release yayınlar:
+- `AION-Timetable-Overlay_x.y.z_x64-setup.exe` – NSIS yükleyici
+- `AION-Timetable-Overlay_x.y.z_x64-setup.nsis.zip` – kurulum gerektirmeyen taşınabilir ZIP
+- `latest.json` – uygulamanın yerleşik güncelleyicisinin karşılaştırdığı imzalı manifest
+
+Bir defaya mahsus `TAURI_SIGNING_PRIVATE_KEY` ve `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` depo sırlarının (Settings → Secrets and variables → Actions) ayarlanmasını gerektirir.
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
 ## Dünya boss verisi kalitesi
 
 23 dünya boss'u/keymaster'ın farklı güven seviyeleri vardır (bkz. `apps/backend/src/db/seed.ts` içindeki yorumlar):
@@ -123,4 +137,3 @@ Kasıtlı olarak hariç tutuldu: Isbariya the Resolute, Hyperion ve Queen Modor 
 - Dredgion'lar için seviye gereksinimleri hâlâ başka bir 4.6 sunucusundan alınmıştır (arena değerleri originaion.com için zaten doğrudan onaylanmıştır) ve sunucu tekrar çevrimiçi olduğunda gerçek sunucuya karşı nihai olarak doğrulanmalıdır.
 - Tiamaranta's Eye haritasındaki (ve diğer bölgelerdeki) dünya boss konumları için tıklama koordinatları henüz sabitlenmemiştir (liste tabanlı seçim zaten çalışıyor, tıklanabilir harita işaretçileri daha sonra gelecek).
 - 21 yeni dünya boss'u henüz 7 dilin tümüne çevrilmemiştir (İngilizce isme geri döner).
-- Otomatik GitHub yayınları (yükleyici + ZIP + otomatik güncelleyici) için henüz bir CI/CD iş akışı yok.

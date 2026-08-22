@@ -109,6 +109,20 @@ timetable_install
 
 Si `deploy/timetable_install` cambia alguna vez, repite el paso `cp` anterior una vez.
 
+## Releases
+
+Al hacer push de una etiqueta como `v0.1.0` (o ejecutar el workflow manualmente desde la pestaña Actions) se activa [`.github/workflows/release.yml`](.github/workflows/release.yml), que compila el instalador de Windows y publica una GitHub Release con:
+- `AION-Timetable-Overlay_x.y.z_x64-setup.exe` – instalador NSIS
+- `AION-Timetable-Overlay_x.y.z_x64-setup.nsis.zip` – ZIP portátil, sin instalación necesaria
+- `latest.json` – manifiesto firmado contra el que verifica el actualizador integrado de la app
+
+Requiere configurar una sola vez los secretos del repositorio `TAURI_SIGNING_PRIVATE_KEY` y `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` (Settings → Secrets and variables → Actions).
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
 ## Calidad de los datos de jefes de mundo
 
 Los 23 jefes de mundo/keymasters tienen distintos niveles de confianza (ver comentarios en `apps/backend/src/db/seed.ts`):
@@ -123,4 +137,3 @@ Excluidos deliberadamente: Isbariya the Resolute, Hyperion y Queen Modor (las 4 
 - Los requisitos de nivel para los dredgions todavía se toman de otro servidor 4.6 (los valores de las arenas ya están confirmados directamente para originaion.com) y deberían verificarse finalmente contra el servidor real una vez que vuelva a estar en línea.
 - Las coordenadas de clic para las ubicaciones de los jefes de mundo en el mapa de Tiamaranta's Eye (y las otras zonas) aún no están fijadas (la selección por lista ya funciona, los marcadores de mapa clicables vendrán después).
 - Los 21 nuevos jefes de mundo todavía no están traducidos a los 7 idiomas (usan el nombre en inglés como respaldo).
-- Todavía no hay un flujo de CI/CD para releases automáticos en GitHub (instalador + ZIP + auto-actualizador).

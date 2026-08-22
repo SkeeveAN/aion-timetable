@@ -109,6 +109,20 @@ timetable_install
 
 Si `deploy/timetable_install` change un jour, répétez une fois l'étape `cp` ci-dessus.
 
+## Releases
+
+Pousser un tag comme `v0.1.0` (ou lancer le workflow manuellement depuis l'onglet Actions) déclenche [`.github/workflows/release.yml`](.github/workflows/release.yml), qui compile l'installeur Windows et publie une Release GitHub avec :
+- `AION-Timetable-Overlay_x.y.z_x64-setup.exe` – installeur NSIS
+- `AION-Timetable-Overlay_x.y.z_x64-setup.nsis.zip` – ZIP portable, aucune installation nécessaire
+- `latest.json` – manifeste signé contre lequel le module de mise à jour intégré de l'application vérifie
+
+Nécessite de configurer une seule fois les secrets de dépôt `TAURI_SIGNING_PRIVATE_KEY` et `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` (Settings → Secrets and variables → Actions).
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
 ## Qualité des données des boss du monde
 
 Les 23 boss du monde/keymasters ont différents niveaux de confiance (voir les commentaires dans `apps/backend/src/db/seed.ts`) :
@@ -123,4 +137,3 @@ Exclus délibérément : Isbariya the Resolute, Hyperion et Queen Modor (les 4 v
 - Les exigences de niveau pour les dredgions sont encore reprises d'un autre serveur 4.6 (les valeurs des arènes sont déjà directement confirmées pour originaion.com) et devraient être finalement vérifiées par rapport au serveur réel une fois qu'il sera de nouveau en ligne.
 - Les coordonnées de clic pour les emplacements des boss du monde sur la carte de Tiamaranta's Eye (et les autres zones) ne sont pas encore fixées (la sélection par liste fonctionne déjà, les marqueurs de carte cliquables suivront).
 - Les 21 nouveaux boss du monde ne sont pas encore traduits dans les 7 langues (repli sur le nom anglais).
-- Aucun workflow CI/CD pour les releases GitHub automatiques (installeur + ZIP + auto-updater) n'existe encore.

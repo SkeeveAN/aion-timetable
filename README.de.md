@@ -109,6 +109,20 @@ timetable_install
 
 Falls sich `deploy/timetable_install` selbst mal ändert, einmalig den `cp`-Schritt oben wiederholen.
 
+## Releases
+
+Ein Tag wie `v0.1.0` pushen (oder den Workflow manuell im Actions-Tab starten) löst [`.github/workflows/release.yml`](.github/workflows/release.yml) aus, das den Windows-Installer baut und eine GitHub Release veröffentlicht mit:
+- `AION-Timetable-Overlay_x.y.z_x64-setup.exe` – NSIS-Installer
+- `AION-Timetable-Overlay_x.y.z_x64-setup.nsis.zip` – portables ZIP, keine Installation nötig
+- `latest.json` – signiertes Manifest, gegen das der eingebaute Updater der App prüft
+
+Erfordert einmalig die Repository-Secrets `TAURI_SIGNING_PRIVATE_KEY` und `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` (Settings → Secrets and variables → Actions).
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
 ## Weltboss-Datenqualität
 
 Die 23 Weltbosse/Keymaster haben unterschiedliche Vertrauensstufen (siehe Kommentare in `apps/backend/src/db/seed.ts`):
@@ -123,4 +137,3 @@ Bewusst ausgeschlossen: Isbariya the Resolute, Hyperion und Queen Modor (alle 4 
 - Level-Anforderungen für Dredgions sind noch von einem anderen 4.6-Server übernommen (Arena-Werte sind für originaion.com bereits direkt bestätigt) und sollten final gegen den echten Server verifiziert werden, sobald er wieder online ist.
 - Klick-Koordinaten für die Weltboss-Orte auf der Tiamaranta's-Eye-Karte (und den anderen Zonen) sind noch nicht gepinnt (Listenauswahl funktioniert bereits, klickbare Kartenmarker folgen).
 - Die 21 neuen Weltbosse sind noch nicht in alle 7 Sprachen übersetzt (fallen auf den englischen Namen zurück).
-- CI/CD-Workflow für automatische GitHub-Releases (Installer + ZIP + Auto-Updater) ist noch nicht eingerichtet.
