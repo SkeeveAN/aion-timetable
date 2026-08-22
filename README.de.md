@@ -135,5 +135,5 @@ Bewusst ausgeschlossen: Isbariya the Resolute, Hyperion und Queen Modor (alle 4 
 ## Offene Punkte
 
 - Level-Anforderungen für Dredgions sind noch von einem anderen 4.6-Server übernommen (Arena-Werte sind für originaion.com bereits direkt bestätigt) und sollten final gegen den echten Server verifiziert werden, sobald er wieder online ist.
-- Tiamaranta's Eye (Dabra/Zumita) hat jetzt eine echte Karte mit klickbaren Markern (Koordinaten und das Kartenbild selbst stammen von aioncodex.com); die Weltbosse der anderen Zonen nutzen noch reine Listenauswahl.
+- Alle Weltbosse haben jetzt echte klickbare Kartenmarker (Heiron, Inggison, Gelkmaros, Reshanta, Sarpan, Tiamaranta, Tiamaranta's Eye, Eltnen) – Koordinaten und Kartenbilder stammen beide von aioncodex.com; nur für Commander Sunayaka gibt es dort keine Kartendaten, er nutzt weiterhin reine Listenauswahl.
 - Die 21 neuen Weltbosse sind noch nicht in alle 8 Sprachen übersetzt (fallen auf den englischen Namen zurück).

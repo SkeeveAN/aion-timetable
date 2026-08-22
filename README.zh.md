@@ -135,5 +135,5 @@ git push origin v0.1.0
 ## 待解决事项
 
 - Dredgion 的等级要求仍然沿用自另一个 4.6 服务器(竞技场的数值已针对 originaion.com 直接确认),待该服务器重新上线后应最终对照真实服务器进行核实。
-- Tiamaranta's Eye(Dabra/Zumita)现已拥有带可点击标记的真实地图(坐标与地图图片本身均来自 aioncodex.com 自身的区域地图);其他区域的世界 Boss 目前仍仅支持列表式选择。
+- 目前所有世界 Boss 均已拥有真实的可点击地图标记(Heiron、Inggison、Gelkmaros、Reshanta、Sarpan、Tiamaranta、Tiamaranta's Eye、Eltnen);坐标与地图图片均来自 aioncodex.com;仅 Commander Sunayaka 在 aioncodex 上没有可用的地图数据,目前仍只支持列表式选择。
 - 21 个新增世界 Boss 尚未翻译成全部 8 种语言(会回退显示英文名称)。

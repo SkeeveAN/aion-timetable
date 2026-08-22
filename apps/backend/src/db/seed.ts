@@ -17,14 +17,17 @@ const OFFICIAL_TRANSLATIONS: { canonicalName: string; language: string; translat
   { canonicalName: "Terath Dredgion", language: "de", translatedName: "Sadha-Dredgion" },
   { canonicalName: "Terath Dredgion", language: "fr", translatedName: "Dredgion du Terath" },
   { canonicalName: "Terath Dredgion", language: "ru", translatedName: "Дерадикон Садх" },
+  { canonicalName: "Terath Dredgion", language: "zh", translatedName: "萨德哈德雷得奇安" },
   // Engulfed Ophidan Bridge (in-game: Ophidan Bridge / Jormungand's Bridge)
   { canonicalName: "Engulfed Ophidan Bridge", language: "de", translatedName: "Jormungand-Brücke" },
   { canonicalName: "Engulfed Ophidan Bridge", language: "fr", translatedName: "Pont de Jormungand" },
   { canonicalName: "Engulfed Ophidan Bridge", language: "ru", translatedName: "Мост Йормунганда" },
+  { canonicalName: "Engulfed Ophidan Bridge", language: "zh", translatedName: "耶梦加得大桥" },
   // Iron Wall Warfront
   { canonicalName: "Iron Wall Warfront", language: "de", translatedName: "Schlachtfeld der Stahlmauerbastion" },
   { canonicalName: "Iron Wall Warfront", language: "fr", translatedName: "Champ de bataille du Bastion du mur d'acier" },
   { canonicalName: "Iron Wall Warfront", language: "ru", translatedName: "Неприступная твердыня" },
+  { canonicalName: "Iron Wall Warfront", language: "zh", translatedName: "铁壁决战场" },
   // Kamar Battlefield
   { canonicalName: "Kamar Battlefield", language: "de", translatedName: "Schlachtfeld von Kamar" },
   { canonicalName: "Kamar Battlefield", language: "fr", translatedName: "Champ de bataille de Kamar" },
@@ -95,11 +98,12 @@ const OFFICIAL_TRANSLATIONS: { canonicalName: string; language: string; translat
 ];
 
 // China had an official AION release (NetEase, mainland). zh entries above
-// come from aioncodex.com's own "cn" locale pages, same provenance as the
-// de/fr/ru rows - genuinely official, not community-translated. Terath
-// Dredgion/Engulfed Ophidan Bridge/Iron Wall Warfront have no zh row yet
-// (not found in the same research pass); falls back to English like any
-// other missing translation.
+// come from aioncodex.com's own "cn" locale pages (fetched via the /cn/...
+// path prefix, e.g. aioncodex.com/cn/item/122001531/), same provenance as
+// the de/fr/ru rows - genuinely official, not community-translated. Names
+// were read off a related item/quest/NPC page (e.g. "Ophidan Bridge
+// Entrance") and stripped of that item's own suffix, same approach used for
+// the other dredgion/arena rows above.
 
 // AION never had an official Spanish, Italian, Turkish, or Polish client -
 // there is no in-game source to copy these from. These are best-effort community-style
@@ -256,12 +260,18 @@ function seedWorldBosses() {
   console.log("Seeded world boss types and locations.");
 }
 
+interface AdditionalBossLocation {
+  label: string;
+  mapX?: number;
+  mapY?: number;
+}
+
 interface AdditionalBossSpec {
   key: string;
   displayName: string;
   respawnMinSeconds: number;
   respawnMaxSeconds: number;
-  locations: string[];
+  locations: AdditionalBossLocation[];
 }
 
 const HOUR = 3600;
@@ -277,23 +287,37 @@ const DAY = 86400;
 // that already excluded Ahbana. Kordac and "Dragon Lord's Champion" were
 // searched for extensively and do not appear to exist in AION under any
 // spelling - not seeded rather than inventing data.
+// Map pin coordinates (percentage-of-image, 0-100) come from the same
+// approach as Dabra/Zumita above: the real marker positions aioncodex.com
+// renders on each NPC's own zone map (Leaflet CRS.Simple pixel space,
+// 4096x4096 at max zoom), clustered from raw patrol/spawn points into
+// distinct camp areas. Map images stitched from aioncodex's own tiles into
+// apps/overlay/src/assets/maps/{heiron,inggison,gelkmaros,reshanta-core,
+// reshanta-top,sarpan,tiamaranta,eltnen}.jpg (zone -> asset mapping in
+// apps/overlay/src/lib/bossMapZones.ts).
 const ADDITIONAL_WORLD_BOSSES: AdditionalBossSpec[] = [
-  { key: "high_priest_yatri", displayName: "High Priest Yatri", respawnMinSeconds: 14000, respawnMaxSeconds: 14000, locations: ["Heiron"] },
-  { key: "scout_dehavi", displayName: "Scout Dehavi", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Heiron"] },
-  { key: "bollvig_blackheart", displayName: "Bollvig Blackheart", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: ["Heiron"] },
-  { key: "high_mage_brashuna", displayName: "High Mage Brashuna", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Heiron"] },
-  { key: "bulwark_jeshuchi", displayName: "Bulwark Jeshuchi", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Heiron"] },
-  { key: "guardian_vingeveu", displayName: "Guardian Vingeveu", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Heiron"] },
-  { key: "watcher_zapiel", displayName: "Watcher Zapiel", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: ["Heiron"] },
-  { key: "deputy_hanuman", displayName: "Deputy Hanuman", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: ["Heiron"] },
-  { key: "omega", displayName: "Omega", respawnMinSeconds: 20 * HOUR, respawnMaxSeconds: 20 * HOUR, locations: ["Inggison"] },
-  { key: "ragnarok", displayName: "Ragnarok", respawnMinSeconds: 20 * HOUR, respawnMaxSeconds: 20 * HOUR, locations: ["Gelkmaros"] },
-  { key: "menotios", displayName: "Menotios", respawnMinSeconds: 28 * HOUR, respawnMaxSeconds: 28 * HOUR, locations: ["Reshanta"] },
-  { key: "debarim_the_omnipotent", displayName: "Debarim the Omnipotent", respawnMinSeconds: 21240, respawnMaxSeconds: 21240, locations: ["Sarpan"] },
-  { key: "ativas_crystalline", displayName: "Ativas Crystalline", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Tiamaranta"] },
-  { key: "golden_tatar", displayName: "Golden Tatar", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Tiamaranta"] },
-  { key: "kradi_the_glutton", displayName: "Kradi the Glutton", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Tiamaranta - Ort 1", "Tiamaranta - Ort 2"] },
-  { key: "grand_chieftain_saendukal", displayName: "Grand Chieftain Saendukal", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: ["Eltnen"] },
+  { key: "high_priest_yatri", displayName: "High Priest Yatri", respawnMinSeconds: 14000, respawnMaxSeconds: 14000, locations: [{ label: "Heiron - Südosten", mapX: 78.9, mapY: 69.2 }] },
+  { key: "scout_dehavi", displayName: "Scout Dehavi", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: [{ label: "Heiron - Südosten", mapX: 82.6, mapY: 79.5 }] },
+  { key: "bollvig_blackheart", displayName: "Bollvig Blackheart", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: [{ label: "Heiron - Osten", mapX: 92.1, mapY: 32.6 }] },
+  { key: "high_mage_brashuna", displayName: "High Mage Brashuna", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: [{ label: "Heiron - Südosten", mapX: 87.0, mapY: 75.2 }] },
+  { key: "bulwark_jeshuchi", displayName: "Bulwark Jeshuchi", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: [{ label: "Heiron - Südosten", mapX: 84.6, mapY: 91.0 }] },
+  { key: "guardian_vingeveu", displayName: "Guardian Vingeveu", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: [{ label: "Heiron - Südosten", mapX: 81.6, mapY: 93.0 }] },
+  { key: "watcher_zapiel", displayName: "Watcher Zapiel", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: [{ label: "Heiron - Südosten", mapX: 83.6, mapY: 95.1 }] },
+  { key: "deputy_hanuman", displayName: "Deputy Hanuman", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: [{ label: "Heiron - Osten", mapX: 85.1, mapY: 63.0 }] },
+  { key: "omega", displayName: "Omega", respawnMinSeconds: 20 * HOUR, respawnMaxSeconds: 20 * HOUR, locations: [{ label: "Inggison - Osten", mapX: 63.9, mapY: 46.9 }] },
+  { key: "ragnarok", displayName: "Ragnarok", respawnMinSeconds: 20 * HOUR, respawnMaxSeconds: 20 * HOUR, locations: [
+    { label: "Gelkmaros - Südwesten", mapX: 44.0, mapY: 57.3 },
+    { label: "Gelkmaros - Nordwesten", mapX: 41.9, mapY: 45.9 },
+  ] },
+  { key: "menotios", displayName: "Menotios", respawnMinSeconds: 28 * HOUR, respawnMaxSeconds: 28 * HOUR, locations: [{ label: "Reshanta - Nordwesten", mapX: 47.3, mapY: 46.8 }] },
+  { key: "debarim_the_omnipotent", displayName: "Debarim the Omnipotent", respawnMinSeconds: 21240, respawnMaxSeconds: 21240, locations: [{ label: "Sarpan - Nordosten", mapX: 97.2, mapY: 22.7 }] },
+  { key: "ativas_crystalline", displayName: "Ativas Crystalline", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: [{ label: "Tiamaranta - Südwesten", mapX: 9.0, mapY: 87.9 }] },
+  { key: "golden_tatar", displayName: "Golden Tatar", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: [{ label: "Tiamaranta - Nordosten", mapX: 90.7, mapY: 19.2 }] },
+  { key: "kradi_the_glutton", displayName: "Kradi the Glutton", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: [
+    { label: "Tiamaranta - Ort 1 (Osten)", mapX: 61.0, mapY: 49.7 },
+    { label: "Tiamaranta - Ort 2 (Westen)", mapX: 38.0, mapY: 49.6 },
+  ] },
+  { key: "grand_chieftain_saendukal", displayName: "Grand Chieftain Saendukal", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: [{ label: "Eltnen - Südwesten", mapX: 23.7, mapY: 79.7 }] },
 
   // Rough approximations, not a real kill->respawn cycle (see conversation):
   // Medeus spawns in a nightly window (~21:00-04:00 server time) rather than
@@ -301,15 +325,28 @@ const ADDITIONAL_WORLD_BOSSES: AdditionalBossSpec[] = [
   // three fortress locations, despawning after 1h if not killed. Modeled
   // here as a ~1 day / ~1 week window so the app still shows something
   // useful, clearly not the same confidence level as the timer-based bosses.
-  { key: "medeus_the_vile", displayName: "Medeus the Vile", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: ["Heiron"] },
-  { key: "moltenus", displayName: "Moltenus", respawnMinSeconds: 7 * DAY, respawnMaxSeconds: 7 * DAY, locations: ["Krotan Refuge", "Miren Fortress", "Kysis Fortress"] },
+  { key: "medeus_the_vile", displayName: "Medeus the Vile", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: [{ label: "Heiron - Nordosten", mapX: 81.8, mapY: 6.8 }] },
+  // aioncodex's own marker data gives 3 points on the Reshanta-Top map but
+  // (unlike the NPCs above) doesn't label which point is which fortress, so
+  // the Krotan/Miren/Kysis name-to-point assignment below is best-effort
+  // ordering, not confirmed - lower confidence than the coordinates for
+  // other bosses in this file.
+  { key: "moltenus", displayName: "Moltenus", respawnMinSeconds: 7 * DAY, respawnMaxSeconds: 7 * DAY, locations: [
+    { label: "Krotan Refuge", mapX: 44.4, mapY: 41.6 },
+    { label: "Miren Fortress", mapX: 39.5, mapY: 65.2 },
+    { label: "Kysis Fortress", mapX: 59.6, mapY: 50.6 },
+  ] },
 
   // Sunayaka family - all three confirmed real NPCs in Tiamaranta's Eye;
   // exact spawn schedule conflicts between sources (daily window, exact
   // clock time unverified), so treated the same way as Medeus above.
-  { key: "governor_sunayaka", displayName: "Governor Sunayaka", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: ["Tiamaranta's Eye"] },
-  { key: "berserker_sunayaka", displayName: "Berserker Sunayaka", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: ["Tiamaranta's Eye"] },
-  { key: "commander_sunayaka", displayName: "Commander Sunayaka", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: ["Tiamaranta's Eye"] },
+  // Governor/Berserker have real pinned coordinates (both spawn right at the
+  // central inner keep); no "Commander Sunayaka" NPC exists on aioncodex
+  // under that name (the closest match, "Solorius Sunayaka", has no map
+  // data at all), so it stays unpinned.
+  { key: "governor_sunayaka", displayName: "Governor Sunayaka", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: [{ label: "Tiamaranta's Eye - Zentrum", mapX: 49.7, mapY: 49.5 }] },
+  { key: "berserker_sunayaka", displayName: "Berserker Sunayaka", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: [{ label: "Tiamaranta's Eye - Zentrum", mapX: 49.6, mapY: 49.2 }] },
+  { key: "commander_sunayaka", displayName: "Commander Sunayaka", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: [{ label: "Tiamaranta's Eye" }] },
 ];
 
 function seedAdditionalWorldBosses() {
@@ -336,11 +373,11 @@ function seedAdditionalWorldBosses() {
 
     db.insert(worldBossLocations)
       .values(
-        spec.locations.map((label) => ({
+        spec.locations.map((loc) => ({
           bossTypeId: Number(bossId),
-          label,
-          mapX: null,
-          mapY: null,
+          label: loc.label,
+          mapX: loc.mapX ?? null,
+          mapY: loc.mapY ?? null,
         }))
       )
       .run();

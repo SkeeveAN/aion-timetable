@@ -135,5 +135,5 @@ Kasıtlı olarak hariç tutuldu: Isbariya the Resolute, Hyperion ve Queen Modor 
 ## Açık noktalar
 
 - Dredgion'lar için seviye gereksinimleri hâlâ başka bir 4.6 sunucusundan alınmıştır (arena değerleri originaion.com için zaten doğrudan onaylanmıştır) ve sunucu tekrar çevrimiçi olduğunda gerçek sunucuya karşı nihai olarak doğrulanmalıdır.
-- Tiamaranta's Eye (Dabra/Zumita) artık tıklanabilir işaretçilere sahip gerçek bir haritaya sahiptir (koordinatlar ve harita görüntüsünün kendisi aioncodex.com'dan alınmıştır); diğer bölgelerdeki dünya boss'ları hâlâ yalnızca liste tabanlı seçim kullanıyor.
+- Artık tüm dünya boss'ları gerçek, tıklanabilir harita işaretçilerine sahiptir (Heiron, Inggison, Gelkmaros, Reshanta, Sarpan, Tiamaranta, Tiamaranta's Eye, Eltnen); koordinatlar ve harita görüntülerinin ikisi de aioncodex.com'dan alınmıştır; yalnızca Commander Sunayaka için harita verisi bulunmuyor ve hâlâ yalnızca liste tabanlı seçim kullanıyor.
 - 21 yeni dünya boss'u henüz 8 dilin tümüne çevrilmemiştir (İngilizce isme geri döner).

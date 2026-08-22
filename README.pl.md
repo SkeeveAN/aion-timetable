@@ -135,5 +135,5 @@ Celowo wykluczone: Isbariya the Resolute, Hyperion i Queen Modor (wszystkie 4 wa
 ## Otwarte punkty
 
 - Wymagania poziomowe dla dredgionów wciąż pochodzą z innego serwera 4.6 (wartości aren są już bezpośrednio potwierdzone dla originaion.com) i powinny zostać ostatecznie zweryfikowane na rzeczywistym serwerze, gdy ten znów będzie online.
-- Tiamaranta's Eye (Dabra/Zumita) ma już prawdziwą mapę z klikalnymi znacznikami (współrzędne i sam obraz mapy pochodzą z aioncodex.com); bossowie światowi w innych zonach wciąż używają tylko wyboru z listy.
+- Wszyscy bossowie światowi mają już prawdziwe, klikalne znaczniki na mapie (Heiron, Inggison, Gelkmaros, Reshanta, Sarpan, Tiamaranta, Tiamaranta's Eye, Eltnen); współrzędne i obrazy map pochodzą z aioncodex.com; tylko dla Commander Sunayaka nie ma dostępnych danych mapy i wciąż używa tylko wyboru z listy.
 - 21 nowych bossów światowych nie jest jeszcze przetłumaczonych na wszystkie 8 języków (używana jest angielska nazwa jako rezerwowa).

@@ -135,5 +135,5 @@ Excluidos deliberadamente: Isbariya the Resolute, Hyperion y Queen Modor (las 4 
 ## Pendientes
 
 - Los requisitos de nivel para los dredgions todavía se toman de otro servidor 4.6 (los valores de las arenas ya están confirmados directamente para originaion.com) y deberían verificarse finalmente contra el servidor real una vez que vuelva a estar en línea.
-- Tiamaranta's Eye (Dabra/Zumita) ya tiene un mapa real con marcadores clicables (tanto las coordenadas como la propia imagen del mapa provienen de aioncodex.com); los jefes de mundo de las demás zonas todavía usan solo selección por lista.
+- Todos los jefes de mundo ya tienen marcadores de mapa reales y clicables (Heiron, Inggison, Gelkmaros, Reshanta, Sarpan, Tiamaranta, Tiamaranta's Eye, Eltnen); tanto las coordenadas como las imágenes del mapa provienen de aioncodex.com; solo Commander Sunayaka no tiene datos de mapa disponibles y sigue usando solo selección por lista.
 - Los 21 nuevos jefes de mundo todavía no están traducidos a los 8 idiomas (usan el nombre en inglés como respaldo).

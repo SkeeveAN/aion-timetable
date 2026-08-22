@@ -135,5 +135,5 @@ Esclusi deliberatamente: Isbariya the Resolute, Hyperion e Queen Modor (tutte le
 ## Punti aperti
 
 - I requisiti di livello per i dredgion sono ancora presi da un altro server 4.6 (i valori delle arene sono già confermati direttamente per originaion.com) e dovrebbero essere infine verificati contro il server reale una volta che sarà di nuovo online.
-- Tiamaranta's Eye (Dabra/Zumita) ha ora una mappa reale con marker cliccabili (sia le coordinate che l'immagine della mappa stessa provengono da aioncodex.com); i boss mondiali delle altre zone usano ancora solo la selezione da lista.
+- Tutti i boss mondiali hanno ora marker di mappa reali e cliccabili (Heiron, Inggison, Gelkmaros, Reshanta, Sarpan, Tiamaranta, Tiamaranta's Eye, Eltnen); sia le coordinate che le immagini della mappa provengono da aioncodex.com; solo Commander Sunayaka non ha dati di mappa disponibili e usa ancora solo la selezione da lista.
 - I 21 nuovi boss mondiali non sono ancora tradotti in tutte le 8 lingue (usano il nome inglese come fallback).

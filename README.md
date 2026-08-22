@@ -135,5 +135,5 @@ Deliberately excluded: Isbariya the Resolute, Hyperion, and Queen Modor (all 4 v
 ## Open items
 
 - Level requirements for dredgions are still taken from a different 4.6 server (arena values are already directly confirmed for originaion.com) and should be finally verified against the real server once it's back online.
-- Tiamaranta's Eye (Dabra/Zumita) now has a real map with clickable pins (coordinates and the map image itself both sourced from aioncodex.com's own zone map); the other zones' world bosses still use list-only location selection.
+- All world bosses now have real clickable map pins (Heiron, Inggison, Gelkmaros, Reshanta, Sarpan, Tiamaranta, Tiamaranta's Eye, Eltnen), coordinates and map images both sourced from aioncodex.com's own zone maps; only Commander Sunayaka has no map data available on aioncodex and still uses list-only selection.
 - The 21 new world bosses aren't translated into all 8 languages yet (fall back to the English name).
