@@ -113,7 +113,6 @@ timetable_install
 
 推送形如 `v0.1.0` 的标签(或从 Actions 标签页手动运行工作流)会触发 [`.github/workflows/release.yml`](.github/workflows/release.yml),该工作流会构建 Windows 安装程序并发布一个 GitHub Release,内含:
 - `AION-Timetable-Overlay_x.y.z_x64-setup.exe` – NSIS 安装程序
-- `AION-Timetable-Overlay_x.y.z_x64-setup.nsis.zip` – 便携版 ZIP,无需安装
 - `latest.json` – 应用内置更新程序用于检查更新的签名清单
 
 需要预先一次性设置仓库密钥 `TAURI_SIGNING_PRIVATE_KEY` 和 `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`(Settings → Secrets and variables → Actions)。

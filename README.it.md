@@ -113,7 +113,6 @@ Se `deploy/timetable_install` stesso dovesse mai cambiare, ripetere una volta il
 
 Il push di un tag come `v0.1.0` (o l'esecuzione manuale del workflow dalla tab Actions) attiva [`.github/workflows/release.yml`](.github/workflows/release.yml), che compila l'installer Windows e pubblica una Release GitHub con:
 - `AION-Timetable-Overlay_x.y.z_x64-setup.exe` – installer NSIS
-- `AION-Timetable-Overlay_x.y.z_x64-setup.nsis.zip` – ZIP portatile, nessuna installazione necessaria
 - `latest.json` – manifest firmato contro cui l'updater integrato dell'app effettua il controllo
 
 Richiede di impostare una tantum i secret del repository `TAURI_SIGNING_PRIVATE_KEY` e `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` (Settings → Secrets and variables → Actions).

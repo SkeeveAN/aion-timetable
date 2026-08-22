@@ -113,7 +113,6 @@ timetable_install
 
 `v0.1.0` gibi bir etiketi push etmek (veya iş akışını Actions sekmesinden manuel olarak çalıştırmak) [`.github/workflows/release.yml`](.github/workflows/release.yml)'i tetikler; bu da Windows yükleyicisini derler ve şunları içeren bir GitHub Release yayınlar:
 - `AION-Timetable-Overlay_x.y.z_x64-setup.exe` – NSIS yükleyici
-- `AION-Timetable-Overlay_x.y.z_x64-setup.nsis.zip` – kurulum gerektirmeyen taşınabilir ZIP
 - `latest.json` – uygulamanın yerleşik güncelleyicisinin karşılaştırdığı imzalı manifest
 
 Bir defaya mahsus `TAURI_SIGNING_PRIVATE_KEY` ve `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` depo sırlarının (Settings → Secrets and variables → Actions) ayarlanmasını gerektirir.
