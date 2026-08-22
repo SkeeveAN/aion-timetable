@@ -1,6 +1,6 @@
 # AION Timetable Overlay
 
-Ein transparentes Windows-Overlay für den privaten AION-4.6-Server **OriginAion**, das während des Spielens eingeblendet bleibt: Zeitplan für PvP Instances / Arenas / Siege / Rifts (Server- und lokale Zeitzone, Level-Filterung), plus team-internes Tracking der Weltboss-Spawns (Dabra, Zumitas) in Tiamaranta's Eye inklusive gemeinsamer Kommentare.
+Ein transparentes Windows-Overlay für den privaten AION-4.6-Server **OriginAion**, das während des Spielens eingeblendet bleibt: Zeitplan für PvP Instances / Arenas / Siege / Rifts (Server- und lokale Zeitzone, Level-Filterung, 7 Sprachen), plus team-internes Kill/Respawn-Tracking für 23 Weltbosse/Keymaster (Dabra, Zumita, plus 21 weitere u. a. in Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) inklusive gemeinsamer Kommentare.
 
 ## Architektur
 
@@ -107,8 +107,18 @@ timetable_install
 
 Falls sich `deploy/timetable_install` selbst mal ändert, einmalig den `cp`-Schritt oben wiederholen.
 
+## Weltboss-Datenqualität
+
+Die 23 Weltbosse/Keymaster haben unterschiedliche Vertrauensstufen (siehe Kommentare in `apps/backend/src/db/seed.ts`):
+- **Dabra/Zumita:** Respawn-Fenster direkt vom Nutzer angegeben (höchste Vertrauensstufe für diese App).
+- **16 Weltbosse** (Heiron/Tiamaranta/Inggison/Gelkmaros/Reshanta/Sarpan/Eltnen): Respawn-Zeiten aus dem Open-Source-Emulator `beyond-aion/aion-server` (datamined, mittel-hohe Verlässlichkeit, keine offizielle Quelle).
+- **Medeus the Vile, Moltenus, Governor/Berserker/Commander Sunayaka:** Folgen keinem echten Kill→Respawn-Zyklus (nächtliches bzw. wöchentliches Zeitfenster) – im Kill-Tracker nur grob als ~1-Tages- bzw. ~1-Wochen-Fenster angenähert, niedrigere Vertrauensstufe.
+
+Bewusst ausgeschlossen: Isbariya the Resolute, Hyperion und Queen Modor (alle 4 Varianten) sind Instanz-Bosse mit wöchentlichem Lockout, keine Open-World-Spawns. "Kordac" und "Dragon Lord's Champion" wurden ausgiebig gesucht und existieren unter keiner Schreibweise in AION – bewusst nicht eingetragen, statt Daten zu erfinden.
+
 ## Offene Punkte
 
 - Level-Anforderungen für Dredgions sind noch von einem anderen 4.6-Server übernommen (Arena-Werte sind für originaion.com bereits direkt bestätigt) und sollten final gegen den echten Server verifiziert werden, sobald er wieder online ist.
-- Klick-Koordinaten für die Weltboss-Orte auf der Tiamaranta's-Eye-Karte sind noch nicht gepinnt (Listenauswahl funktioniert bereits, klickbare Kartenmarker folgen).
+- Klick-Koordinaten für die Weltboss-Orte auf der Tiamaranta's-Eye-Karte (und den anderen Zonen) sind noch nicht gepinnt (Listenauswahl funktioniert bereits, klickbare Kartenmarker folgen).
+- Die 21 neuen Weltbosse sind noch nicht in alle 7 Sprachen übersetzt (fallen auf den englischen Namen zurück).
 - CI/CD-Workflow für automatische GitHub-Releases (Installer + ZIP + Auto-Updater) ist noch nicht eingerichtet.
