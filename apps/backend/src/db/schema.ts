@@ -74,6 +74,25 @@ export const instanceLevelRequirements = sqliteTable("instance_level_requirement
   maxLevel: integer("max_level").notNull(),
 });
 
+// Localized display names for canonical (English, as-scraped) entity names -
+// instance names, world boss names, etc. Missing rows simply fall back to the
+// canonical name, so this table can be filled in incrementally per language.
+export const entityTranslations = sqliteTable(
+  "entity_translations",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    canonicalName: text("canonical_name").notNull(),
+    language: text("language").notNull(),
+    translatedName: text("translated_name").notNull(),
+  },
+  (table) => ({
+    uniqueEntry: uniqueIndex("entity_translations_unique").on(
+      table.canonicalName,
+      table.language
+    ),
+  })
+);
+
 export const serverTimeMeta = sqliteTable("server_time_meta", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   offsetLabel: text("offset_label").notNull(),

@@ -23,7 +23,10 @@ export type Weekday = (typeof WEEKDAYS)[number];
 export interface ScheduleEvent {
   id: number;
   category: ScheduleCategory;
+  /** Canonical (English, as-scraped) name - stable key, used for level-requirement matching etc. */
   name: string;
+  /** Name to actually show in the UI, resolved server-side for the requested language. Falls back to `name`. */
+  displayName: string;
   imageUrl: string | null;
   weekday: Weekday;
   /** "HH:MM" in server time */

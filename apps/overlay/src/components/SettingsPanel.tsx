@@ -1,3 +1,4 @@
+import { SUPPORTED_LANGUAGES } from "@aion-timetable/shared";
 import type { OverlaySettings } from "../hooks/useSettings";
 
 interface Props {
@@ -15,6 +16,20 @@ export function SettingsPanel({ settings, onChange, onClose }: Props) {
         <span>Darstellung</span>
         <button onClick={onClose}>Schließen</button>
       </div>
+
+      <label>
+        Sprache
+        <select
+          value={settings.language}
+          onChange={(e) => onChange({ language: e.target.value as OverlaySettings["language"] })}
+        >
+          {SUPPORTED_LANGUAGES.map((l) => (
+            <option key={l.code} value={l.code}>
+              {l.label}
+            </option>
+          ))}
+        </select>
+      </label>
 
       <label>
         Mein Level

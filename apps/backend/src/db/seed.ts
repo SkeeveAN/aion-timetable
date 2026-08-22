@@ -50,27 +50,31 @@ function seedWorldBosses() {
     })
     .run().lastInsertRowid;
 
-  const zumitasId = db
+  // Note: Dabra and Zumita are "Keymaster" NPCs per aioncodex.com
+  // (https://aioncodex.com/4x/npc/219193/ and .../219192/), not classic world
+  // bosses - tracked the same way here regardless (spawn + respawn window).
+  const zumitaId = db
     .insert(worldBossTypes)
     .values({
-      key: "zumitas",
-      displayName: "Zumitas",
+      key: "zumita",
+      displayName: "Zumita",
       respawnMinSeconds: 30 * 60,
       respawnMaxSeconds: 30 * 60,
     })
     .run().lastInsertRowid;
 
-  // Location labels only for now - map_x/map_y follow once pinned on the map (see plan).
+  // Location labels only for now - map_x/map_y and the real spawn-point names
+  // follow once pinned on the map (see plan / aioncodex research).
   db.insert(worldBossLocations)
     .values([
       { bossTypeId: Number(dabraId), label: "Dabra - Open", mapX: null, mapY: null },
       { bossTypeId: Number(dabraId), label: "Dabra - Unten", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitasId), label: "Zumitas - Ort 1", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitasId), label: "Zumitas - Ort 2", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitasId), label: "Zumitas - Ort 3", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitasId), label: "Zumitas - Ort 4", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitasId), label: "Zumitas - Ort 5", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitasId), label: "Zumitas - Ort 6", mapX: null, mapY: null },
+      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 1", mapX: null, mapY: null },
+      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 2", mapX: null, mapY: null },
+      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 3", mapX: null, mapY: null },
+      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 4", mapX: null, mapY: null },
+      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 5", mapX: null, mapY: null },
+      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 6", mapX: null, mapY: null },
     ])
     .run();
 

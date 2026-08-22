@@ -16,9 +16,9 @@ import { CommentThread } from "./components/CommentThread";
 import "./App.css";
 
 export default function App() {
-  const { data: schedule, reload: reloadSchedule } = useSchedule();
   const auth = useAuth();
   const { settings, update: updateSettings, loaded: settingsLoaded } = useSettings();
+  const { data: schedule, reload: reloadSchedule } = useSchedule(settings.language);
   const { interactive, setInteractive, settingsOpen, setSettingsOpen, startDrag } =
     useInteractiveMode();
 
@@ -31,7 +31,7 @@ export default function App() {
     setSettingsOpen(true);
     void updateSettings({ onboarded: true });
   }, [settingsLoaded, settings.onboarded]);
-  const worldBosses = useWorldBosses(auth.api, auth.isTeamMode);
+  const worldBosses = useWorldBosses(auth.api, auth.isTeamMode, settings.language);
   const [activeCategory, setActiveCategory] =
     useState<ScheduleCategory>("pvp_instances");
   const [page, setPage] = useState<0 | 1>(0);
@@ -64,7 +64,11 @@ export default function App() {
       )}
 
       {schedule && page === 0 && (
-        <UpcomingList schedule={schedule} myLevel={settings.myLevel} />
+        <UpcomingList
+          schedule={schedule}
+          myLevel={settings.myLevel}
+          language={settings.language}
+        />
       )}
 
       {schedule && page === 1 && (
@@ -73,6 +77,7 @@ export default function App() {
           activeCategory={activeCategory}
           onCategoryChange={setActiveCategory}
           myLevel={settings.myLevel}
+          language={settings.language}
         />
       )}
 

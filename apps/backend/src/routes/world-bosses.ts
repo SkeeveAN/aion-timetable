@@ -14,6 +14,7 @@ import type {
   WorldBossesResponse,
   WorldBossLocationState,
 } from "@aion-timetable/shared";
+import { languageFromQuery, resolveDisplayNames } from "../i18n.js";
 
 const killSchema = z.object({
   killedAt: z.string().datetime().optional(),
@@ -36,8 +37,18 @@ export async function worldBossRoutes(app: FastifyInstance) {
 
   app.get("/world-bosses", async (request, reply) => {
     const teamId = request.user!.teamId;
+    const language = languageFromQuery(request.query);
     const bossTypes = db.select().from(worldBossTypes).all();
     const locations = db.select().from(worldBossLocations).all();
+    const displayNames = resolveDisplayNames(
+      [
+        ...new Set([
+          ...bossTypes.map((b) => b.displayName),
+          ...locations.map((l) => l.label),
+        ]),
+      ],
+      language
+    );
 
     const locationStates: WorldBossLocationState[] = locations.map((loc) => {
       const lastKillRow = db
@@ -66,6 +77,7 @@ export async function worldBossRoutes(app: FastifyInstance) {
             id: loc.id,
             bossTypeId: loc.bossTypeId,
             label: loc.label,
+            localizedLabel: displayNames.get(loc.label) ?? loc.label,
             mapX: loc.mapX,
             mapY: loc.mapY,
           },
@@ -87,6 +99,7 @@ export async function worldBossRoutes(app: FastifyInstance) {
           id: loc.id,
           bossTypeId: loc.bossTypeId,
           label: loc.label,
+          localizedLabel: displayNames.get(loc.label) ?? loc.label,
           mapX: loc.mapX,
           mapY: loc.mapY,
         },
@@ -108,6 +121,7 @@ export async function worldBossRoutes(app: FastifyInstance) {
         id: b.id,
         key: b.key,
         displayName: b.displayName,
+        localizedName: displayNames.get(b.displayName) ?? b.displayName,
         respawnMinSeconds: b.respawnMinSeconds,
         respawnMaxSeconds: b.respawnMaxSeconds,
       })),

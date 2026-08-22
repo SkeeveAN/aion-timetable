@@ -43,7 +43,7 @@ export function WorldBossPanel({ data, onReportKill }: Props) {
               setSelectedLocationId(null);
             }}
           >
-            {boss.displayName}
+            {boss.localizedName}
           </button>
         ))}
       </div>
@@ -59,7 +59,7 @@ export function WorldBossPanel({ data, onReportKill }: Props) {
               }
               onClick={() => setSelectedLocationId(state.location.id)}
             >
-              <span>{state.location.label}</span>
+              <span>{state.location.localizedLabel}</span>
               {state.respawnEarliest && state.respawnLatest && (
                 <span className="respawn-window">
                   erwartet {formatLocalTime(new Date(state.respawnEarliest))}–

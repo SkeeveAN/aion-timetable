@@ -3,10 +3,12 @@ import { db } from "../db/client.js";
 import { scheduleEvents, serverTimeMeta, instanceLevelRequirements } from "../db/schema.js";
 import { desc } from "drizzle-orm";
 import type { ScheduleResponse } from "@aion-timetable/shared";
+import { languageFromQuery, resolveDisplayNames } from "../i18n.js";
 
 /** Public endpoint - powers the Standalone mode with no login required. */
 export async function scheduleRoutes(app: FastifyInstance) {
-  app.get("/schedule", async (_request, reply) => {
+  app.get("/schedule", async (request, reply) => {
+    const language = languageFromQuery(request.query);
     const events = db.select().from(scheduleEvents).all();
     const meta = db
       .select()
@@ -16,6 +18,10 @@ export async function scheduleRoutes(app: FastifyInstance) {
       .get();
     const levelReqs = db.select().from(instanceLevelRequirements).all();
     const levelByName = new Map(levelReqs.map((l) => [l.name, l]));
+    const displayNames = resolveDisplayNames(
+      [...new Set(events.map((e) => e.name))],
+      language
+    );
 
     const response: ScheduleResponse = {
       events: events.map((e) => {
@@ -24,6 +30,7 @@ export async function scheduleRoutes(app: FastifyInstance) {
           id: e.id,
           category: e.category,
           name: e.name,
+          displayName: displayNames.get(e.name) ?? e.name,
           imageUrl: e.imageUrl,
           weekday: e.weekday,
           startTime: e.startTime,

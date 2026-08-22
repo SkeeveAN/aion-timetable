@@ -1,23 +1,25 @@
 import { useMemo } from "react";
-import type { ScheduleCategory, ScheduleResponse } from "@aion-timetable/shared";
+import type { LanguageCode, ScheduleCategory, ScheduleResponse } from "@aion-timetable/shared";
+import { SCHEDULE_CATEGORIES } from "@aion-timetable/shared";
 import { formatCountdown, formatLocalTime, nextOccurrenceUtc } from "../lib/time";
 import { matchesLevel } from "../lib/level";
-
-const CATEGORY_LABELS: Record<ScheduleCategory, string> = {
-  pvp_instances: "PvP Instances",
-  arenas: "Arenas",
-  siege: "Siege",
-  rifts: "Rifts",
-};
+import { categoryLabel } from "../lib/categoryLabels";
 
 interface Props {
   schedule: ScheduleResponse;
   activeCategory: ScheduleCategory;
   onCategoryChange: (category: ScheduleCategory) => void;
   myLevel: number | null;
+  language: LanguageCode;
 }
 
-export function ScheduleList({ schedule, activeCategory, onCategoryChange, myLevel }: Props) {
+export function ScheduleList({
+  schedule,
+  activeCategory,
+  onCategoryChange,
+  myLevel,
+  language,
+}: Props) {
   const now = new Date();
 
   const upcoming = useMemo(() => {
@@ -34,23 +36,21 @@ export function ScheduleList({ schedule, activeCategory, onCategoryChange, myLev
   return (
     <div className="schedule-list">
       <div className="category-tabs">
-        {(Object.entries(CATEGORY_LABELS) as [ScheduleCategory, string][]).map(
-          ([key, label]) => (
-            <button
-              key={key}
-              className={key === activeCategory ? "tab active" : "tab"}
-              onClick={() => onCategoryChange(key)}
-            >
-              {label}
-            </button>
-          )
-        )}
+        {SCHEDULE_CATEGORIES.map((key) => (
+          <button
+            key={key}
+            className={key === activeCategory ? "tab active" : "tab"}
+            onClick={() => onCategoryChange(key)}
+          >
+            {categoryLabel(language, key)}
+          </button>
+        ))}
       </div>
 
       <ul className="event-items">
         {upcoming.map(({ event, next }) => (
           <li key={`${event.id}-${next.getTime()}`} className="event-item">
-            <span className="event-name">{event.name}</span>
+            <span className="event-name">{event.displayName}</span>
             <span className="event-time">
               {event.startTime} Server &middot; {formatLocalTime(next)} lokal &middot;{" "}
               {formatCountdown(next, now)}

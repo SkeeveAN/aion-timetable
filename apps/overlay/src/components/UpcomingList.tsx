@@ -1,23 +1,18 @@
 import { useMemo } from "react";
-import type { ScheduleCategory, ScheduleResponse } from "@aion-timetable/shared";
+import type { LanguageCode, ScheduleResponse } from "@aion-timetable/shared";
 import { formatCountdown, formatLocalTime, nextOccurrenceUtc } from "../lib/time";
 import { matchesLevel } from "../lib/level";
-
-const CATEGORY_SHORT: Record<ScheduleCategory, string> = {
-  pvp_instances: "PvP",
-  arenas: "Arena",
-  siege: "Siege",
-  rifts: "Rift",
-};
+import { categoryShortLabel } from "../lib/categoryLabels";
 
 const WINDOW_MS = 60 * 60_000;
 
 interface Props {
   schedule: ScheduleResponse;
   myLevel: number | null;
+  language: LanguageCode;
 }
 
-export function UpcomingList({ schedule, myLevel }: Props) {
+export function UpcomingList({ schedule, myLevel, language }: Props) {
   const now = new Date();
 
   const upcoming = useMemo(() => {
@@ -38,8 +33,8 @@ export function UpcomingList({ schedule, myLevel }: Props) {
     <ul className="upcoming-list">
       {upcoming.map(({ event, next }) => (
         <li key={`${event.id}-${next.getTime()}`} className="upcoming-item">
-          <span className="upcoming-category">{CATEGORY_SHORT[event.category]}</span>
-          <span className="upcoming-name">{event.name}</span>
+          <span className="upcoming-category">{categoryShortLabel(language, event.category)}</span>
+          <span className="upcoming-name">{event.displayName}</span>
           <span className="upcoming-time">
             {formatLocalTime(next)} &middot; {formatCountdown(next, now)}
           </span>

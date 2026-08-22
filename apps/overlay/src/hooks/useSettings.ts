@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { LazyStore } from "@tauri-apps/plugin-store";
+import type { LanguageCode } from "@aion-timetable/shared";
 
 export interface OverlaySettings {
   fontSize: number;
@@ -8,6 +9,7 @@ export interface OverlaySettings {
   myLevel: number | null;
   /** false until the first-run setup flow has shown itself once */
   onboarded: boolean;
+  language: LanguageCode;
 }
 
 const DEFAULT_SETTINGS: OverlaySettings = {
@@ -15,6 +17,7 @@ const DEFAULT_SETTINGS: OverlaySettings = {
   textColor: "#ffffff",
   myLevel: null,
   onboarded: false,
+  language: "de",
 };
 
 const store = new LazyStore("settings.json");

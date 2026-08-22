@@ -1,7 +1,10 @@
 export interface WorldBossType {
   id: number;
   key: string;
+  /** Canonical (English) name - stable key. */
   displayName: string;
+  /** Name to actually show in the UI, resolved server-side for the requested language. */
+  localizedName: string;
   respawnMinSeconds: number;
   respawnMaxSeconds: number;
 }
@@ -9,7 +12,10 @@ export interface WorldBossType {
 export interface WorldBossLocation {
   id: number;
   bossTypeId: number;
+  /** Canonical (English) label - stable key. */
   label: string;
+  /** Label to actually show in the UI, resolved server-side for the requested language. */
+  localizedLabel: string;
   /** percentage-of-image coordinates, 0-100; null until pinned on the map */
   mapX: number | null;
   mapY: number | null;
