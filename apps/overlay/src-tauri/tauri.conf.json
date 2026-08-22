@@ -43,9 +43,9 @@
   "plugins": {
     "updater": {
       "endpoints": [
-        "https://github.com/REPLACE_ME_GITHUB_USER/timetable/releases/latest/download/latest.json"
+        "https://github.com/SkeeveAN/aion-timetable/releases/latest/download/latest.json"
       ],
-      "pubkey": "REPLACE_ME_RUN_pnpm_tauri_signer_generate"
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEJGMjBBNjY2REIwMTQwOTYKUldTV1FBSGJacVlndjZzMXEyNmF1bGRPK1F3WlYvZlBDQ1hNWGlkcE1Rd1ZyOGU1Z2JSdkRLVTQK"
     }
   }
 }
