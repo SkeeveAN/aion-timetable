@@ -17,7 +17,7 @@ packages/
 - **Datenquelle Zeitplan:** Ein Playwright-Scraper liest periodisch die Wochenansicht von `originaion.com/schedule` (inkl. der aktuellen Server-Zeitzone) aus und speichert sie im Backend. Die Tabs auf der Zielseite sind rein clientseitig, daher ein echter Headless-Browser statt einfachem HTTP-Fetch.
 - **Team-Modell:** Kein klassisches Login. Eine Person erstellt ein Team (Name, Beschreibung, Passwort) und erhält einen Einladungscode; weitere Mitglieder treten mit diesem Code und einem Anzeigenamen bei. Kills und Kommentare sind pro Team isoliert (`teamId`), der Team-Owner kann Anzeigenamen von Mitgliedern nachträglich ändern.
 - **Standalone- vs. Team-Modus:** Ohne Team-Beitritt zeigt die App nur den öffentlichen Zeitplan (`GET /schedule`, kein Login nötig). Mit Team-Beitritt kommen Live-Kommentare und die Weltboss-Karte via WebSocket dazu.
-- **Level-Filterung:** Dredgion/Arena-Instanzen haben Level-Anforderungen (in AION 4.6: Terath Dredgion 56–65, alle anderen Dredgions/Arenen 61–65, Quelle: `euroaion.com/AboutServer` als weiterer 4.6-Server). Die App blendet Instanzen komplett aus, die nicht zum in den Einstellungen hinterlegten eigenen Level passen.
+- **Level-Filterung:** Dredgion/Arena-Instanzen haben Level-Anforderungen. Bestätigt für originaion.com: Terath Dredgion 56–65; Engulfed Ophidan Bridge, Iron Wall Warfront, Kamar Battlefield und Arena of Glory (4er alle-gegen-alle, nur oberstes Bracket) 61–65; Arena of Chaos (10er alle-gegen-alle), Arena of Discipline (1v1) und Arena of Harmony (3v3) queuen dagegen in eines von vier 5er-Level-Brackets (46–50/51–55/56–60/61–65) und sind daher im gesamten Bereich 46–65 zugänglich. Die App blendet Instanzen komplett aus, die nicht zum in den Einstellungen hinterlegten eigenen Level passen.
 
 ## Voraussetzungen
 
@@ -90,6 +90,6 @@ Aktuell produktiv unter `timetable.skeeve.tv` betrieben: Node.js + systemd-Servi
 
 ## Offene Punkte
 
-- Level-Anforderungen für Dredgions/Arenen sind von einem anderen 4.6-Server übernommen und sollten gegen den echten Server verifiziert werden, sobald er wieder online ist.
+- Level-Anforderungen für Dredgions sind noch von einem anderen 4.6-Server übernommen (Arena-Werte sind für originaion.com bereits direkt bestätigt) und sollten final gegen den echten Server verifiziert werden, sobald er wieder online ist.
 - Klick-Koordinaten für die Weltboss-Orte auf der Tiamaranta's-Eye-Karte sind noch nicht gepinnt (Listenauswahl funktioniert bereits, klickbare Kartenmarker folgen).
 - CI/CD-Workflow für automatische GitHub-Releases (Installer + ZIP + Auto-Updater) ist noch nicht eingerichtet.
