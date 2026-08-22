@@ -5,17 +5,21 @@ import {
   instanceLevelRequirements,
 } from "./schema.js";
 
-// Sourced from euroaion.com/en-US/AboutServer ("Full alignment with the
-// official 4.6 game server") - cross-check against originaion.com if their
-// values ever diverge, e.g. via a custom-adjusted level requirement.
+// Confirmed for originaion.com directly (see conversation history): Arena of
+// Chaos (10-man free-for-all), Discipline (1v1) and Harmony (3v3) each queue
+// players into one of four 5-level brackets (46-50/51-55/56-60/61-65), so the
+// overall eligible range is 46-65. Arena of Glory (4-man free-for-all) is the
+// exception - only the top bracket (61-65) qualifies. Dredgion/battlefield
+// values are still sourced from euroaion.com/en-US/AboutServer - cross-check
+// against originaion.com if they ever diverge.
 const LEVEL_REQUIREMENTS = [
   { name: "Terath Dredgion", minLevel: 56, maxLevel: 65 },
   { name: "Engulfed Ophidan Bridge", minLevel: 61, maxLevel: 65 },
   { name: "Iron Wall Warfront", minLevel: 61, maxLevel: 65 },
   { name: "Kamar Battlefield", minLevel: 61, maxLevel: 65 },
-  { name: "Arena of Chaos", minLevel: 61, maxLevel: 65 },
-  { name: "Arena of Discipline", minLevel: 61, maxLevel: 65 },
-  { name: "Arena of Harmony", minLevel: 61, maxLevel: 65 },
+  { name: "Arena of Chaos", minLevel: 46, maxLevel: 65 },
+  { name: "Arena of Discipline", minLevel: 46, maxLevel: 65 },
+  { name: "Arena of Harmony", minLevel: 46, maxLevel: 65 },
   { name: "Arena of Glory", minLevel: 61, maxLevel: 65 },
 ];
 
