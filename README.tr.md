@@ -85,6 +85,7 @@ Pencerede kasıtlı olarak başlık çubuğu/kapatma düğmesi olmadığından, 
 - **İlk başlatma:** İlk başlatmada uygulama otomatik olarak etkileşimli + ayarlar modunda açılır, böylece yeni kullanıcılar kısayolları henüz bilmeden onu hemen konumlandırıp yapılandırabilir.
 - **Sıfırlama:** Tüm ayarlar (seviye, renk, takım üyeliği, ilk başlatma durumu) Tauri uygulama veri dizininde (`settings.json`, `auth.json`) JSON dosyaları olarak bulunur. Bu dosyaları silmek uygulamayı tamamen sıfırlar.
 - **Otomatik kapanma:** Uygulama AION istemci sürecini (`aion.bin`) izler. İstemci bir kez çalıştığı görüldükten sonra kapatılırsa, overlay uygulaması da otomatik olarak kapanır.
+- **Otomatik güncelleme:** Uygulama her başlatıldığında arka planda en son GitHub Release'i kontrol eder, varsa bir güncellemeyi indirip yükler ve ardından yeniden başlar - hiçbir iletişim kutusu veya tıklama gerekmez.
 
 ## Sunucu dağıtımı (referans)
 

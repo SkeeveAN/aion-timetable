@@ -31,6 +31,13 @@ body,
   font-size: 12px;
 }
 
+.update-banner {
+  padding: 4px 8px;
+  background: rgba(80, 160, 255, 0.25);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
 .category-tabs,
 .boss-type-tabs {
   display: flex;

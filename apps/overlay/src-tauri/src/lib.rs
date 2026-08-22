@@ -15,6 +15,44 @@ fn get_os_username() -> String {
         .unwrap_or_default()
 }
 
+/// Reads the language the frontend last persisted to settings.json (written by
+/// useSettings.ts as `{"overlay": {"language": "xx", ...}}`), so the native
+/// tray menu (built once at startup, before any frontend code runs) matches
+/// the user's chosen UI language instead of always being German. Falls back
+/// to "de" - same default as `DEFAULT_SETTINGS.language` on the frontend -
+/// whenever the file doesn't exist yet (first launch) or can't be parsed.
+fn read_persisted_language(app: &tauri::AppHandle) -> String {
+    let default_lang = "de".to_string();
+    let Ok(dir) = app.path().app_data_dir() else {
+        return default_lang;
+    };
+    let Ok(content) = std::fs::read_to_string(dir.join("settings.json")) else {
+        return default_lang;
+    };
+    let Ok(json) = serde_json::from_str::<serde_json::Value>(&content) else {
+        return default_lang;
+    };
+    json.get("overlay")
+        .and_then(|o| o.get("language"))
+        .and_then(|l| l.as_str())
+        .unwrap_or(&default_lang)
+        .to_string()
+}
+
+fn tray_labels(lang: &str) -> (&'static str, &'static str) {
+    match lang {
+        "en" => ("Settings", "Quit"),
+        "es" => ("Ajustes", "Salir"),
+        "it" => ("Impostazioni", "Esci"),
+        "fr" => ("Paramètres", "Quitter"),
+        "tr" => ("Ayarlar", "Çıkış"),
+        "ru" => ("Настройки", "Выход"),
+        "pl" => ("Ustawienia", "Zamknij"),
+        "zh" => ("设置", "退出"),
+        _ => ("Einstellungen", "Beenden"),
+    }
+}
+
 const GAME_PROCESS_NAME: &str = "aion.bin";
 
 #[cfg(windows)]
@@ -103,8 +141,9 @@ pub fn run() {
 
             // The window has no decorations/close button by design (transparent overlay),
             // so the tray icon is the only way to reach Settings or quit while click-through.
-            let settings_item = MenuItem::with_id(app, "settings", "Einstellungen", true, None::<&str>)?;
-            let quit_item = MenuItem::with_id(app, "quit", "Beenden", true, None::<&str>)?;
+            let (settings_label, quit_label) = tray_labels(&read_persisted_language(app.handle()));
+            let settings_item = MenuItem::with_id(app, "settings", settings_label, true, None::<&str>)?;
+            let quit_item = MenuItem::with_id(app, "quit", quit_label, true, None::<&str>)?;
             let tray_menu = Menu::with_items(app, &[&settings_item, &quit_item])?;
 
             TrayIconBuilder::new()

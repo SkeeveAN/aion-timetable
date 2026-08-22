@@ -85,6 +85,7 @@ Ponieważ okno celowo nie ma paska tytułu/przycisku zamykania, dostępna jest r
 - **Pierwsze uruchomienie:** Podczas pierwszego uruchomienia aplikacja automatycznie otwiera się w trybie interaktywnym + ustawień, aby nowi użytkownicy mogli natychmiast ją ustawić i skonfigurować, nie znając jeszcze skrótów klawiszowych.
 - **Reset:** Wszystkie ustawienia (poziom, kolor, przynależność do zespołu, status pierwszego uruchomienia) znajdują się jako pliki JSON w katalogu danych aplikacji Tauri (`settings.json`, `auth.json`). Usunięcie tych plików całkowicie resetuje aplikację.
 - **Automatyczne zamykanie:** Aplikacja monitoruje proces klienta AION (`aion.bin`). Gdy klient zostanie zaobserwowany jako działający, a następnie zostanie zamknięty, aplikacja overlay również automatycznie się zamyka.
+- **Automatyczna aktualizacja:** Przy każdym uruchomieniu aplikacja w tle sprawdza najnowsze GitHub Release, pobiera i instaluje aktualizację, jeśli jest dostępna, a następnie się restartuje - bez okien dialogowych i klikania.
 
 ## Wdrożenie serwera (informacja)
 

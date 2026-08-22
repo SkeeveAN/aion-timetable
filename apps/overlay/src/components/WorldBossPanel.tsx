@@ -1,15 +1,18 @@
 import { useState } from "react";
-import type { WorldBossesResponse } from "@aion-timetable/shared";
+import type { LanguageCode, WorldBossesResponse } from "@aion-timetable/shared";
 import { formatLocalTime } from "../lib/time";
 import { BOSS_MAP_ZONES } from "../lib/bossMapZones";
 import { WorldBossMap } from "./WorldBossMap";
+import { t } from "../lib/uiStrings";
 
 interface Props {
   data: WorldBossesResponse;
+  language: LanguageCode;
   onReportKill: (locationId: number) => Promise<void>;
 }
 
-export function WorldBossPanel({ data, onReportKill }: Props) {
+export function WorldBossPanel({ data, language, onReportKill }: Props) {
+  const strings = t(language);
   const [selectedBossTypeId, setSelectedBossTypeId] = useState(
     data.bossTypes[0]?.id ?? null
   );
@@ -75,7 +78,7 @@ export function WorldBossPanel({ data, onReportKill }: Props) {
               <span>{state.location.localizedLabel}</span>
               {state.respawnEarliest && state.respawnLatest && (
                 <span className="respawn-window">
-                  erwartet {formatLocalTime(new Date(state.respawnEarliest))}–
+                  {strings.respawnExpected} {formatLocalTime(new Date(state.respawnEarliest))}–
                   {formatLocalTime(new Date(state.respawnLatest))}
                 </span>
               )}
@@ -86,7 +89,7 @@ export function WorldBossPanel({ data, onReportKill }: Props) {
 
       {selectedLocationId !== null && (
         <button className="kill-confirm" disabled={confirming} onClick={confirmKill}>
-          {confirming ? "..." : "Kill / Getötet"}
+          {confirming ? "..." : strings.killButton}
         </button>
       )}
     </div>

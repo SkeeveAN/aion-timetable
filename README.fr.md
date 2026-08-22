@@ -85,6 +85,7 @@ Comme la fenêtre n'a intentionnellement ni barre de titre ni bouton de fermetur
 - **Premier lancement :** Au tout premier lancement, l'application s'ouvre automatiquement en mode interactif + paramètres afin que les nouveaux utilisateurs puissent immédiatement la positionner et la configurer sans encore connaître les raccourcis.
 - **Réinitialisation :** Tous les paramètres (niveau, couleur, appartenance à l'équipe, statut du premier lancement) sont stockés sous forme de fichiers JSON dans le répertoire de données de l'application Tauri (`settings.json`, `auth.json`). Supprimer ces fichiers réinitialise complètement l'application.
 - **Fermeture automatique :** L'application surveille le processus du client AION (`aion.bin`). Une fois que le client a été vu en cours d'exécution puis se ferme, l'application overlay se ferme aussi automatiquement.
+- **Mise à jour automatique :** À chaque lancement, l'application vérifie silencieusement la dernière GitHub Release, télécharge et installe une mise à jour si disponible, puis redémarre - aucune boîte de dialogue, rien à cliquer.
 
 ## Déploiement serveur (référence)
 

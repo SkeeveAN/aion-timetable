@@ -4,6 +4,7 @@ import { useSchedule } from "./hooks/useSchedule";
 import { useAuth } from "./hooks/useAuth";
 import { useSettings } from "./hooks/useSettings";
 import { useInteractiveMode } from "./hooks/useInteractiveMode";
+import { useAutoUpdate } from "./hooks/useAutoUpdate";
 import { useWorldBosses } from "./hooks/useWorldBosses";
 import { useLiveUpdates } from "./hooks/useLiveUpdates";
 import { UpcomingList } from "./components/UpcomingList";
@@ -13,6 +14,7 @@ import { TeamWizard } from "./components/TeamWizard";
 import { TeamPanel } from "./components/TeamPanel";
 import { WorldBossPanel } from "./components/WorldBossPanel";
 import { CommentThread } from "./components/CommentThread";
+import { t } from "./lib/uiStrings";
 import "./App.css";
 
 export default function App() {
@@ -21,6 +23,7 @@ export default function App() {
   const { data: schedule, reload: reloadSchedule } = useSchedule(settings.language);
   const { interactive, setInteractive, settingsOpen, setSettingsOpen, startDrag } =
     useInteractiveMode();
+  const updateStatus = useAutoUpdate();
 
   useEffect(() => {
     if (!settingsLoaded || settings.onboarded) return;
@@ -52,14 +55,20 @@ export default function App() {
     (l) => l.location.id === lastKillLocationId
   )?.lastKill;
 
+  const strings = t(settings.language);
+
   return (
     <div
       className="overlay-root"
       style={{ fontSize: settings.fontSize, color: settings.textColor }}
     >
+      {updateStatus === "downloading" && (
+        <div className="update-banner">{strings.updateBanner}</div>
+      )}
+
       {interactive && (
         <div className="drag-handle" onMouseDown={() => void startDrag()}>
-          ⠿ Verschieben (Strg+Umschalt+O zum Verlassen)
+          {strings.dragHandle}
         </div>
       )}
 
@@ -84,16 +93,20 @@ export default function App() {
       {interactive && schedule && (
         <div className="pager">
           <button disabled={page === 0} onClick={() => setPage(0)}>
-            ‹ Jetzt/Bald
+            {strings.pagerNow}
           </button>
           <button disabled={page === 1} onClick={() => setPage(1)}>
-            Ganzer Plan ›
+            {strings.pagerFull}
           </button>
         </div>
       )}
 
       {interactive && !auth.isTeamMode && (
-        <TeamWizard onCreate={auth.createTeam} onJoin={auth.joinTeam} />
+        <TeamWizard
+          language={settings.language}
+          onCreate={auth.createTeam}
+          onJoin={auth.joinTeam}
+        />
       )}
 
       {interactive && auth.isTeamMode && auth.team && auth.member && (
@@ -102,12 +115,14 @@ export default function App() {
             api={auth.api}
             team={auth.team}
             member={auth.member}
+            language={settings.language}
             onLeave={() => void auth.leaveTeam()}
           />
 
           {worldBosses.data && (
             <WorldBossPanel
               data={worldBosses.data}
+              language={settings.language}
               onReportKill={async (locationId) => {
                 await worldBosses.reportKill(locationId);
                 setLastKillLocationId(locationId);
@@ -120,6 +135,7 @@ export default function App() {
               api={auth.api}
               killRecordId={lastKillRecord.id}
               liveComments={liveComments}
+              language={settings.language}
             />
           )}
         </>

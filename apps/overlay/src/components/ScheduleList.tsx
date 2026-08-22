@@ -4,6 +4,7 @@ import { SCHEDULE_CATEGORIES } from "@aion-timetable/shared";
 import { formatCountdown, formatLocalTime, nextOccurrenceUtc } from "../lib/time";
 import { matchesLevel } from "../lib/level";
 import { categoryLabel } from "../lib/categoryLabels";
+import { t } from "../lib/uiStrings";
 
 interface Props {
   schedule: ScheduleResponse;
@@ -20,6 +21,7 @@ export function ScheduleList({
   myLevel,
   language,
 }: Props) {
+  const strings = t(language);
   const now = new Date();
 
   const upcoming = useMemo(() => {
@@ -52,12 +54,13 @@ export function ScheduleList({
           <li key={`${event.id}-${next.getTime()}`} className="event-item">
             <span className="event-name">{event.displayName}</span>
             <span className="event-time">
-              {event.startTime} Server &middot; {formatLocalTime(next)} lokal &middot;{" "}
+              {event.startTime} {strings.scheduleServerSuffix} &middot;{" "}
+              {formatLocalTime(next)} {strings.scheduleLocalSuffix} &middot;{" "}
               {formatCountdown(next, now)}
             </span>
           </li>
         ))}
-        {upcoming.length === 0 && <li className="event-empty">Keine Termine gefunden.</li>}
+        {upcoming.length === 0 && <li className="event-empty">{strings.scheduleEmpty}</li>}
       </ul>
     </div>
   );

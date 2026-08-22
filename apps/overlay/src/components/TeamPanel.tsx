@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import type { MemberInfo, TeamInfo } from "@aion-timetable/shared";
+import type { LanguageCode, MemberInfo, TeamInfo } from "@aion-timetable/shared";
 import type { ApiClient } from "../api/client";
+import { t } from "../lib/uiStrings";
 
 interface Props {
   api: ApiClient;
   team: TeamInfo;
   member: MemberInfo;
+  language: LanguageCode;
   onLeave: () => void;
 }
 
-export function TeamPanel({ api, team, member, onLeave }: Props) {
+export function TeamPanel({ api, team, member, language, onLeave }: Props) {
+  const strings = t(language);
   const [members, setMembers] = useState<MemberInfo[]>([]);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [draftName, setDraftName] = useState("");
@@ -26,7 +29,7 @@ export function TeamPanel({ api, team, member, onLeave }: Props) {
         <span className="team-description">{team.description}</span>
       </div>
       <div className="invite-code">
-        Einladungscode: <code>{team.inviteCode}</code>
+        {strings.teamInviteCodeLabel} <code>{team.inviteCode}</code>
       </div>
 
       {member.isOwner && members.length > 0 && (
@@ -55,7 +58,7 @@ export function TeamPanel({ api, team, member, onLeave }: Props) {
                     setDraftName(m.displayName);
                   }}
                 >
-                  {m.displayName} {m.isOwner && "(Owner)"}
+                  {m.displayName} {m.isOwner && strings.teamOwnerTag}
                 </span>
               )}
             </li>
@@ -64,7 +67,7 @@ export function TeamPanel({ api, team, member, onLeave }: Props) {
       )}
 
       <button className="logout-btn" onClick={onLeave}>
-        Team verlassen
+        {strings.teamLeaveButton}
       </button>
     </div>
   );

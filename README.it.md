@@ -85,6 +85,7 @@ Poiché la finestra intenzionalmente non ha barra del titolo/pulsante di chiusur
 - **Primo avvio:** Al primissimo avvio, l'app si apre automaticamente in modalità interattiva + impostazioni, così i nuovi utenti possono posizionarla e configurarla immediatamente senza già conoscere le scorciatoie.
 - **Reset:** Tutte le impostazioni (livello, colore, appartenenza al team, stato del primo avvio) risiedono come file JSON nella directory dati dell'app Tauri (`settings.json`, `auth.json`). Eliminare questi file resetta completamente l'app.
 - **Chiusura automatica:** L'app monitora il processo del client AION (`aion.bin`). Una volta che il client è stato visto in esecuzione e poi si chiude, anche l'app overlay si chiude automaticamente.
+- **Aggiornamento automatico:** Ad ogni avvio, l'app controlla in background l'ultima GitHub Release, scarica e installa un aggiornamento se disponibile, poi si riavvia - nessuna finestra di dialogo, nessun clic necessario.
 
 ## Deployment del server (riferimento)
 

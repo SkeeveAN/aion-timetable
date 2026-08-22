@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import type { Comment } from "@aion-timetable/shared";
+import type { Comment, LanguageCode } from "@aion-timetable/shared";
 import type { ApiClient } from "../api/client";
+import { t } from "../lib/uiStrings";
 
 interface Props {
   api: ApiClient;
   killRecordId: number;
   liveComments: Comment[];
+  language: LanguageCode;
 }
 
-export function CommentThread({ api, killRecordId, liveComments }: Props) {
+export function CommentThread({ api, killRecordId, liveComments, language }: Props) {
+  const strings = t(language);
   const [comments, setComments] = useState<Comment[]>([]);
   const [draft, setDraft] = useState("");
 
@@ -42,11 +45,11 @@ export function CommentThread({ api, killRecordId, liveComments }: Props) {
       <div className="comment-input">
         <input
           value={draft}
-          placeholder="Kommentar..."
+          placeholder={strings.commentPlaceholder}
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && submit()}
         />
-        <button onClick={submit}>Senden</button>
+        <button onClick={submit}>{strings.commentSend}</button>
       </div>
     </div>
   );

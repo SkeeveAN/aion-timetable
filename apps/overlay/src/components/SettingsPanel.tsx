@@ -1,5 +1,6 @@
 import { SUPPORTED_LANGUAGES } from "@aion-timetable/shared";
 import type { OverlaySettings } from "../hooks/useSettings";
+import { t } from "../lib/uiStrings";
 
 interface Props {
   settings: OverlaySettings;
@@ -8,17 +9,21 @@ interface Props {
 }
 
 const COLORS = ["#ffffff", "#ffd54f", "#4fc3f7", "#81c784", "#e57373"];
+const MIN_FONT_SIZE = 10;
+const MAX_FONT_SIZE = 28;
 
 export function SettingsPanel({ settings, onChange, onClose }: Props) {
+  const strings = t(settings.language);
+
   return (
     <div className="settings-panel">
       <div className="settings-header">
-        <span>Darstellung</span>
-        <button onClick={onClose}>Schließen</button>
+        <span>{strings.settingsTitle}</span>
+        <button onClick={onClose}>{strings.settingsClose}</button>
       </div>
 
       <label>
-        Sprache
+        {strings.settingsLanguage}
         <select
           value={settings.language}
           onChange={(e) => onChange({ language: e.target.value as OverlaySettings["language"] })}
@@ -32,12 +37,12 @@ export function SettingsPanel({ settings, onChange, onClose }: Props) {
       </label>
 
       <label>
-        Mein Level
+        {strings.settingsMyLevel}
         <input
           type="number"
           min={1}
           max={65}
-          placeholder="z. B. 65"
+          placeholder={strings.settingsMyLevelPlaceholder}
           value={settings.myLevel ?? ""}
           onChange={(e) =>
             onChange({ myLevel: e.target.value === "" ? null : Number(e.target.value) })
@@ -46,13 +51,19 @@ export function SettingsPanel({ settings, onChange, onClose }: Props) {
       </label>
 
       <label>
-        Schriftgröße: {settings.fontSize}px
+        {strings.settingsFontSize} (px)
         <input
-          type="range"
-          min={10}
-          max={28}
+          type="number"
+          min={MIN_FONT_SIZE}
+          max={MAX_FONT_SIZE}
           value={settings.fontSize}
-          onChange={(e) => onChange({ fontSize: Number(e.target.value) })}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+            if (Number.isNaN(value)) return;
+            onChange({
+              fontSize: Math.min(MAX_FONT_SIZE, Math.max(MIN_FONT_SIZE, value)),
+            });
+          }}
         />
       </label>
 

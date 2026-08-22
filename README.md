@@ -85,6 +85,7 @@ Since the window intentionally has no title bar/close button, there's also a **t
 - **First launch:** On the very first launch, the app automatically opens in interactive + settings mode so new users can immediately position and configure it without already knowing the hotkeys.
 - **Reset:** All settings (level, color, team membership, first-launch status) live as JSON files in the Tauri app data directory (`settings.json`, `auth.json`). Deleting these files fully resets the app.
 - **Auto-quit:** The app watches the AION client process (`aion.bin`). Once the client has been seen running and then closes, the overlay app quits automatically too.
+- **Auto-update:** On every launch, the app silently checks the latest GitHub Release, downloads and installs an update if one is available, then restarts - no dialogs, nothing to click.
 
 ## Server deployment (reference)
 

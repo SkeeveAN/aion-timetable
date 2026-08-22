@@ -3,6 +3,7 @@ import type { LanguageCode, ScheduleResponse } from "@aion-timetable/shared";
 import { formatCountdown, formatLocalTime, nextOccurrenceUtc } from "../lib/time";
 import { matchesLevel } from "../lib/level";
 import { categoryShortLabel } from "../lib/categoryLabels";
+import { t } from "../lib/uiStrings";
 
 const WINDOW_MS = 60 * 60_000;
 
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export function UpcomingList({ schedule, myLevel, language }: Props) {
+  const strings = t(language);
   const now = new Date();
 
   const upcoming = useMemo(() => {
@@ -41,7 +43,7 @@ export function UpcomingList({ schedule, myLevel, language }: Props) {
         </li>
       ))}
       {upcoming.length === 0 && (
-        <li className="event-empty">Nichts in der nächsten Stunde.</li>
+        <li className="event-empty">{strings.upcomingEmpty}</li>
       )}
     </ul>
   );

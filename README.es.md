@@ -85,6 +85,7 @@ Como la ventana intencionalmente no tiene barra de título ni botón de cerrar, 
 - **Primer inicio:** En el primer inicio, la app se abre automáticamente en modo interactivo + ajustes para que los nuevos usuarios puedan posicionarla y configurarla de inmediato sin conocer aún los atajos.
 - **Restablecer:** Todos los ajustes (nivel, color, membresía de equipo, estado de primer inicio) viven como archivos JSON en el directorio de datos de la app de Tauri (`settings.json`, `auth.json`). Borrar estos archivos restablece la app por completo.
 - **Cierre automático:** La app vigila el proceso del cliente de AION (`aion.bin`). Una vez que el cliente ha estado en ejecución y luego se cierra, la app de overlay también se cierra automáticamente.
+- **Actualización automática:** En cada inicio, la app comprueba en segundo plano la última GitHub Release, descarga e instala una actualización si hay una disponible, y luego se reinicia; sin diálogos ni clics.
 
 ## Despliegue del servidor (referencia)
 
