@@ -1,3 +1,4 @@
+import { eq } from "drizzle-orm";
 import { db } from "./client.js";
 import {
   worldBossTypes,
@@ -210,6 +211,100 @@ function seedWorldBosses() {
   console.log("Seeded world boss types and locations.");
 }
 
+interface AdditionalBossSpec {
+  key: string;
+  displayName: string;
+  respawnMinSeconds: number;
+  respawnMaxSeconds: number;
+  locations: string[];
+}
+
+const HOUR = 3600;
+const DAY = 86400;
+
+// Respawn timers datamined from the beyond-aion/aion-server open-source
+// emulator (branch 4.7.5, game-server/data/static_data/spawns/Npcs/*.xml,
+// respawn_time attribute) - reverse-engineered from real spawn data, not
+// official patch notes, so medium-high confidence rather than confirmed.
+// Isbariya the Resolute, Hyperion and the Queen Modor variants were
+// investigated and excluded: all three are instanced (dungeon/raid) bosses
+// with weekly lockouts, not open-world spawns, matching the same reasoning
+// that already excluded Ahbana. Kordac and "Dragon Lord's Champion" were
+// searched for extensively and do not appear to exist in AION under any
+// spelling - not seeded rather than inventing data.
+const ADDITIONAL_WORLD_BOSSES: AdditionalBossSpec[] = [
+  { key: "high_priest_yatri", displayName: "High Priest Yatri", respawnMinSeconds: 14000, respawnMaxSeconds: 14000, locations: ["Heiron"] },
+  { key: "scout_dehavi", displayName: "Scout Dehavi", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Heiron"] },
+  { key: "bollvig_blackheart", displayName: "Bollvig Blackheart", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: ["Heiron"] },
+  { key: "high_mage_brashuna", displayName: "High Mage Brashuna", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Heiron"] },
+  { key: "bulwark_jeshuchi", displayName: "Bulwark Jeshuchi", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Heiron"] },
+  { key: "guardian_vingeveu", displayName: "Guardian Vingeveu", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Heiron"] },
+  { key: "watcher_zapiel", displayName: "Watcher Zapiel", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: ["Heiron"] },
+  { key: "deputy_hanuman", displayName: "Deputy Hanuman", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: ["Heiron"] },
+  { key: "omega", displayName: "Omega", respawnMinSeconds: 20 * HOUR, respawnMaxSeconds: 20 * HOUR, locations: ["Inggison"] },
+  { key: "ragnarok", displayName: "Ragnarok", respawnMinSeconds: 20 * HOUR, respawnMaxSeconds: 20 * HOUR, locations: ["Gelkmaros"] },
+  { key: "menotios", displayName: "Menotios", respawnMinSeconds: 28 * HOUR, respawnMaxSeconds: 28 * HOUR, locations: ["Reshanta"] },
+  { key: "debarim_the_omnipotent", displayName: "Debarim the Omnipotent", respawnMinSeconds: 21240, respawnMaxSeconds: 21240, locations: ["Sarpan"] },
+  { key: "ativas_crystalline", displayName: "Ativas Crystalline", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Tiamaranta"] },
+  { key: "golden_tatar", displayName: "Golden Tatar", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Tiamaranta"] },
+  { key: "kradi_the_glutton", displayName: "Kradi the Glutton", respawnMinSeconds: 4 * HOUR, respawnMaxSeconds: 4 * HOUR, locations: ["Tiamaranta - Ort 1", "Tiamaranta - Ort 2"] },
+  { key: "grand_chieftain_saendukal", displayName: "Grand Chieftain Saendukal", respawnMinSeconds: 6 * HOUR, respawnMaxSeconds: 6 * HOUR, locations: ["Eltnen"] },
+
+  // Rough approximations, not a real kill->respawn cycle (see conversation):
+  // Medeus spawns in a nightly window (~21:00-04:00 server time) rather than
+  // on a fixed timer; Moltenus is a weekly event (Sunday ~20:00) at one of
+  // three fortress locations, despawning after 1h if not killed. Modeled
+  // here as a ~1 day / ~1 week window so the app still shows something
+  // useful, clearly not the same confidence level as the timer-based bosses.
+  { key: "medeus_the_vile", displayName: "Medeus the Vile", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: ["Heiron"] },
+  { key: "moltenus", displayName: "Moltenus", respawnMinSeconds: 7 * DAY, respawnMaxSeconds: 7 * DAY, locations: ["Krotan Refuge", "Miren Fortress", "Kysis Fortress"] },
+
+  // Sunayaka family - all three confirmed real NPCs in Tiamaranta's Eye;
+  // exact spawn schedule conflicts between sources (daily window, exact
+  // clock time unverified), so treated the same way as Medeus above.
+  { key: "governor_sunayaka", displayName: "Governor Sunayaka", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: ["Tiamaranta's Eye"] },
+  { key: "berserker_sunayaka", displayName: "Berserker Sunayaka", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: ["Tiamaranta's Eye"] },
+  { key: "commander_sunayaka", displayName: "Commander Sunayaka", respawnMinSeconds: DAY, respawnMaxSeconds: DAY, locations: ["Tiamaranta's Eye"] },
+];
+
+function seedAdditionalWorldBosses() {
+  const existing = db
+    .select()
+    .from(worldBossTypes)
+    .where(eq(worldBossTypes.key, "omega"))
+    .get();
+  if (existing) {
+    console.log("Additional world bosses already seeded, skipping.");
+    return;
+  }
+
+  for (const spec of ADDITIONAL_WORLD_BOSSES) {
+    const bossId = db
+      .insert(worldBossTypes)
+      .values({
+        key: spec.key,
+        displayName: spec.displayName,
+        respawnMinSeconds: spec.respawnMinSeconds,
+        respawnMaxSeconds: spec.respawnMaxSeconds,
+      })
+      .run().lastInsertRowid;
+
+    db.insert(worldBossLocations)
+      .values(
+        spec.locations.map((label) => ({
+          bossTypeId: Number(bossId),
+          label,
+          mapX: null,
+          mapY: null,
+        }))
+      )
+      .run();
+  }
+
+  console.log(`Seeded ${ADDITIONAL_WORLD_BOSSES.length} additional world bosses.`);
+}
+
 seedWorldBosses();
+seedAdditionalWorldBosses();
 seedLevelRequirements();
 seedEntityTranslations();
