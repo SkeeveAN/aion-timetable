@@ -1,0 +1,21 @@
+node_modules/
+dist/
+build/
+.env
+.env.*
+!.env.example
+
+# Tauri
+apps/overlay/src-tauri/target/
+apps/overlay/dist/
+
+# Backend
+apps/backend/data/*.sqlite
+apps/backend/data/*.sqlite-*
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

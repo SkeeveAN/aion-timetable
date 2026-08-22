@@ -1,0 +1,285 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  background: transparent;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+  user-select: none;
+}
+
+.overlay-root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(15, 15, 20, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.drag-handle {
+  cursor: move;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.category-tabs,
+.boss-type-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.tab {
+  flex: 1;
+  padding: 4px 6px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.85em;
+}
+
+.tab.active {
+  background: rgba(255, 255, 255, 0.28);
+  font-weight: 600;
+}
+
+.upcoming-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.upcoming-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 4px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+}
+
+.upcoming-category {
+  font-size: 0.7em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  min-width: 3.2em;
+}
+
+.upcoming-name {
+  flex: 1;
+}
+
+.upcoming-time {
+  font-size: 0.8em;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.pager button {
+  flex: 1;
+  padding: 3px 6px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.75em;
+}
+
+.pager button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.event-items,
+.location-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.event-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+}
+
+.event-time {
+  opacity: 0.8;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.location-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  cursor: pointer;
+}
+
+.location-btn.active {
+  background: rgba(255, 200, 80, 0.3);
+}
+
+.respawn-window {
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+
+.kill-confirm {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #d64545;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.settings-panel {
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.color-row {
+  display: flex;
+  gap: 6px;
+}
+
+.swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.swatch.active {
+  border-color: white;
+}
+
+.wizard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.wizard-form input {
+  width: 100%;
+}
+
+.login-error {
+  color: #ff8a80;
+  font-size: 0.8em;
+}
+
+.team-panel {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.team-description {
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+
+.invite-code code {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.member-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.85em;
+}
+
+.member-list span {
+  cursor: pointer;
+}
+
+.comment-thread {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 6px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.comment-thread ul {
+  list-style: none;
+  margin: 0 0 6px;
+  padding: 0;
+  font-size: 0.85em;
+}
+
+.comment-input {
+  display: flex;
+  gap: 4px;
+}
+
+.comment-input input {
+  flex: 1;
+}
+
+.logout-btn {
+  align-self: flex-start;
+  font-size: 0.8em;
+  opacity: 0.7;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
