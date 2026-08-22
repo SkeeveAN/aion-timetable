@@ -88,12 +88,15 @@ Da das Fenster bewusst ohne Titelleiste/Schließen-Button läuft, gibt es zusät
 
 Aktuell produktiv unter `timetable.skeeve.tv` betrieben: Node.js + systemd-Service (kein Docker), SQLite lokal auf dem Server, nginx als TLS-Reverse-Proxy (inkl. WebSocket-Upgrade für `/ws`), Zertifikat via certbot. Der Scraper läuft stündlich als Teil des Backend-Prozesses (`node-cron`).
 
-Das Server-Verzeichnis (`/opt/timetable`) ist ein normaler Git-Checkout dieses Repos. Updates laufen über das Skript unter [`deploy/timetable_install.sh`](deploy/timetable_install.sh): es zieht den aktuellen `main`-Branch, installiert die Backend-Abhängigkeiten, wendet ausstehende DB-Migrationen an, aktualisiert die systemd-Unit ([`deploy/aion-timetable-backend.service`](deploy/aion-timetable-backend.service)) und startet den Service neu.
+Das Server-Verzeichnis (`/opt/timetable`) ist ein normaler Git-Checkout dieses Repos. Updates laufen über zwei Skripte in [`deploy/`](deploy/):
+- [`deploy/timetable_install`](deploy/timetable_install) – stabiles Bootstrap-Skript, holt den aktuellen `main`-Branch und startet danach `install-backend.sh` als frischen Prozess (bewusst getrennt, damit sich ein laufendes Skript nicht mitten in der Ausführung selbst per `git reset --hard` überschreibt).
+- [`deploy/install-backend.sh`](deploy/install-backend.sh) – installiert die Backend-Abhängigkeiten, wendet ausstehende DB-Migrationen an, aktualisiert die systemd-Unit ([`deploy/aion-timetable-backend.service`](deploy/aion-timetable-backend.service)) und startet den Service neu.
 
-Einmalig einrichten (als root auf dem Server):
+Einmalig einrichten (als root auf dem Server) – bewusst **kopieren, nicht verlinken**, damit das Bootstrap-Skript stabil bleibt, auch während es sich selbst per Git aktualisiert:
 
 ```bash
-ln -s /opt/timetable/deploy/timetable_install.sh /usr/local/bin/timetable_install
+cp /opt/timetable/deploy/timetable_install /usr/local/bin/timetable_install
+chmod +x /usr/local/bin/timetable_install
 ```
 
 Danach reicht für jedes Update:
@@ -101,6 +104,8 @@ Danach reicht für jedes Update:
 ```bash
 timetable_install
 ```
+
+Falls sich `deploy/timetable_install` selbst mal ändert, einmalig den `cp`-Schritt oben wiederholen.
 
 ## Offene Punkte
 

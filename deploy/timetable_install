@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Stabiles Bootstrap-Skript - wird 1:1 (nicht als Symlink!) nach
+# /usr/local/bin/timetable_install kopiert und bleibt bewusst unverändert
+# liegen, solange sich nicht sein eigener Ablauf ändert.
+#
+# Zieht den aktuellen main-Branch nach /opt/timetable und übergibt danach
+# per `exec` an install-backend.sh - als frisch gestarteter Prozess, der die
+# gerade aktualisierte Datei von Anfang an liest. So kann sich das eigentliche
+# Installationsskript beliebig ändern, ohne dass sich ein laufendes Bash
+# mitten in der Ausführung selbst unter den Füßen wegzieht.
+set -euo pipefail
+
+REPO_DIR="/opt/timetable"
+REPO_URL="https://github.com/SkeeveAN/aion-timetable.git"
+SERVICE_USER="aion-timetable"
+
+if [[ "$EUID" -ne 0 ]]; then
+  echo "timetable_install muss als root laufen." >&2
+  exit 1
+fi
+
+if [[ ! -d "$REPO_DIR/.git" ]]; then
+  echo "==> Noch kein Git-Checkout unter $REPO_DIR gefunden, klone frisch..."
+  su - "$SERVICE_USER" -s /bin/bash -c "git clone --branch main '$REPO_URL' '$REPO_DIR'"
+fi
+
+echo "==> Hole aktuellen Code..."
+su - "$SERVICE_USER" -s /bin/bash -c "
+  set -e
+  cd '$REPO_DIR'
+  git fetch origin
+  git reset --hard origin/main
+"
+
+exec bash "$REPO_DIR/deploy/install-backend.sh"
