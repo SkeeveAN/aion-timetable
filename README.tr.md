@@ -1,8 +1,8 @@
-🇬🇧 [English](README.md) · 🇩🇪 [Deutsch](README.de.md) · 🇪🇸 [Español](README.es.md) · 🇮🇹 [Italiano](README.it.md) · 🇫🇷 [Français](README.fr.md) · 🇹🇷 **Türkçe** · 🇷🇺 [Русский](README.ru.md) · 🇵🇱 [Polski](README.pl.md)
+🇬🇧 [English](README.md) · 🇩🇪 [Deutsch](README.de.md) · 🇪🇸 [Español](README.es.md) · 🇮🇹 [Italiano](README.it.md) · 🇫🇷 [Français](README.fr.md) · 🇹🇷 **Türkçe** · 🇷🇺 [Русский](README.ru.md) · 🇵🇱 [Polski](README.pl.md) · 🇨🇳 [中文](README.zh.md)
 
 # AION Timetable Overlay
 
-Özel AION 4.6 sunucusu **OriginAion** için, oyun oynarken üstte kalan şeffaf bir Windows overlay'i: PvP Instances / Arenas / Siege / Rifts programı (sunucu ve yerel saat dilimi, seviye filtreleme, 7 dil), ayrıca Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen bölgelerindeki 23 dünya boss'u/keymaster (Dabra, Zumita ve 21 diğeri) için takım içi öldürme/yeniden doğma takibi ve ortak yorumlar.
+Özel AION 4.6 sunucusu **OriginAion** için, oyun oynarken üstte kalan şeffaf bir Windows overlay'i: PvP Instances / Arenas / Siege / Rifts programı (sunucu ve yerel saat dilimi, seviye filtreleme, 8 dil), ayrıca Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen bölgelerindeki 23 dünya boss'u/keymaster (Dabra, Zumita ve 21 diğeri) için takım içi öldürme/yeniden doğma takibi ve ortak yorumlar.
 
 ## Mimari
 
@@ -135,5 +135,5 @@ Kasıtlı olarak hariç tutuldu: Isbariya the Resolute, Hyperion ve Queen Modor 
 ## Açık noktalar
 
 - Dredgion'lar için seviye gereksinimleri hâlâ başka bir 4.6 sunucusundan alınmıştır (arena değerleri originaion.com için zaten doğrudan onaylanmıştır) ve sunucu tekrar çevrimiçi olduğunda gerçek sunucuya karşı nihai olarak doğrulanmalıdır.
-- Tiamaranta's Eye haritasındaki (ve diğer bölgelerdeki) dünya boss konumları için tıklama koordinatları henüz sabitlenmemiştir (liste tabanlı seçim zaten çalışıyor, tıklanabilir harita işaretçileri daha sonra gelecek).
-- 21 yeni dünya boss'u henüz 7 dilin tümüne çevrilmemiştir (İngilizce isme geri döner).
+- Tiamaranta's Eye (Dabra/Zumita) artık tıklanabilir işaretçilere sahip gerçek bir haritaya sahiptir (koordinatlar ve harita görüntüsünün kendisi aioncodex.com'dan alınmıştır); diğer bölgelerdeki dünya boss'ları hâlâ yalnızca liste tabanlı seçim kullanıyor.
+- 21 yeni dünya boss'u henüz 8 dilin tümüne çevrilmemiştir (İngilizce isme geri döner).

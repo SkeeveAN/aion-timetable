@@ -166,6 +166,41 @@ body,
   cursor: pointer;
 }
 
+.boss-map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.boss-map-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.boss-map-pin-dot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(214, 69, 69, 0.85);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+}
+
+.boss-map-pin.active .boss-map-pin-dot {
+  background: rgba(255, 200, 80, 0.95);
+}
+
 .settings-panel {
   padding: 8px;
   border-radius: 8px;

@@ -1,8 +1,8 @@
-🇬🇧 [English](README.md) · 🇩🇪 [Deutsch](README.de.md) · 🇪🇸 [Español](README.es.md) · 🇮🇹 [Italiano](README.it.md) · 🇫🇷 **Français** · 🇹🇷 [Türkçe](README.tr.md) · 🇷🇺 [Русский](README.ru.md) · 🇵🇱 [Polski](README.pl.md)
+🇬🇧 [English](README.md) · 🇩🇪 [Deutsch](README.de.md) · 🇪🇸 [Español](README.es.md) · 🇮🇹 [Italiano](README.it.md) · 🇫🇷 **Français** · 🇹🇷 [Türkçe](README.tr.md) · 🇷🇺 [Русский](README.ru.md) · 🇵🇱 [Polski](README.pl.md) · 🇨🇳 [中文](README.zh.md)
 
 # AION Timetable Overlay
 
-Une superposition (overlay) transparente pour Windows destinée au serveur privé AION 4.6 **OriginAion**, qui reste affichée pendant que vous jouez : planning des PvP Instances / Arenas / Siege / Rifts (fuseau horaire du serveur et local, filtrage par niveau, 7 langues), ainsi qu'un suivi mort/réapparition au niveau de l'équipe pour 23 boss du monde/keymasters (Dabra, Zumita, plus 21 autres à Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) avec commentaires partagés.
+Une superposition (overlay) transparente pour Windows destinée au serveur privé AION 4.6 **OriginAion**, qui reste affichée pendant que vous jouez : planning des PvP Instances / Arenas / Siege / Rifts (fuseau horaire du serveur et local, filtrage par niveau, 8 langues), ainsi qu'un suivi mort/réapparition au niveau de l'équipe pour 23 boss du monde/keymasters (Dabra, Zumita, plus 21 autres à Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) avec commentaires partagés.
 
 ## Architecture
 
@@ -135,5 +135,5 @@ Exclus délibérément : Isbariya the Resolute, Hyperion et Queen Modor (les 4 v
 ## Points en suspens
 
 - Les exigences de niveau pour les dredgions sont encore reprises d'un autre serveur 4.6 (les valeurs des arènes sont déjà directement confirmées pour originaion.com) et devraient être finalement vérifiées par rapport au serveur réel une fois qu'il sera de nouveau en ligne.
-- Les coordonnées de clic pour les emplacements des boss du monde sur la carte de Tiamaranta's Eye (et les autres zones) ne sont pas encore fixées (la sélection par liste fonctionne déjà, les marqueurs de carte cliquables suivront).
-- Les 21 nouveaux boss du monde ne sont pas encore traduits dans les 7 langues (repli sur le nom anglais).
+- Tiamaranta's Eye (Dabra/Zumita) dispose désormais d'une vraie carte avec des marqueurs cliquables (les coordonnées et l'image de la carte elle-même viennent d'aioncodex.com) ; les boss du monde des autres zones utilisent encore uniquement la sélection par liste.
+- Les 21 nouveaux boss du monde ne sont pas encore traduits dans les 8 langues (repli sur le nom anglais).

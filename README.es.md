@@ -1,8 +1,8 @@
-🇬🇧 [English](README.md) · 🇩🇪 [Deutsch](README.de.md) · 🇪🇸 **Español** · 🇮🇹 [Italiano](README.it.md) · 🇫🇷 [Français](README.fr.md) · 🇹🇷 [Türkçe](README.tr.md) · 🇷🇺 [Русский](README.ru.md) · 🇵🇱 [Polski](README.pl.md)
+🇬🇧 [English](README.md) · 🇩🇪 [Deutsch](README.de.md) · 🇪🇸 **Español** · 🇮🇹 [Italiano](README.it.md) · 🇫🇷 [Français](README.fr.md) · 🇹🇷 [Türkçe](README.tr.md) · 🇷🇺 [Русский](README.ru.md) · 🇵🇱 [Polski](README.pl.md) · 🇨🇳 [中文](README.zh.md)
 
 # AION Timetable Overlay
 
-Una superposición (overlay) transparente para Windows para el servidor privado de AION 4.6 **OriginAion**, que permanece visible mientras juegas: horario de PvP Instances / Arenas / Siege / Rifts (zona horaria del servidor y local, filtrado por nivel, 7 idiomas), además de seguimiento de muerte/reaparición a nivel de equipo para 23 jefes de mundo/keymasters (Dabra, Zumita, más otros 21 en Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) con comentarios compartidos.
+Una superposición (overlay) transparente para Windows para el servidor privado de AION 4.6 **OriginAion**, que permanece visible mientras juegas: horario de PvP Instances / Arenas / Siege / Rifts (zona horaria del servidor y local, filtrado por nivel, 8 idiomas), además de seguimiento de muerte/reaparición a nivel de equipo para 23 jefes de mundo/keymasters (Dabra, Zumita, más otros 21 en Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) con comentarios compartidos.
 
 ## Arquitectura
 
@@ -135,5 +135,5 @@ Excluidos deliberadamente: Isbariya the Resolute, Hyperion y Queen Modor (las 4 
 ## Pendientes
 
 - Los requisitos de nivel para los dredgions todavía se toman de otro servidor 4.6 (los valores de las arenas ya están confirmados directamente para originaion.com) y deberían verificarse finalmente contra el servidor real una vez que vuelva a estar en línea.
-- Las coordenadas de clic para las ubicaciones de los jefes de mundo en el mapa de Tiamaranta's Eye (y las otras zonas) aún no están fijadas (la selección por lista ya funciona, los marcadores de mapa clicables vendrán después).
-- Los 21 nuevos jefes de mundo todavía no están traducidos a los 7 idiomas (usan el nombre en inglés como respaldo).
+- Tiamaranta's Eye (Dabra/Zumita) ya tiene un mapa real con marcadores clicables (tanto las coordenadas como la propia imagen del mapa provienen de aioncodex.com); los jefes de mundo de las demás zonas todavía usan solo selección por lista.
+- Los 21 nuevos jefes de mundo todavía no están traducidos a los 8 idiomas (usan el nombre en inglés como respaldo).

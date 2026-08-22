@@ -1,6 +1,10 @@
 import type { LanguageCode, ScheduleCategory } from "@aion-timetable/shared";
 
-const LABELS: Record<LanguageCode, Record<ScheduleCategory, string>> = {
+type CategoryLabels = { en: Record<ScheduleCategory, string> } & Partial<
+  Record<LanguageCode, Record<ScheduleCategory, string>>
+>;
+
+const LABELS: CategoryLabels = {
   en: {
     pvp_instances: "PvP Instances",
     arenas: "Arenas",
@@ -15,7 +19,7 @@ const LABELS: Record<LanguageCode, Record<ScheduleCategory, string>> = {
   },
 };
 
-const SHORT_LABELS: Record<LanguageCode, Record<ScheduleCategory, string>> = {
+const SHORT_LABELS: CategoryLabels = {
   en: { pvp_instances: "PvP", arenas: "Arena", siege: "Siege", rifts: "Rift" },
   de: { pvp_instances: "PvP", arenas: "Arena", siege: "Belag.", rifts: "Riss" },
 };

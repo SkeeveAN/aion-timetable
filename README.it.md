@@ -1,8 +1,8 @@
-🇬🇧 [English](README.md) · 🇩🇪 [Deutsch](README.de.md) · 🇪🇸 [Español](README.es.md) · 🇮🇹 **Italiano** · 🇫🇷 [Français](README.fr.md) · 🇹🇷 [Türkçe](README.tr.md) · 🇷🇺 [Русский](README.ru.md) · 🇵🇱 [Polski](README.pl.md)
+🇬🇧 [English](README.md) · 🇩🇪 [Deutsch](README.de.md) · 🇪🇸 [Español](README.es.md) · 🇮🇹 **Italiano** · 🇫🇷 [Français](README.fr.md) · 🇹🇷 [Türkçe](README.tr.md) · 🇷🇺 [Русский](README.ru.md) · 🇵🇱 [Polski](README.pl.md) · 🇨🇳 [中文](README.zh.md)
 
 # AION Timetable Overlay
 
-Un overlay trasparente per Windows per il server privato AION 4.6 **OriginAion**, che resta visibile mentre giochi: programma di PvP Instances / Arenas / Siege / Rifts (fuso orario del server e locale, filtro per livello, 7 lingue), oltre al tracciamento morte/respawn a livello di team per 23 boss mondiali/keymaster (Dabra, Zumita, più altri 21 a Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) con commenti condivisi.
+Un overlay trasparente per Windows per il server privato AION 4.6 **OriginAion**, che resta visibile mentre giochi: programma di PvP Instances / Arenas / Siege / Rifts (fuso orario del server e locale, filtro per livello, 8 lingue), oltre al tracciamento morte/respawn a livello di team per 23 boss mondiali/keymaster (Dabra, Zumita, più altri 21 a Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) con commenti condivisi.
 
 ## Architettura
 
@@ -135,5 +135,5 @@ Esclusi deliberatamente: Isbariya the Resolute, Hyperion e Queen Modor (tutte le
 ## Punti aperti
 
 - I requisiti di livello per i dredgion sono ancora presi da un altro server 4.6 (i valori delle arene sono già confermati direttamente per originaion.com) e dovrebbero essere infine verificati contro il server reale una volta che sarà di nuovo online.
-- Le coordinate di clic per le posizioni dei boss mondiali sulla mappa di Tiamaranta's Eye (e le altre zone) non sono ancora fissate (la selezione da lista funziona già, i marker cliccabili sulla mappa seguiranno).
-- I 21 nuovi boss mondiali non sono ancora tradotti in tutte le 7 lingue (usano il nome inglese come fallback).
+- Tiamaranta's Eye (Dabra/Zumita) ha ora una mappa reale con marker cliccabili (sia le coordinate che l'immagine della mappa stessa provengono da aioncodex.com); i boss mondiali delle altre zone usano ancora solo la selezione da lista.
+- I 21 nuovi boss mondiali non sono ancora tradotti in tutte le 8 lingue (usano il nome inglese come fallback).

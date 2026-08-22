@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { WorldBossesResponse } from "@aion-timetable/shared";
 import { formatLocalTime } from "../lib/time";
+import { BOSS_MAP_ZONES } from "../lib/bossMapZones";
+import { WorldBossMap } from "./WorldBossMap";
 
 interface Props {
   data: WorldBossesResponse;
@@ -19,6 +21,8 @@ export function WorldBossPanel({ data, onReportKill }: Props) {
   const locations = data.locations.filter(
     (l) => l.location.bossTypeId === selectedBossTypeId
   );
+  const selectedBossType = data.bossTypes.find((b) => b.id === selectedBossTypeId);
+  const mapImage = selectedBossType ? BOSS_MAP_ZONES[selectedBossType.key] : undefined;
 
   async function confirmKill() {
     if (selectedLocationId === null) return;
@@ -47,6 +51,15 @@ export function WorldBossPanel({ data, onReportKill }: Props) {
           </button>
         ))}
       </div>
+
+      {mapImage && (
+        <WorldBossMap
+          mapImage={mapImage}
+          locations={locations}
+          selectedLocationId={selectedLocationId}
+          onSelect={setSelectedLocationId}
+        />
+      )}
 
       <ul className="location-list">
         {locations.map((state) => (

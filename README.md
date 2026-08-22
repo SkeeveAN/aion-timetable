@@ -1,8 +1,8 @@
-🇬🇧 **English** · 🇩🇪 [Deutsch](README.de.md) · 🇪🇸 [Español](README.es.md) · 🇮🇹 [Italiano](README.it.md) · 🇫🇷 [Français](README.fr.md) · 🇹🇷 [Türkçe](README.tr.md) · 🇷🇺 [Русский](README.ru.md) · 🇵🇱 [Polski](README.pl.md)
+🇬🇧 **English** · 🇩🇪 [Deutsch](README.de.md) · 🇪🇸 [Español](README.es.md) · 🇮🇹 [Italiano](README.it.md) · 🇫🇷 [Français](README.fr.md) · 🇹🇷 [Türkçe](README.tr.md) · 🇷🇺 [Русский](README.ru.md) · 🇵🇱 [Polski](README.pl.md) · 🇨🇳 [中文](README.zh.md)
 
 # AION Timetable Overlay
 
-A transparent Windows overlay for the private AION 4.6 server **OriginAion**, staying on top while you play: schedule for PvP Instances / Arenas / Siege / Rifts (server and local time zone, level filtering, 7 languages), plus team-internal kill/respawn tracking for 23 world bosses/keymasters (Dabra, Zumita, plus 21 more across Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) including shared comments.
+A transparent Windows overlay for the private AION 4.6 server **OriginAion**, staying on top while you play: schedule for PvP Instances / Arenas / Siege / Rifts (server and local time zone, level filtering, 8 languages), plus team-internal kill/respawn tracking for 23 world bosses/keymasters (Dabra, Zumita, plus 21 more across Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) including shared comments.
 
 ## Architecture
 
@@ -135,5 +135,5 @@ Deliberately excluded: Isbariya the Resolute, Hyperion, and Queen Modor (all 4 v
 ## Open items
 
 - Level requirements for dredgions are still taken from a different 4.6 server (arena values are already directly confirmed for originaion.com) and should be finally verified against the real server once it's back online.
-- Click coordinates for the world boss locations on the Tiamaranta's Eye map (and the other zones) are not pinned yet (list-based selection already works, clickable map markers follow).
-- The 21 new world bosses aren't translated into all 7 languages yet (fall back to the English name).
+- Tiamaranta's Eye (Dabra/Zumita) now has a real map with clickable pins (coordinates and the map image itself both sourced from aioncodex.com's own zone map); the other zones' world bosses still use list-only location selection.
+- The 21 new world bosses aren't translated into all 8 languages yet (fall back to the English name).

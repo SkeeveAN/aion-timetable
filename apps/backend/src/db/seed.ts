@@ -29,40 +29,53 @@ const OFFICIAL_TRANSLATIONS: { canonicalName: string; language: string; translat
   { canonicalName: "Kamar Battlefield", language: "de", translatedName: "Schlachtfeld von Kamar" },
   { canonicalName: "Kamar Battlefield", language: "fr", translatedName: "Champ de bataille de Kamar" },
   { canonicalName: "Kamar Battlefield", language: "ru", translatedName: "Поле битвы Камара" },
+  { canonicalName: "Kamar Battlefield", language: "zh", translatedName: "卡玛尔战场" },
   // Arenas
   { canonicalName: "Arena of Chaos", language: "de", translatedName: "Arena der Vehemenz" },
   { canonicalName: "Arena of Chaos", language: "fr", translatedName: "Arène du Chaos" },
   { canonicalName: "Arena of Chaos", language: "ru", translatedName: "Арена хаоса" },
+  { canonicalName: "Arena of Chaos", language: "zh", translatedName: "混沌竞技场" },
   { canonicalName: "Arena of Discipline", language: "de", translatedName: "Arena der Disziplin" },
   { canonicalName: "Arena of Discipline", language: "fr", translatedName: "Arène de la Discipline" },
   { canonicalName: "Arena of Discipline", language: "ru", translatedName: "Арена доблести" },
+  { canonicalName: "Arena of Discipline", language: "zh", translatedName: "孤独竞技场" },
   { canonicalName: "Arena of Harmony", language: "de", translatedName: "Arena der Kooperation" },
   { canonicalName: "Arena of Harmony", language: "fr", translatedName: "Arène de la coopération" },
   { canonicalName: "Arena of Harmony", language: "ru", translatedName: "Арена покровительства" },
+  { canonicalName: "Arena of Harmony", language: "zh", translatedName: "合作竞技场" },
   { canonicalName: "Arena of Glory", language: "de", translatedName: "Arena des Ruhms" },
   { canonicalName: "Arena of Glory", language: "fr", translatedName: "Arène de la Gloire" },
   { canonicalName: "Arena of Glory", language: "ru", translatedName: "Арена славы" },
+  { canonicalName: "Arena of Glory", language: "zh", translatedName: "荣耀竞技场" },
   // Siege zones
   { canonicalName: "Sillus", language: "ru", translatedName: "Силлус" },
+  { canonicalName: "Sillus", language: "zh", translatedName: "希鲁斯" },
   { canonicalName: "Silona", language: "de", translatedName: "Bassen" },
   { canonicalName: "Silona", language: "fr", translatedName: "Bassen" },
   { canonicalName: "Silona", language: "ru", translatedName: "Базен" },
+  { canonicalName: "Silona", language: "zh", translatedName: "巴森" },
   { canonicalName: "Pradeth", language: "de", translatedName: "Prades" },
   { canonicalName: "Pradeth", language: "fr", translatedName: "Pradès" },
   { canonicalName: "Pradeth", language: "ru", translatedName: "Парадес" },
+  { canonicalName: "Pradeth", language: "zh", translatedName: "弗拉德斯" },
   { canonicalName: "Vorgaltem Citadel", language: "de", translatedName: "Vorgaltem-Turm" },
   { canonicalName: "Vorgaltem Citadel", language: "fr", translatedName: "Tour de Vorgaltem" },
   { canonicalName: "Vorgaltem Citadel", language: "ru", translatedName: "Запечатанная башня" },
+  { canonicalName: "Vorgaltem Citadel", language: "zh", translatedName: "巴卡巴塔封印塔" },
   { canonicalName: "Crimson Temple", language: "de", translatedName: "Karmintempel" },
   { canonicalName: "Crimson Temple", language: "fr", translatedName: "Temple Pourpre" },
   { canonicalName: "Crimson Temple", language: "ru", translatedName: "Храм красной земли" },
+  { canonicalName: "Crimson Temple", language: "zh", translatedName: "红色大地神殿" },
   { canonicalName: "Altar of Avarice", language: "de", translatedName: "Altar der Gier" },
   { canonicalName: "Altar of Avarice", language: "fr", translatedName: "Autel de l'avidité" },
   { canonicalName: "Altar of Avarice", language: "ru", translatedName: "Алтарь алчности" },
+  { canonicalName: "Altar of Avarice", language: "zh", translatedName: "贪婪祭坛" },
   { canonicalName: "Temple of Scales", language: "de", translatedName: "Altdrachentempel" },
   { canonicalName: "Temple of Scales", language: "fr", translatedName: "Temple de l'Ancien dragon" },
   { canonicalName: "Temple of Scales", language: "ru", translatedName: "Храм древнего дракона" },
+  { canonicalName: "Temple of Scales", language: "zh", translatedName: "古代龙神殿" },
   { canonicalName: "Miren/Krotan/Kysis", language: "ru", translatedName: "Ра-Мирэн/Кротан/Ткисас" },
+  { canonicalName: "Miren/Krotan/Kysis", language: "zh", translatedName: "拉米兰/克罗坦/德奇沙斯" },
   // Rift zones - DE/FR keep the English name except Heiron (RU-only difference below applies to all)
   { canonicalName: "Heiron", language: "ru", translatedName: "Интердика" },
   { canonicalName: "Eltnen", language: "ru", translatedName: "Элтенен" },
@@ -74,10 +87,19 @@ const OFFICIAL_TRANSLATIONS: { canonicalName: string; language: string; translat
   { canonicalName: "Dabra", language: "de", translatedName: "Davra" },
   { canonicalName: "Dabra", language: "fr", translatedName: "Davra" },
   { canonicalName: "Dabra", language: "ru", translatedName: "Дабра" },
+  { canonicalName: "Dabra", language: "zh", translatedName: "达布拉" },
   { canonicalName: "Zumita", language: "de", translatedName: "Jumita" },
   { canonicalName: "Zumita", language: "fr", translatedName: "Jumita" },
   { canonicalName: "Zumita", language: "ru", translatedName: "Джумита" },
+  { canonicalName: "Zumita", language: "zh", translatedName: "朱米塔" },
 ];
+
+// China had an official AION release (NetEase, mainland). zh entries above
+// come from aioncodex.com's own "cn" locale pages, same provenance as the
+// de/fr/ru rows - genuinely official, not community-translated. Terath
+// Dredgion/Engulfed Ophidan Bridge/Iron Wall Warfront have no zh row yet
+// (not found in the same research pass); falls back to English like any
+// other missing translation.
 
 // AION never had an official Spanish, Italian, Turkish, or Polish client -
 // there is no in-game source to copy these from. These are best-effort community-style
@@ -207,18 +229,27 @@ function seedWorldBosses() {
     })
     .run().lastInsertRowid;
 
-  // Location labels only for now - map_x/map_y and the real spawn-point names
-  // follow once pinned on the map (see plan / aioncodex research).
+  // Pin coordinates (percentage-of-image, 0-100) are clustered from the real
+  // marker positions aioncodex.com itself renders on the Tiamaranta's Eye
+  // zone map for these two NPCs (Leaflet CRS.Simple pixel space, 4096x4096 at
+  // max zoom - https://aioncodex.com/4x/npc/219193/ and .../219192/), not
+  // guessed: many near-duplicate patrol waypoints were merged into the
+  // distinct camp areas below. The map image itself is stitched from
+  // aioncodex's own tile set (/zonemap/tiamat_down/{z}/{x}/{y}.jpg) into
+  // apps/overlay/src/assets/maps/tiamaranta-eye.jpg.
   db.insert(worldBossLocations)
     .values([
-      { bossTypeId: Number(dabraId), label: "Dabra - Open", mapX: null, mapY: null },
-      { bossTypeId: Number(dabraId), label: "Dabra - Unten", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 1", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 2", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 3", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 4", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 5", mapX: null, mapY: null },
-      { bossTypeId: Number(zumitaId), label: "Zumita - Ort 6", mapX: null, mapY: null },
+      { bossTypeId: Number(dabraId), label: "Dabra - Nordwesten", mapX: 39.6, mapY: 37.1 },
+      { bossTypeId: Number(dabraId), label: "Dabra - Norden", mapX: 52.3, mapY: 37.2 },
+      { bossTypeId: Number(dabraId), label: "Dabra - Nordosten", mapX: 62.0, mapY: 36.0 },
+      { bossTypeId: Number(dabraId), label: "Dabra - Westen", mapX: 35.8, mapY: 54.8 },
+      { bossTypeId: Number(dabraId), label: "Dabra - Osten", mapX: 63.5, mapY: 54.9 },
+      { bossTypeId: Number(dabraId), label: "Dabra - Südwesten", mapX: 42.4, mapY: 61.7 },
+      { bossTypeId: Number(dabraId), label: "Dabra - Südosten", mapX: 59.0, mapY: 60.4 },
+      { bossTypeId: Number(zumitaId), label: "Zumita - Nordwesten", mapX: 31.1, mapY: 37.1 },
+      { bossTypeId: Number(zumitaId), label: "Zumita - Nordosten", mapX: 68.2, mapY: 38.5 },
+      { bossTypeId: Number(zumitaId), label: "Zumita - Südwesten", mapX: 36.3, mapY: 65.6 },
+      { bossTypeId: Number(zumitaId), label: "Zumita - Südosten", mapX: 62.1, mapY: 66.3 },
     ])
     .run();
 
