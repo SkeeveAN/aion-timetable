@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-# Pulls the latest main branch into /opt/timetable, installs backend
-# dependencies, applies pending DB migrations, and (re)starts the systemd
-# service. Safe to re-run any time - every step is idempotent.
+# Zieht den aktuellen main-Branch nach /opt/timetable, installiert die
+# Backend-Abhängigkeiten, wendet ausstehende DB-Migrationen an und
+# startet den systemd-Service (neu). Beliebig oft wiederholbar - jeder
+# Schritt ist idempotent.
 #
-# Installed as `timetable_install` on the server via a symlink into
-# /usr/local/bin (see README/deploy docs). Must run as root: it needs to
-# write the systemd unit and control the service, and drops to the
-# unprivileged service user for everything else.
+# Wird auf dem Server als `timetable_install` über einen Symlink nach
+# /usr/local/bin bereitgestellt (siehe README/deploy-Doku). Muss als root
+# laufen: es schreibt die systemd-Unit und steuert den Service, alle
+# anderen Schritte laufen unter dem unprivilegierten Service-User.
 set -euo pipefail
 
 REPO_DIR="/opt/timetable"
@@ -15,16 +16,16 @@ SERVICE_NAME="aion-timetable-backend"
 SERVICE_USER="aion-timetable"
 
 if [[ "$EUID" -ne 0 ]]; then
-  echo "timetable_install must be run as root (needs systemctl + the service unit file)." >&2
+  echo "timetable_install muss als root laufen (braucht systemctl + die Service-Unit-Datei)." >&2
   exit 1
 fi
 
 if [[ ! -d "$REPO_DIR/.git" ]]; then
-  echo "==> No git checkout found at $REPO_DIR yet, cloning..."
+  echo "==> Noch kein Git-Checkout unter $REPO_DIR gefunden, klone frisch..."
   su - "$SERVICE_USER" -s /bin/bash -c "git clone --branch main '$REPO_URL' '$REPO_DIR'"
 fi
 
-echo "==> Fetching latest code..."
+echo "==> Hole aktuellen Code..."
 su - "$SERVICE_USER" -s /bin/bash -c "
   set -e
   cd '$REPO_DIR'
@@ -32,7 +33,7 @@ su - "$SERVICE_USER" -s /bin/bash -c "
   git reset --hard origin/main
 "
 
-echo "==> Installing backend dependencies..."
+echo "==> Installiere Backend-Abhängigkeiten..."
 su - "$SERVICE_USER" -s /bin/bash -c "
   set -e
   cd '$REPO_DIR'
@@ -45,14 +46,14 @@ su - "$SERVICE_USER" -s /bin/bash -c "
   pnpm run db:seed
 "
 
-echo "==> Installing/updating systemd unit..."
+echo "==> Installiere/aktualisiere systemd-Unit..."
 cp "$REPO_DIR/deploy/aion-timetable-backend.service" "/etc/systemd/system/$SERVICE_NAME.service"
 systemctl daemon-reload
 systemctl enable "$SERVICE_NAME" >/dev/null
 
-echo "==> Restarting service..."
+echo "==> Starte Service neu..."
 systemctl restart "$SERVICE_NAME"
 sleep 2
 systemctl status "$SERVICE_NAME" --no-pager -l | head -12
 
-echo "==> Done."
+echo "==> Fertig."
