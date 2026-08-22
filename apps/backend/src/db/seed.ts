@@ -135,17 +135,20 @@ function seedEntityTranslations() {
   );
 }
 
-// Confirmed for originaion.com directly (see conversation history): the
-// Dredgions/battlefields AND Arena of Chaos (10-man free-for-all)/Discipline
-// (1v1)/Harmony (3v3) all queue players into one of four 5-level brackets
-// (46-50/51-55/56-60/61-65), so the overall eligible range is 46-65 for all
-// of them. Arena of Glory (4-man free-for-all) is the sole exception - only
-// the top bracket (61-65) qualifies.
+// Confirmed for originaion.com directly (see conversation history): Terath
+// Dredgion runs under different in-game names depending on the level
+// bracket, so it queues into all four 5-level brackets (46-50/51-55/56-60/
+// 61-65) like the arenas below - overall eligible range 46-65. Engulfed
+// Ophidan Bridge, Iron Wall Warfront and Kamar Battlefield are endgame-only
+// (61-65), no lower-level bracket exists for them. Arena of Chaos (10-man
+// free-for-all)/Discipline (1v1)/Harmony (3v3) queue into all four brackets
+// like Terath Dredgion; Arena of Glory (4-man free-for-all) is the exception
+// - only the top bracket (61-65) qualifies.
 const LEVEL_REQUIREMENTS = [
   { name: "Terath Dredgion", minLevel: 46, maxLevel: 65 },
-  { name: "Engulfed Ophidan Bridge", minLevel: 46, maxLevel: 65 },
-  { name: "Iron Wall Warfront", minLevel: 46, maxLevel: 65 },
-  { name: "Kamar Battlefield", minLevel: 46, maxLevel: 65 },
+  { name: "Engulfed Ophidan Bridge", minLevel: 61, maxLevel: 65 },
+  { name: "Iron Wall Warfront", minLevel: 61, maxLevel: 65 },
+  { name: "Kamar Battlefield", minLevel: 61, maxLevel: 65 },
   { name: "Arena of Chaos", minLevel: 46, maxLevel: 65 },
   { name: "Arena of Discipline", minLevel: 46, maxLevel: 65 },
   { name: "Arena of Harmony", minLevel: 46, maxLevel: 65 },
