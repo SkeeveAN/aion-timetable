@@ -79,8 +79,8 @@ const OFFICIAL_TRANSLATIONS: { canonicalName: string; language: string; translat
   { canonicalName: "Zumita", language: "ru", translatedName: "Джумита" },
 ];
 
-// AION never had an official Spanish, Italian, or Turkish client - there is
-// no in-game source to copy these from. These are best-effort community-style
+// AION never had an official Spanish, Italian, Turkish, or Polish client -
+// there is no in-game source to copy these from. These are best-effort community-style
 // translations (descriptive names translated for meaning; proper nouns left
 // as-is), explicitly lower-confidence than OFFICIAL_TRANSLATIONS above.
 const COMMUNITY_TRANSLATIONS: { canonicalName: string; language: string; translatedName: string }[] = [
@@ -119,6 +119,18 @@ const COMMUNITY_TRANSLATIONS: { canonicalName: string; language: string; transla
   { canonicalName: "Temple of Scales", language: "es", translatedName: "Templo de las Escamas" },
   { canonicalName: "Temple of Scales", language: "it", translatedName: "Tempio delle Squame" },
   { canonicalName: "Temple of Scales", language: "tr", translatedName: "Pullar Tapınağı" },
+  { canonicalName: "Terath Dredgion", language: "pl", translatedName: "Dredgion Terath" },
+  { canonicalName: "Engulfed Ophidan Bridge", language: "pl", translatedName: "Most Jormunganda" },
+  { canonicalName: "Iron Wall Warfront", language: "pl", translatedName: "Pole Bitwy Żelaznego Muru" },
+  { canonicalName: "Kamar Battlefield", language: "pl", translatedName: "Pole Bitwy Kamar" },
+  { canonicalName: "Arena of Chaos", language: "pl", translatedName: "Arena Chaosu" },
+  { canonicalName: "Arena of Discipline", language: "pl", translatedName: "Arena Dyscypliny" },
+  { canonicalName: "Arena of Harmony", language: "pl", translatedName: "Arena Harmonii" },
+  { canonicalName: "Arena of Glory", language: "pl", translatedName: "Arena Chwały" },
+  { canonicalName: "Vorgaltem Citadel", language: "pl", translatedName: "Cytadela Vorgaltem" },
+  { canonicalName: "Crimson Temple", language: "pl", translatedName: "Karmazynowa Świątynia" },
+  { canonicalName: "Altar of Avarice", language: "pl", translatedName: "Ołtarz Chciwości" },
+  { canonicalName: "Temple of Scales", language: "pl", translatedName: "Świątynia Łusek" },
 ];
 
 function seedEntityTranslations() {
