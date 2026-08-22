@@ -15,6 +15,13 @@
       "when": 1787332151658,
       "tag": "0001_round_starbolt",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1787388410139,
+      "tag": "0002_flawless_swordsman",
+      "breakpoints": true
     }
   ]
 }
