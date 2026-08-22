@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import type { LanguageCode, ScheduleResponse } from "@aion-timetable/shared";
-import { formatCountdown, formatLocalTime, nextOccurrenceUtc } from "../lib/time";
+import { currentOrNextOccurrence, formatCountdown, formatLocalTime } from "../lib/time";
 import { matchesLevel } from "../lib/level";
 import { categoryShortLabel } from "../lib/categoryLabels";
 import { t } from "../lib/uiStrings";
@@ -22,23 +22,42 @@ export function UpcomingList({ schedule, myLevel, language }: Props) {
       .filter((event) => matchesLevel(event, myLevel))
       .map((event) => ({
         event,
-        next: nextOccurrenceUtc(event.weekday, event.startTime, schedule.serverTime.offsetMinutes, now),
+        occurrence: currentOrNextOccurrence(
+          event.weekday,
+          event.startTime,
+          event.endTime,
+          schedule.serverTime.offsetMinutes,
+          now
+        ),
       }))
-      .filter(({ next }) => {
-        const diff = next.getTime() - now.getTime();
+      .filter(({ occurrence }) => {
+        if (occurrence.isActive) return true;
+        const diff = occurrence.start.getTime() - now.getTime();
         return diff >= 0 && diff <= WINDOW_MS;
       })
-      .sort((a, b) => a.next.getTime() - b.next.getTime());
+      .sort((a, b) => a.occurrence.start.getTime() - b.occurrence.start.getTime());
   }, [schedule, myLevel]);
 
   return (
     <ul className="upcoming-list">
-      {upcoming.map(({ event, next }) => (
-        <li key={`${event.id}-${next.getTime()}`} className="upcoming-item">
+      {upcoming.map(({ event, occurrence }) => (
+        <li
+          key={`${event.id}-${occurrence.start.getTime()}`}
+          className={occurrence.isActive ? "upcoming-item active" : "upcoming-item"}
+        >
           <span className="upcoming-category">{categoryShortLabel(language, event.category)}</span>
           <span className="upcoming-name">{event.displayName}</span>
           <span className="upcoming-time">
-            {formatLocalTime(next)} &middot; {formatCountdown(next, now)}
+            {occurrence.isActive ? (
+              <>
+                {strings.upcomingRunning} &middot; {formatCountdown(occurrence.end, now)}
+              </>
+            ) : (
+              <>
+                {formatLocalTime(occurrence.start)} &middot;{" "}
+                {formatCountdown(occurrence.start, now)}
+              </>
+            )}
           </span>
         </li>
       ))}

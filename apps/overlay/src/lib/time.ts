@@ -45,6 +45,48 @@ export function nextOccurrenceUtc(
   return new Date(targetServer.getTime() - serverOffsetMinutes * 60_000);
 }
 
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+function parseMinutes(time: string): number {
+  const [hours, minutes] = time.split(":").map(Number);
+  return hours * 60 + minutes;
+}
+
+export interface Occurrence {
+  start: Date;
+  end: Date;
+  /** true if `now` falls inside [start, end) - the slot is currently running */
+  isActive: boolean;
+}
+
+/**
+ * Like `nextOccurrenceUtc`, but also detects a currently-running occurrence:
+ * `nextOccurrenceUtc` always skips ahead to a future start, so an event that
+ * started earlier today and hasn't ended yet would otherwise disappear
+ * entirely instead of showing as "running now".
+ */
+export function currentOrNextOccurrence(
+  weekday: Weekday,
+  startTime: string,
+  endTime: string,
+  serverOffsetMinutes: number,
+  now = new Date()
+): Occurrence {
+  const durationMinutes =
+    (parseMinutes(endTime) - parseMinutes(startTime) + 24 * 60) % (24 * 60);
+  const durationMs = durationMinutes * 60_000;
+
+  const next = nextOccurrenceUtc(weekday, startTime, serverOffsetMinutes, now);
+  const previousStart = new Date(next.getTime() - 7 * DAY_MS);
+  const previousEnd = new Date(previousStart.getTime() + durationMs);
+
+  if (now >= previousStart && now < previousEnd) {
+    return { start: previousStart, end: previousEnd, isActive: true };
+  }
+
+  return { start: next, end: new Date(next.getTime() + durationMs), isActive: false };
+}
+
 export function formatLocalTime(date: Date): string {
   return date.toLocaleTimeString(undefined, {
     hour: "2-digit",

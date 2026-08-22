@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import type { LanguageCode, ScheduleCategory, ScheduleResponse } from "@aion-timetable/shared";
 import { SCHEDULE_CATEGORIES } from "@aion-timetable/shared";
-import { formatCountdown, formatLocalTime, nextOccurrenceUtc } from "../lib/time";
+import { currentOrNextOccurrence, formatCountdown, formatLocalTime } from "../lib/time";
 import { matchesLevel } from "../lib/level";
 import { categoryLabel } from "../lib/categoryLabels";
 import { t } from "../lib/uiStrings";
@@ -29,9 +29,15 @@ export function ScheduleList({
       .filter((e) => e.category === activeCategory && matchesLevel(e, myLevel))
       .map((e) => ({
         event: e,
-        next: nextOccurrenceUtc(e.weekday, e.startTime, schedule.serverTime.offsetMinutes, now),
+        occurrence: currentOrNextOccurrence(
+          e.weekday,
+          e.startTime,
+          e.endTime,
+          schedule.serverTime.offsetMinutes,
+          now
+        ),
       }))
-      .sort((a, b) => a.next.getTime() - b.next.getTime())
+      .sort((a, b) => a.occurrence.start.getTime() - b.occurrence.start.getTime())
       .slice(0, 8);
   }, [schedule, activeCategory, myLevel]);
 
@@ -50,13 +56,24 @@ export function ScheduleList({
       </div>
 
       <ul className="event-items">
-        {upcoming.map(({ event, next }) => (
-          <li key={`${event.id}-${next.getTime()}`} className="event-item">
+        {upcoming.map(({ event, occurrence }) => (
+          <li
+            key={`${event.id}-${occurrence.start.getTime()}`}
+            className={occurrence.isActive ? "event-item active" : "event-item"}
+          >
             <span className="event-name">{event.displayName}</span>
             <span className="event-time">
-              {event.startTime} {strings.scheduleServerSuffix} &middot;{" "}
-              {formatLocalTime(next)} {strings.scheduleLocalSuffix} &middot;{" "}
-              {formatCountdown(next, now)}
+              {occurrence.isActive ? (
+                <>
+                  {strings.upcomingRunning} &middot; {formatCountdown(occurrence.end, now)}
+                </>
+              ) : (
+                <>
+                  {event.startTime} {strings.scheduleServerSuffix} &middot;{" "}
+                  {formatLocalTime(occurrence.start)} {strings.scheduleLocalSuffix} &middot;{" "}
+                  {formatCountdown(occurrence.start, now)}
+                </>
+              )}
             </span>
           </li>
         ))}

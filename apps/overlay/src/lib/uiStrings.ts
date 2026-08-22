@@ -33,6 +33,7 @@ export interface UiStrings {
   scheduleServerSuffix: string;
   scheduleLocalSuffix: string;
   respawnExpected: string;
+  upcomingRunning: string;
 }
 
 const EN: UiStrings = {
@@ -68,6 +69,7 @@ const EN: UiStrings = {
   scheduleServerSuffix: "server",
   scheduleLocalSuffix: "local",
   respawnExpected: "expected",
+  upcomingRunning: "running",
 };
 
 const DE: UiStrings = {
@@ -103,6 +105,7 @@ const DE: UiStrings = {
   scheduleServerSuffix: "Server",
   scheduleLocalSuffix: "lokal",
   respawnExpected: "erwartet",
+  upcomingRunning: "läuft",
 };
 
 const ES: UiStrings = {
@@ -138,6 +141,7 @@ const ES: UiStrings = {
   scheduleServerSuffix: "servidor",
   scheduleLocalSuffix: "local",
   respawnExpected: "esperado",
+  upcomingRunning: "en curso",
 };
 
 const IT: UiStrings = {
@@ -173,6 +177,7 @@ const IT: UiStrings = {
   scheduleServerSuffix: "server",
   scheduleLocalSuffix: "locale",
   respawnExpected: "previsto",
+  upcomingRunning: "in corso",
 };
 
 const FR: UiStrings = {
@@ -208,6 +213,7 @@ const FR: UiStrings = {
   scheduleServerSuffix: "serveur",
   scheduleLocalSuffix: "local",
   respawnExpected: "prévu",
+  upcomingRunning: "en cours",
 };
 
 const TR: UiStrings = {
@@ -243,6 +249,7 @@ const TR: UiStrings = {
   scheduleServerSuffix: "sunucu",
   scheduleLocalSuffix: "yerel",
   respawnExpected: "beklenen",
+  upcomingRunning: "devam ediyor",
 };
 
 const RU: UiStrings = {
@@ -278,6 +285,7 @@ const RU: UiStrings = {
   scheduleServerSuffix: "сервер",
   scheduleLocalSuffix: "локальное",
   respawnExpected: "ожидается",
+  upcomingRunning: "идёт сейчас",
 };
 
 const PL: UiStrings = {
@@ -313,6 +321,7 @@ const PL: UiStrings = {
   scheduleServerSuffix: "serwer",
   scheduleLocalSuffix: "lokalny",
   respawnExpected: "oczekiwane",
+  upcomingRunning: "trwa",
 };
 
 const ZH: UiStrings = {
@@ -348,6 +357,7 @@ const ZH: UiStrings = {
   scheduleServerSuffix: "服务器",
   scheduleLocalSuffix: "本地",
   respawnExpected: "预计",
+  upcomingRunning: "进行中",
 };
 
 const STRINGS: Record<LanguageCode, UiStrings> = {
