@@ -1,34 +1,36 @@
+🇬🇧 **English** · 🇩🇪 [Deutsch](README.de.md) · 🇪🇸 [Español](README.es.md) · 🇮🇹 [Italiano](README.it.md) · 🇫🇷 [Français](README.fr.md) · 🇹🇷 [Türkçe](README.tr.md) · 🇷🇺 [Русский](README.ru.md) · 🇵🇱 [Polski](README.pl.md)
+
 # AION Timetable Overlay
 
-Ein transparentes Windows-Overlay für den privaten AION-4.6-Server **OriginAion**, das während des Spielens eingeblendet bleibt: Zeitplan für PvP Instances / Arenas / Siege / Rifts (Server- und lokale Zeitzone, Level-Filterung, 7 Sprachen), plus team-internes Kill/Respawn-Tracking für 23 Weltbosse/Keymaster (Dabra, Zumita, plus 21 weitere u. a. in Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) inklusive gemeinsamer Kommentare.
+A transparent Windows overlay for the private AION 4.6 server **OriginAion**, staying on top while you play: schedule for PvP Instances / Arenas / Siege / Rifts (server and local time zone, level filtering, 7 languages), plus team-internal kill/respawn tracking for 23 world bosses/keymasters (Dabra, Zumita, plus 21 more across Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) including shared comments.
 
-## Architektur
+## Architecture
 
 Monorepo (pnpm workspaces):
 
 ```
 apps/
-  overlay/    Tauri v2 (Rust) + React/TypeScript – die Windows-Overlay-App
-  backend/    Fastify + Drizzle/SQLite + Playwright – API, WebSocket, Scraper
+  overlay/    Tauri v2 (Rust) + React/TypeScript – the Windows overlay app
+  backend/    Fastify + Drizzle/SQLite + Playwright – API, WebSocket, scraper
 packages/
-  shared/     Gemeinsame TypeScript-Typen zwischen Backend und Overlay
+  shared/     Shared TypeScript types between backend and overlay
 ```
 
-- **Datenquelle Zeitplan:** Ein Playwright-Scraper liest periodisch die Wochenansicht von `originaion.com/schedule` (inkl. der aktuellen Server-Zeitzone) aus und speichert sie im Backend. Die Tabs auf der Zielseite sind rein clientseitig, daher ein echter Headless-Browser statt einfachem HTTP-Fetch.
-- **Team-Modell:** Kein klassisches Login. Eine Person erstellt ein Team (Name, Beschreibung, Passwort) und erhält einen Einladungscode; weitere Mitglieder treten mit diesem Code und einem Anzeigenamen bei. Kills und Kommentare sind pro Team isoliert (`teamId`), der Team-Owner kann Anzeigenamen von Mitgliedern nachträglich ändern.
-- **Standalone- vs. Team-Modus:** Ohne Team-Beitritt zeigt die App nur den öffentlichen Zeitplan (`GET /schedule`, kein Login nötig). Mit Team-Beitritt kommen Live-Kommentare und die Weltboss-Karte via WebSocket dazu.
-- **Level-Filterung:** Dredgion/Arena-Instanzen haben Level-Anforderungen. Bestätigt für originaion.com: Terath Dredgion 56–65; Engulfed Ophidan Bridge, Iron Wall Warfront, Kamar Battlefield und Arena of Glory (4er alle-gegen-alle, nur oberstes Bracket) 61–65; Arena of Chaos (10er alle-gegen-alle), Arena of Discipline (1v1) und Arena of Harmony (3v3) queuen dagegen in eines von vier 5er-Level-Brackets (46–50/51–55/56–60/61–65) und sind daher im gesamten Bereich 46–65 zugänglich. Die App blendet Instanzen komplett aus, die nicht zum in den Einstellungen hinterlegten eigenen Level passen.
+- **Schedule data source:** A Playwright scraper periodically reads the weekly view of `originaion.com/schedule` (including the current server time zone) and stores it in the backend. The tabs on that page are purely client-side, so a real headless browser is needed rather than a plain HTTP fetch.
+- **Team model:** No classic login. One person creates a team (name, description, password) and gets an invite code; other members join with that code and a display name. Kills and comments are isolated per team (`teamId`); the team owner can rename members afterwards.
+- **Standalone vs. team mode:** Without joining a team, the app only shows the public schedule (`GET /schedule`, no login required). Joining a team adds live comments and the world boss board via WebSocket.
+- **Level filtering:** Dredgion/arena instances have level requirements. Confirmed for originaion.com: Engulfed Ophidan Bridge, Iron Wall Warfront, Kamar Battlefield and Arena of Glory (4-man free-for-all, top bracket only) are endgame-only at 61–65; Terath Dredgion, Arena of Chaos (10-man free-for-all), Arena of Discipline (1v1) and Arena of Harmony (3v3) instead queue into one of four 5-level brackets (46–50/51–55/56–60/61–65) — Terath Dredgion runs under a different in-game name per bracket — and are therefore accessible across the full 46–65 range. The app completely hides instances that don't match the level set in its settings.
 
-## Voraussetzungen
+## Prerequisites
 
-- **Node.js** ≥ 20 und **pnpm** (`corepack enable && corepack prepare pnpm --activate`)
-- **Für den Overlay-Build zusätzlich (nur Windows, da Zielplattform):**
-  - Rust (`rustup`, Standard-Toolchain `stable-x86_64-pc-windows-msvc`)
-  - Microsoft Visual Studio Build Tools mit dem Workload *Desktop development with C++* (liefert den MSVC-Linker, den Rust unter Windows braucht)
-  - WebView2 Runtime (auf aktuellem Windows 10/11 bereits vorinstalliert)
-- **Für den Backend-Betrieb:** ein C-Compiler (`build-essential` unter Debian/Ubuntu) zum Bauen von `better-sqlite3`, sowie die von Playwright benötigten Chromium-Systemabhängigkeiten (`pnpm exec playwright install-deps chromium`)
+- **Node.js** ≥ 20 and **pnpm** (`corepack enable && corepack prepare pnpm --activate`)
+- **Additionally for the overlay build (Windows only, as that's the target platform):**
+  - Rust (`rustup`, default toolchain `stable-x86_64-pc-windows-msvc`)
+  - Microsoft Visual Studio Build Tools with the *Desktop development with C++* workload (provides the MSVC linker Rust needs on Windows)
+  - WebView2 Runtime (already preinstalled on current Windows 10/11)
+- **For running the backend:** a C compiler (`build-essential` on Debian/Ubuntu) to build `better-sqlite3`, plus Playwright's Chromium system dependencies (`pnpm exec playwright install-deps chromium`)
 
-> Hinweis: Die Overlay-App muss als natives Windows-Programm laufen (Transparenz, globale Hotkeys über einem Vollbild-Spiel funktionieren nicht aus WSL/Linux heraus). Backend-Entwicklung kann problemlos unter WSL/Linux erfolgen; für `pnpm tauri dev`/`build` wird eine native Windows-Umgebung mit Node + Rust benötigt.
+> Note: the overlay app must run as a native Windows program (transparency and global hotkeys over a fullscreen game don't work from WSL/Linux). Backend development works fine under WSL/Linux; `pnpm tauri dev`/`build` needs a native Windows environment with Node + Rust.
 
 ## Setup
 
@@ -40,85 +42,85 @@ pnpm install
 
 ```bash
 cd apps/backend
-cp .env.example .env        # JWT_SECRET auf einen langen Zufallswert setzen
+cp .env.example .env        # set JWT_SECRET to a long random value
 pnpm exec drizzle-kit generate
 pnpm run db:migrate
-pnpm run db:seed             # seedet Weltboss-Typen/Orte + Level-Anforderungen
-pnpm run dev                 # startet API (Port 3000) + Scraper-Cron
+pnpm run db:seed             # seeds world boss types/locations + level requirements
+pnpm run dev                 # starts the API (port 3000) + scraper cron
 ```
 
-Wichtige Endpunkte:
-- `GET /schedule` – öffentlich, liefert den Wochenplan + Server-Zeitzonen-Offset
-- `POST /teams`, `POST /teams/join` – Team erstellen/beitreten
-- `GET /world-bosses`, `POST /world-bosses/:locationId/kill` – auth-pflichtig
-- `GET /comments`, `POST /comments` – auth-pflichtig
-- `WS /ws?token=...` – Live-Updates für Kills/Kommentare/Zeitplan-Refresh
+Key endpoints:
+- `GET /schedule` – public, returns the weekly schedule + server time zone offset
+- `POST /teams`, `POST /teams/join` – create/join a team
+- `GET /world-bosses`, `POST /world-bosses/:locationId/kill` – auth required
+- `GET /comments`, `POST /comments` – auth required
+- `WS /ws?token=...` – live updates for kills/comments/schedule refresh
 
-### Overlay-App (Windows)
+### Overlay app (Windows)
 
 ```bash
 cd apps/overlay
 pnpm install
-pnpm tauri dev      # Entwicklung mit Hot-Reload
-pnpm tauri build    # Produktions-Build (NSIS-Installer, siehe tauri.conf.json)
+pnpm tauri dev      # development with hot reload
+pnpm tauri build    # production build (NSIS installer, see tauri.conf.json)
 ```
 
-Die Backend-URL ist aktuell fest in `apps/overlay/src/config.ts` auf `https://timetable.skeeve.tv` gesetzt.
+The backend URL is currently hardcoded to `https://timetable.skeeve.tv` in `apps/overlay/src/config.ts`.
 
-## Globale Hotkeys
+## Global hotkeys
 
-Funktionieren systemweit (auch wenn das Spiel fokussiert ist), solange AION im **Fenster- oder Borderless-Modus** läuft – bei exklusivem Vollbild rendert grundsätzlich kein Overlay darüber (DWM-Limitierung, betrifft alle Overlay-Tools).
+Work system-wide (even while the game is focused), as long as AION runs in **windowed or borderless mode** – no overlay can render on top of exclusive fullscreen (a DWM limitation affecting all overlay tools).
 
-| Hotkey | Funktion |
+| Hotkey | Function |
 |---|---|
-| `Strg+Umschalt+O` | Interaktions-/Verschieben-Modus umschalten (Fenster wird klickbar/verschiebbar, Team-Wizard und Weltboss-Karte werden bedienbar) |
-| `Strg+F10` | Settings-Panel umschalten (Schriftgröße, Textfarbe, eigenes Level) |
+| `Ctrl+Shift+O` | Toggle interactive/move mode (window becomes clickable/movable, team wizard and world boss board become usable) |
+| `Ctrl+F10` | Toggle the settings panel (font size, text color, own level) |
 
-Beide Modi deaktivieren temporär den Klick-durch-Modus; außerhalb dieser Modi ist das Fenster vollständig klickdurchlässig und stört nie normale Spiel-/Desktop-Eingaben.
+Both modes temporarily disable click-through; outside of them the window is fully click-through and never interferes with normal game/desktop input.
 
-Da das Fenster bewusst ohne Titelleiste/Schließen-Button läuft, gibt es zusätzlich ein **Tray-Icon** ("AION Timetable Overlay") mit Rechtsklick-Menü für „Einstellungen" und „Beenden".
+Since the window intentionally has no title bar/close button, there's also a **tray icon** ("AION Timetable Overlay") with a right-click menu for "Settings" and "Quit".
 
-## Sonstiges Verhalten
+## Other behavior
 
-- **Erststart:** Beim allerersten Start öffnet sich die App automatisch im Interaktions- und Settings-Modus, damit neue Nutzer sie sofort platzieren und konfigurieren können, ohne die Hotkeys schon zu kennen.
-- **Reset:** Alle Einstellungen (Level, Farbe, Team-Zugehörigkeit, Erststart-Status) liegen als JSON-Dateien im Tauri-App-Datenverzeichnis (`settings.json`, `auth.json`). Löschen dieser Dateien setzt die App vollständig zurück.
-- **Auto-Beenden:** Die App überwacht den AION-Client-Prozess (`aion.bin`). Sobald der Client einmal lief und danach beendet wird, schließt sich die Overlay-App automatisch mit.
+- **First launch:** On the very first launch, the app automatically opens in interactive + settings mode so new users can immediately position and configure it without already knowing the hotkeys.
+- **Reset:** All settings (level, color, team membership, first-launch status) live as JSON files in the Tauri app data directory (`settings.json`, `auth.json`). Deleting these files fully resets the app.
+- **Auto-quit:** The app watches the AION client process (`aion.bin`). Once the client has been seen running and then closes, the overlay app quits automatically too.
 
-## Server-Deployment (Referenz)
+## Server deployment (reference)
 
-Aktuell produktiv unter `timetable.skeeve.tv` betrieben: Node.js + systemd-Service (kein Docker), SQLite lokal auf dem Server, nginx als TLS-Reverse-Proxy (inkl. WebSocket-Upgrade für `/ws`), Zertifikat via certbot. Der Scraper läuft stündlich als Teil des Backend-Prozesses (`node-cron`).
+Currently running in production at `timetable.skeeve.tv`: Node.js + systemd service (no Docker), SQLite local to the server, nginx as a TLS reverse proxy (including WebSocket upgrade for `/ws`), certificate via certbot. The scraper runs hourly as part of the backend process (`node-cron`).
 
-Das Server-Verzeichnis (`/opt/timetable`) ist ein normaler Git-Checkout dieses Repos. Updates laufen über zwei Skripte in [`deploy/`](deploy/):
-- [`deploy/timetable_install`](deploy/timetable_install) – stabiles Bootstrap-Skript, holt den aktuellen `main`-Branch und startet danach `install-backend.sh` als frischen Prozess (bewusst getrennt, damit sich ein laufendes Skript nicht mitten in der Ausführung selbst per `git reset --hard` überschreibt).
-- [`deploy/install-backend.sh`](deploy/install-backend.sh) – installiert die Backend-Abhängigkeiten, wendet ausstehende DB-Migrationen an, aktualisiert die systemd-Unit ([`deploy/aion-timetable-backend.service`](deploy/aion-timetable-backend.service)) und startet den Service neu.
+The server directory (`/opt/timetable`) is a normal git checkout of this repo. Updates go through two scripts in [`deploy/`](deploy/):
+- [`deploy/timetable_install`](deploy/timetable_install) – stable bootstrap script, pulls the current `main` branch and then execs into `install-backend.sh` as a fresh process (deliberately separate so a running script doesn't overwrite itself mid-execution via `git reset --hard`).
+- [`deploy/install-backend.sh`](deploy/install-backend.sh) – installs backend dependencies, applies pending DB migrations, updates the systemd unit ([`deploy/aion-timetable-backend.service`](deploy/aion-timetable-backend.service)) and restarts the service.
 
-Einmalig einrichten (als root auf dem Server) – bewusst **kopieren, nicht verlinken**, damit das Bootstrap-Skript stabil bleibt, auch während es sich selbst per Git aktualisiert:
+One-time setup (as root on the server) – deliberately **copied, not symlinked**, so the bootstrap script stays stable even while it updates itself via git:
 
 ```bash
 cp /opt/timetable/deploy/timetable_install /usr/local/bin/timetable_install
 chmod +x /usr/local/bin/timetable_install
 ```
 
-Danach reicht für jedes Update:
+After that, every update is just:
 
 ```bash
 timetable_install
 ```
 
-Falls sich `deploy/timetable_install` selbst mal ändert, einmalig den `cp`-Schritt oben wiederholen.
+If `deploy/timetable_install` itself ever changes, repeat the `cp` step above once.
 
-## Weltboss-Datenqualität
+## World boss data quality
 
-Die 23 Weltbosse/Keymaster haben unterschiedliche Vertrauensstufen (siehe Kommentare in `apps/backend/src/db/seed.ts`):
-- **Dabra/Zumita:** Respawn-Fenster direkt vom Nutzer angegeben (höchste Vertrauensstufe für diese App).
-- **16 Weltbosse** (Heiron/Tiamaranta/Inggison/Gelkmaros/Reshanta/Sarpan/Eltnen): Respawn-Zeiten aus dem Open-Source-Emulator `beyond-aion/aion-server` (datamined, mittel-hohe Verlässlichkeit, keine offizielle Quelle).
-- **Medeus the Vile, Moltenus, Governor/Berserker/Commander Sunayaka:** Folgen keinem echten Kill→Respawn-Zyklus (nächtliches bzw. wöchentliches Zeitfenster) – im Kill-Tracker nur grob als ~1-Tages- bzw. ~1-Wochen-Fenster angenähert, niedrigere Vertrauensstufe.
+The 23 world bosses/keymasters have different confidence levels (see comments in `apps/backend/src/db/seed.ts`):
+- **Dabra/Zumita:** respawn window given directly by the user (highest confidence for this app).
+- **16 world bosses** (Heiron/Tiamaranta/Inggison/Gelkmaros/Reshanta/Sarpan/Eltnen): respawn times from the open-source emulator `beyond-aion/aion-server` (datamined, medium-high confidence, not an official source).
+- **Medeus the Vile, Moltenus, Governor/Berserker/Commander Sunayaka:** don't follow a real kill→respawn cycle (nightly or weekly scheduled window) – approximated in the kill tracker as a rough ~1-day/~1-week window, lower confidence.
 
-Bewusst ausgeschlossen: Isbariya the Resolute, Hyperion und Queen Modor (alle 4 Varianten) sind Instanz-Bosse mit wöchentlichem Lockout, keine Open-World-Spawns. "Kordac" und "Dragon Lord's Champion" wurden ausgiebig gesucht und existieren unter keiner Schreibweise in AION – bewusst nicht eingetragen, statt Daten zu erfinden.
+Deliberately excluded: Isbariya the Resolute, Hyperion, and Queen Modor (all 4 variants) are instanced bosses with a weekly lockout, not open-world spawns. "Kordac" and "Dragon Lord's Champion" were searched extensively and do not exist under any spelling in AION – deliberately not added rather than inventing data.
 
-## Offene Punkte
+## Open items
 
-- Level-Anforderungen für Dredgions sind noch von einem anderen 4.6-Server übernommen (Arena-Werte sind für originaion.com bereits direkt bestätigt) und sollten final gegen den echten Server verifiziert werden, sobald er wieder online ist.
-- Klick-Koordinaten für die Weltboss-Orte auf der Tiamaranta's-Eye-Karte (und den anderen Zonen) sind noch nicht gepinnt (Listenauswahl funktioniert bereits, klickbare Kartenmarker folgen).
-- Die 21 neuen Weltbosse sind noch nicht in alle 7 Sprachen übersetzt (fallen auf den englischen Namen zurück).
-- CI/CD-Workflow für automatische GitHub-Releases (Installer + ZIP + Auto-Updater) ist noch nicht eingerichtet.
+- Level requirements for dredgions are still taken from a different 4.6 server (arena values are already directly confirmed for originaion.com) and should be finally verified against the real server once it's back online.
+- Click coordinates for the world boss locations on the Tiamaranta's Eye map (and the other zones) are not pinned yet (list-based selection already works, clickable map markers follow).
+- The 21 new world bosses aren't translated into all 7 languages yet (fall back to the English name).
+- No CI/CD workflow for automatic GitHub releases (installer + ZIP + auto-updater) yet.
