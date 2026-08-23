@@ -3,6 +3,7 @@ import type { LanguageCode, ScheduleResponse } from "@aion-timetable/shared";
 import { currentOrNextOccurrence, formatCountdown, formatLocalTime } from "../lib/time";
 import { matchesLevel } from "../lib/level";
 import { categoryShortLabel } from "../lib/categoryLabels";
+import { riftLabel } from "../lib/riftZones";
 import { t } from "../lib/uiStrings";
 
 const WINDOW_MS = 60 * 60_000;
@@ -46,7 +47,11 @@ export function UpcomingList({ schedule, myLevel, language }: Props) {
           className={occurrence.isActive ? "upcoming-item active" : "upcoming-item"}
         >
           <span className="upcoming-category">{categoryShortLabel(language, event.category)}</span>
-          <span className="upcoming-name">{event.displayName}</span>
+          <span className="upcoming-name">
+            {event.category === "rifts"
+              ? riftLabel(event, schedule.events, strings.riftFromToTemplate)
+              : event.displayName}
+          </span>
           <span className="upcoming-time">
             {occurrence.isActive ? (
               <>

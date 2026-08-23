@@ -3,6 +3,7 @@ export const SCHEDULE_CATEGORIES = [
   "arenas",
   "siege",
   "rifts",
+  "duel",
 ] as const;
 
 export type ScheduleCategory = (typeof SCHEDULE_CATEGORIES)[number];

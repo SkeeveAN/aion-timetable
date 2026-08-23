@@ -35,7 +35,7 @@ export const scheduleEvents = sqliteTable(
   {
     id: integer("id").primaryKey({ autoIncrement: true }),
     category: text("category", {
-      enum: ["pvp_instances", "arenas", "siege", "rifts"],
+      enum: ["pvp_instances", "arenas", "siege", "rifts", "duel"],
     }).notNull(),
     name: text("name").notNull(),
     imageUrl: text("image_url"),

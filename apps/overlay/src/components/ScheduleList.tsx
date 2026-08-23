@@ -4,6 +4,7 @@ import { SCHEDULE_CATEGORIES } from "@aion-timetable/shared";
 import { currentOrNextOccurrence, formatCountdown, formatLocalTime } from "../lib/time";
 import { matchesLevel } from "../lib/level";
 import { categoryLabel } from "../lib/categoryLabels";
+import { riftLabel } from "../lib/riftZones";
 import { t } from "../lib/uiStrings";
 
 interface Props {
@@ -61,7 +62,11 @@ export function ScheduleList({
             key={`${event.id}-${occurrence.start.getTime()}`}
             className={occurrence.isActive ? "event-item active" : "event-item"}
           >
-            <span className="event-name">{event.displayName}</span>
+            <span className="event-name">
+              {activeCategory === "rifts"
+                ? riftLabel(event, schedule.events, strings.riftFromToTemplate)
+                : event.displayName}
+            </span>
             <span className="event-time">
               {occurrence.isActive ? (
                 <>

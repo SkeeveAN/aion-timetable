@@ -13,18 +13,20 @@ const LABELS: CategoryLabels = {
     arenas: "Arenas",
     siege: "Raid",
     rifts: "Rifts",
+    duel: "Duel",
   },
   de: {
     pvp_instances: "PvP-Instanzen",
     arenas: "Arenen",
     siege: "Raid",
     rifts: "Risse",
+    duel: "Duell",
   },
 };
 
 const SHORT_LABELS: CategoryLabels = {
-  en: { pvp_instances: "PvP", arenas: "Arena", siege: "Raid", rifts: "Rift" },
-  de: { pvp_instances: "PvP", arenas: "Arena", siege: "Raid", rifts: "Riss" },
+  en: { pvp_instances: "PvP", arenas: "Arena", siege: "Raid", rifts: "Rift", duel: "Duel" },
+  de: { pvp_instances: "PvP", arenas: "Arena", siege: "Raid", rifts: "Riss", duel: "Duell" },
 };
 
 export function categoryLabel(language: LanguageCode, category: ScheduleCategory): string {

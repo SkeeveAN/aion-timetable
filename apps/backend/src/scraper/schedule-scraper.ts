@@ -2,12 +2,19 @@ import { chromium } from "playwright";
 import type { ScheduleCategory, Weekday } from "@aion-timetable/shared";
 import { env } from "../env.js";
 
-const CATEGORY_LABELS: Record<ScheduleCategory, string> = {
+// "duel" has no tab of its own on the site - it's "Recharger", scraped under
+// the "Arenas" tab, then reclassified below. Partial so the scrape loop
+// below never tries to click a nonexistent "Duel" button.
+const CATEGORY_LABELS: Partial<Record<ScheduleCategory, string>> = {
   pvp_instances: "PvP Instances",
   arenas: "Arenas",
   siege: "Siege",
   rifts: "Rifts",
 };
+
+// Recharger is a duel arena, not a PvP arena - the site just has no separate
+// tab for it, so it comes back tagged "arenas" like everything else there.
+const DUEL_EVENT_NAMES = new Set(["Recharger"]);
 
 // The weekly table's column headers, in DOM order, after the leading "Time" column.
 const COLUMN_WEEKDAYS: Weekday[] = [
@@ -97,7 +104,7 @@ export async function scrapeSchedule(): Promise<ScrapeResult> {
             if (!name) continue;
 
             events.push({
-              category,
+              category: DUEL_EVENT_NAMES.has(name) ? "duel" : category,
               name,
               imageUrl: null,
               weekday,

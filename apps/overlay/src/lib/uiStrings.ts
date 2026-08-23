@@ -34,6 +34,7 @@ export interface UiStrings {
   scheduleLocalSuffix: string;
   respawnExpected: string;
   upcomingRunning: string;
+  riftFromToTemplate: string;
 }
 
 const EN: UiStrings = {
@@ -70,6 +71,7 @@ const EN: UiStrings = {
   scheduleLocalSuffix: "local",
   respawnExpected: "expected",
   upcomingRunning: "running",
+  riftFromToTemplate: "from {from} to {to}",
 };
 
 const DE: UiStrings = {
@@ -106,6 +108,7 @@ const DE: UiStrings = {
   scheduleLocalSuffix: "lokal",
   respawnExpected: "erwartet",
   upcomingRunning: "läuft",
+  riftFromToTemplate: "von {from} nach {to}",
 };
 
 const ES: UiStrings = {
@@ -142,6 +145,7 @@ const ES: UiStrings = {
   scheduleLocalSuffix: "local",
   respawnExpected: "esperado",
   upcomingRunning: "en curso",
+  riftFromToTemplate: "de {from} a {to}",
 };
 
 const IT: UiStrings = {
@@ -178,6 +182,7 @@ const IT: UiStrings = {
   scheduleLocalSuffix: "locale",
   respawnExpected: "previsto",
   upcomingRunning: "in corso",
+  riftFromToTemplate: "da {from} a {to}",
 };
 
 const FR: UiStrings = {
@@ -214,6 +219,7 @@ const FR: UiStrings = {
   scheduleLocalSuffix: "local",
   respawnExpected: "prévu",
   upcomingRunning: "en cours",
+  riftFromToTemplate: "de {from} à {to}",
 };
 
 const TR: UiStrings = {
@@ -250,6 +256,7 @@ const TR: UiStrings = {
   scheduleLocalSuffix: "yerel",
   respawnExpected: "beklenen",
   upcomingRunning: "devam ediyor",
+  riftFromToTemplate: "{from}'dan {to}'ye",
 };
 
 const RU: UiStrings = {
@@ -286,6 +293,7 @@ const RU: UiStrings = {
   scheduleLocalSuffix: "локальное",
   respawnExpected: "ожидается",
   upcomingRunning: "идёт сейчас",
+  riftFromToTemplate: "из {from} в {to}",
 };
 
 const PL: UiStrings = {
@@ -322,6 +330,7 @@ const PL: UiStrings = {
   scheduleLocalSuffix: "lokalny",
   respawnExpected: "oczekiwane",
   upcomingRunning: "trwa",
+  riftFromToTemplate: "z {from} do {to}",
 };
 
 const ZH: UiStrings = {
@@ -358,6 +367,7 @@ const ZH: UiStrings = {
   scheduleLocalSuffix: "本地",
   respawnExpected: "预计",
   upcomingRunning: "进行中",
+  riftFromToTemplate: "从 {from} 到 {to}",
 };
 
 const STRINGS: Record<LanguageCode, UiStrings> = {
