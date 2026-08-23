@@ -2,7 +2,7 @@
 
 # AION Timetable Overlay
 
-Una superposición (overlay) transparente para Windows para el servidor privado de AION 4.6 **OriginAion**, que permanece visible mientras juegas: horario de PvP Instances / Arenas / Siege / Rifts (zona horaria del servidor y local, filtrado por nivel, 8 idiomas), además de seguimiento de muerte/reaparición a nivel de equipo para 23 jefes de mundo/keymasters (Dabra, Zumita, más otros 21 en Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) con comentarios compartidos.
+Una superposición (overlay) transparente para Windows para el servidor privado de AION 4.6 **OriginAion**, que permanece visible mientras juegas: horario de PvP Instances / Arenas / Raid / Rifts (zona horaria del servidor y local, filtrado por nivel, 8 idiomas), además de seguimiento de muerte/reaparición a nivel de equipo para 23 jefes de mundo/keymasters (Dabra, Zumita, más otros 21 en Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) con comentarios compartidos.
 
 ## Arquitectura
 

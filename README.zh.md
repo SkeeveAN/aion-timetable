@@ -2,7 +2,7 @@
 
 # AION Timetable Overlay
 
-一个用于私人 AION 4.6 服务器 **OriginAion** 的透明 Windows 悬浮窗，游玩时始终置顶显示：PvP Instances / Arenas / Siege / Rifts 日程表(服务器时间与本地时间、按等级过滤、8 种语言),以及针对 23 个世界 Boss/钥匙守护者(Dabra、Zumita,以及 Heiron、Tiamaranta、Inggison、Gelkmaros、Reshanta、Sarpan、Eltnen 等地的另外 21 个)的团队内击杀/重生追踪,并支持共享评论。
+一个用于私人 AION 4.6 服务器 **OriginAion** 的透明 Windows 悬浮窗，游玩时始终置顶显示：PvP Instances / Arenas / Raid / Rifts 日程表(服务器时间与本地时间、按等级过滤、8 种语言),以及针对 23 个世界 Boss/钥匙守护者(Dabra、Zumita,以及 Heiron、Tiamaranta、Inggison、Gelkmaros、Reshanta、Sarpan、Eltnen 等地的另外 21 个)的团队内击杀/重生追踪,并支持共享评论。
 
 ## 架构
 

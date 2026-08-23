@@ -2,7 +2,7 @@
 
 # AION Timetable Overlay
 
-Przezroczysty overlay dla Windows dla prywatnego serwera AION 4.6 **OriginAion**, który pozostaje widoczny podczas gry: harmonogram PvP Instances / Arenas / Siege / Rifts (czas serwera i lokalny, filtrowanie po poziomie, 8 języków), a także śledzenie zabić/odrodzeń na poziomie zespołu dla 23 bossów światowych/keymasterów (Dabra, Zumita oraz 21 kolejnych w Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) wraz ze współdzielonymi komentarzami.
+Przezroczysty overlay dla Windows dla prywatnego serwera AION 4.6 **OriginAion**, który pozostaje widoczny podczas gry: harmonogram PvP Instances / Arenas / Raid / Rifts (czas serwera i lokalny, filtrowanie po poziomie, 8 języków), a także śledzenie zabić/odrodzeń na poziomie zespołu dla 23 bossów światowych/keymasterów (Dabra, Zumita oraz 21 kolejnych w Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) wraz ze współdzielonymi komentarzami.
 
 ## Architektura
 

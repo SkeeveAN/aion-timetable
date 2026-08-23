@@ -2,7 +2,7 @@
 
 # AION Timetable Overlay
 
-A transparent Windows overlay for the private AION 4.6 server **OriginAion**, staying on top while you play: schedule for PvP Instances / Arenas / Siege / Rifts (server and local time zone, level filtering, 8 languages), plus team-internal kill/respawn tracking for 23 world bosses/keymasters (Dabra, Zumita, plus 21 more across Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) including shared comments.
+A transparent Windows overlay for the private AION 4.6 server **OriginAion**, staying on top while you play: schedule for PvP Instances / Arenas / Raid / Rifts (server and local time zone, level filtering, 8 languages), plus team-internal kill/respawn tracking for 23 world bosses/keymasters (Dabra, Zumita, plus 21 more across Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) including shared comments.
 
 ## Architecture
 

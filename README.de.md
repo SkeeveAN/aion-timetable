@@ -2,7 +2,7 @@
 
 # AION Timetable Overlay
 
-Ein transparentes Windows-Overlay für den privaten AION-4.6-Server **OriginAion**, das während des Spielens eingeblendet bleibt: Zeitplan für PvP Instances / Arenas / Siege / Rifts (Server- und lokale Zeitzone, Level-Filterung, 8 Sprachen), plus team-internes Kill/Respawn-Tracking für 23 Weltbosse/Keymaster (Dabra, Zumita, plus 21 weitere u. a. in Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) inklusive gemeinsamer Kommentare.
+Ein transparentes Windows-Overlay für den privaten AION-4.6-Server **OriginAion**, das während des Spielens eingeblendet bleibt: Zeitplan für PvP Instances / Arenas / Raid / Rifts (Server- und lokale Zeitzone, Level-Filterung, 8 Sprachen), plus team-internes Kill/Respawn-Tracking für 23 Weltbosse/Keymaster (Dabra, Zumita, plus 21 weitere u. a. in Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) inklusive gemeinsamer Kommentare.
 
 ## Architektur
 

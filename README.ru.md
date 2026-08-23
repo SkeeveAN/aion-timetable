@@ -2,7 +2,7 @@
 
 # AION Timetable Overlay
 
-Прозрачный оверлей для Windows для приватного сервера AION 4.6 **OriginAion**, остающийся на экране во время игры: расписание PvP Instances / Arenas / Siege / Rifts (время сервера и локальное время, фильтр по уровню, 8 языков), а также командное отслеживание убийств/возрождения для 23 мировых боссов/хранителей ключей (Dabra, Zumita и ещё 21 в Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) с общими комментариями.
+Прозрачный оверлей для Windows для приватного сервера AION 4.6 **OriginAion**, остающийся на экране во время игры: расписание PvP Instances / Arenas / Raid / Rifts (время сервера и локальное время, фильтр по уровню, 8 языков), а также командное отслеживание убийств/возрождения для 23 мировых боссов/хранителей ключей (Dabra, Zumita и ещё 21 в Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen) с общими комментариями.
 
 ## Архитектура
 

@@ -4,24 +4,27 @@ type CategoryLabels = { en: Record<ScheduleCategory, string> } & Partial<
   Record<LanguageCode, Record<ScheduleCategory, string>>
 >;
 
+// "Raid" is used as-is across every language (not translated) - it's the
+// term the community actually uses for this category, regardless of UI
+// language.
 const LABELS: CategoryLabels = {
   en: {
     pvp_instances: "PvP Instances",
     arenas: "Arenas",
-    siege: "Siege",
+    siege: "Raid",
     rifts: "Rifts",
   },
   de: {
     pvp_instances: "PvP-Instanzen",
     arenas: "Arenen",
-    siege: "Belagerung",
+    siege: "Raid",
     rifts: "Risse",
   },
 };
 
 const SHORT_LABELS: CategoryLabels = {
-  en: { pvp_instances: "PvP", arenas: "Arena", siege: "Siege", rifts: "Rift" },
-  de: { pvp_instances: "PvP", arenas: "Arena", siege: "Belag.", rifts: "Riss" },
+  en: { pvp_instances: "PvP", arenas: "Arena", siege: "Raid", rifts: "Rift" },
+  de: { pvp_instances: "PvP", arenas: "Arena", siege: "Raid", rifts: "Riss" },
 };
 
 export function categoryLabel(language: LanguageCode, category: ScheduleCategory): string {

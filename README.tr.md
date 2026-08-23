@@ -2,7 +2,7 @@
 
 # AION Timetable Overlay
 
-Özel AION 4.6 sunucusu **OriginAion** için, oyun oynarken üstte kalan şeffaf bir Windows overlay'i: PvP Instances / Arenas / Siege / Rifts programı (sunucu ve yerel saat dilimi, seviye filtreleme, 8 dil), ayrıca Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen bölgelerindeki 23 dünya boss'u/keymaster (Dabra, Zumita ve 21 diğeri) için takım içi öldürme/yeniden doğma takibi ve ortak yorumlar.
+Özel AION 4.6 sunucusu **OriginAion** için, oyun oynarken üstte kalan şeffaf bir Windows overlay'i: PvP Instances / Arenas / Raid / Rifts programı (sunucu ve yerel saat dilimi, seviye filtreleme, 8 dil), ayrıca Heiron, Tiamaranta, Inggison, Gelkmaros, Reshanta, Sarpan, Eltnen bölgelerindeki 23 dünya boss'u/keymaster (Dabra, Zumita ve 21 diğeri) için takım içi öldürme/yeniden doğma takibi ve ortak yorumlar.
 
 ## Mimari
 
