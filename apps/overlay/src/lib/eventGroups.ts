@@ -36,6 +36,31 @@ function familyFor(name: string): EventFamily | undefined {
   return EVENT_FAMILIES.find((f) => f.members.includes(name));
 }
 
+/** Longest word-aligned prefix shared by all names, e.g. "Arena der " for
+ * ["Arena der Disziplin", "Arena der Kooperation"] - "" if there's no shared
+ * whole-word prefix (never cuts a word in half). */
+function commonWordPrefix(names: string[]): string {
+  if (names.length < 2) return "";
+  let prefix = names[0];
+  for (const name of names.slice(1)) {
+    let i = 0;
+    while (i < prefix.length && i < name.length && prefix[i] === name[i]) i++;
+    prefix = prefix.slice(0, i);
+    if (!prefix) return "";
+  }
+  const lastSpace = prefix.lastIndexOf(" ");
+  return lastSpace === -1 ? "" : prefix.slice(0, lastSpace + 1);
+}
+
+/** Joins names, factoring out a shared prefix once instead of repeating it:
+ * "Arena der Disziplin / Arena der Kooperation" -> "Arena der Disziplin / Kooperation". */
+function joinFactoringPrefix(names: string[]): string {
+  if (names.length <= 1) return names[0] ?? "";
+  const prefix = commonWordPrefix(names);
+  if (!prefix) return names.join(" / ");
+  return prefix + names.map((n) => n.slice(prefix.length)).join(" / ");
+}
+
 interface NamedEvent {
   name: string;
   displayName: string;
@@ -77,11 +102,10 @@ export function groupByFamily<T>(
     }
     if (family) {
       const byName = new Map(bucket.map((i) => [getEvent(i).name, getEvent(i).displayName]));
-      const displayName = family.members
+      const names = family.members
         .map((m) => byName.get(m))
-        .filter((n): n is string => Boolean(n))
-        .join(" / ");
-      return { items: bucket, displayName };
+        .filter((n): n is string => Boolean(n));
+      return { items: bucket, displayName: joinFactoringPrefix(names) };
     }
     return { items: bucket, displayName: firstEvent.displayName };
   });
