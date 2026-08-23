@@ -9,6 +9,7 @@ export interface AccessTokenPayload {
   memberId: number;
   displayName: string;
   isOwner: boolean;
+  isAdmin: boolean;
 }
 
 export async function signAccessToken(payload: AccessTokenPayload) {

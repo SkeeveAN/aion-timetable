@@ -35,6 +35,13 @@ export interface UiStrings {
   respawnExpected: string;
   upcomingRunning: string;
   riftFromToTemplate: string;
+  teamLoginTab: string;
+  teamMemberPasswordPlaceholder: string;
+  teamOwnerLoginButton: string;
+  teamLoginError: string;
+  teamMakeAdminButton: string;
+  teamRemoveAdminButton: string;
+  teamAdminTag: string;
 }
 
 const EN: UiStrings = {
@@ -72,6 +79,13 @@ const EN: UiStrings = {
   respawnExpected: "expected",
   upcomingRunning: "running",
   riftFromToTemplate: "from {from} to {to}",
+  teamLoginTab: "Login (owner)",
+  teamMemberPasswordPlaceholder: "Your password",
+  teamOwnerLoginButton: "Log in",
+  teamLoginError: "Login failed.",
+  teamMakeAdminButton: "Make admin",
+  teamRemoveAdminButton: "Remove admin",
+  teamAdminTag: "(Admin)",
 };
 
 const DE: UiStrings = {
@@ -109,6 +123,13 @@ const DE: UiStrings = {
   respawnExpected: "erwartet",
   upcomingRunning: "läuft",
   riftFromToTemplate: "von {from} nach {to}",
+  teamLoginTab: "Anmelden (Gruppenleiter)",
+  teamMemberPasswordPlaceholder: "Dein Passwort",
+  teamOwnerLoginButton: "Anmelden",
+  teamLoginError: "Anmeldung fehlgeschlagen.",
+  teamMakeAdminButton: "Zum Admin machen",
+  teamRemoveAdminButton: "Admin entfernen",
+  teamAdminTag: "(Admin)",
 };
 
 const ES: UiStrings = {
@@ -146,6 +167,13 @@ const ES: UiStrings = {
   respawnExpected: "esperado",
   upcomingRunning: "en curso",
   riftFromToTemplate: "de {from} a {to}",
+  teamLoginTab: "Iniciar sesión (líder)",
+  teamMemberPasswordPlaceholder: "Tu contraseña",
+  teamOwnerLoginButton: "Iniciar sesión",
+  teamLoginError: "Error al iniciar sesión.",
+  teamMakeAdminButton: "Nombrar admin",
+  teamRemoveAdminButton: "Quitar admin",
+  teamAdminTag: "(Admin)",
 };
 
 const IT: UiStrings = {
@@ -183,6 +211,13 @@ const IT: UiStrings = {
   respawnExpected: "previsto",
   upcomingRunning: "in corso",
   riftFromToTemplate: "da {from} a {to}",
+  teamLoginTab: "Accedi (leader)",
+  teamMemberPasswordPlaceholder: "La tua password",
+  teamOwnerLoginButton: "Accedi",
+  teamLoginError: "Accesso non riuscito.",
+  teamMakeAdminButton: "Rendi admin",
+  teamRemoveAdminButton: "Rimuovi admin",
+  teamAdminTag: "(Admin)",
 };
 
 const FR: UiStrings = {
@@ -220,6 +255,13 @@ const FR: UiStrings = {
   respawnExpected: "prévu",
   upcomingRunning: "en cours",
   riftFromToTemplate: "de {from} à {to}",
+  teamLoginTab: "Connexion (chef)",
+  teamMemberPasswordPlaceholder: "Ton mot de passe",
+  teamOwnerLoginButton: "Se connecter",
+  teamLoginError: "Échec de la connexion.",
+  teamMakeAdminButton: "Nommer admin",
+  teamRemoveAdminButton: "Retirer admin",
+  teamAdminTag: "(Admin)",
 };
 
 const TR: UiStrings = {
@@ -257,6 +299,13 @@ const TR: UiStrings = {
   respawnExpected: "beklenen",
   upcomingRunning: "devam ediyor",
   riftFromToTemplate: "{from}'dan {to}'ye",
+  teamLoginTab: "Giriş (lider)",
+  teamMemberPasswordPlaceholder: "Şifren",
+  teamOwnerLoginButton: "Giriş yap",
+  teamLoginError: "Giriş başarısız oldu.",
+  teamMakeAdminButton: "Admin yap",
+  teamRemoveAdminButton: "Adminliği kaldır",
+  teamAdminTag: "(Admin)",
 };
 
 const RU: UiStrings = {
@@ -294,6 +343,13 @@ const RU: UiStrings = {
   respawnExpected: "ожидается",
   upcomingRunning: "идёт сейчас",
   riftFromToTemplate: "из {from} в {to}",
+  teamLoginTab: "Вход (лидер)",
+  teamMemberPasswordPlaceholder: "Твой пароль",
+  teamOwnerLoginButton: "Войти",
+  teamLoginError: "Не удалось войти.",
+  teamMakeAdminButton: "Сделать админом",
+  teamRemoveAdminButton: "Убрать админа",
+  teamAdminTag: "(Админ)",
 };
 
 const PL: UiStrings = {
@@ -331,6 +387,13 @@ const PL: UiStrings = {
   respawnExpected: "oczekiwane",
   upcomingRunning: "trwa",
   riftFromToTemplate: "z {from} do {to}",
+  teamLoginTab: "Logowanie (lider)",
+  teamMemberPasswordPlaceholder: "Twoje hasło",
+  teamOwnerLoginButton: "Zaloguj się",
+  teamLoginError: "Logowanie nie powiodło się.",
+  teamMakeAdminButton: "Ustaw jako admina",
+  teamRemoveAdminButton: "Usuń admina",
+  teamAdminTag: "(Admin)",
 };
 
 const ZH: UiStrings = {
@@ -368,6 +431,13 @@ const ZH: UiStrings = {
   respawnExpected: "预计",
   upcomingRunning: "进行中",
   riftFromToTemplate: "从 {from} 到 {to}",
+  teamLoginTab: "登录(队长)",
+  teamMemberPasswordPlaceholder: "你的密码",
+  teamOwnerLoginButton: "登录",
+  teamLoginError: "登录失败。",
+  teamMakeAdminButton: "设为管理员",
+  teamRemoveAdminButton: "取消管理员",
+  teamAdminTag: "(管理员)",
 };
 
 const STRINGS: Record<LanguageCode, UiStrings> = {

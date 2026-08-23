@@ -25,6 +25,13 @@ export const teamMembers = sqliteTable("team_members", {
     .references(() => teams.id),
   displayName: text("display_name").notNull(),
   isOwner: integer("is_owner", { mode: "boolean" }).notNull().default(false),
+  isAdmin: integer("is_admin", { mode: "boolean" }).notNull().default(false),
+  // Nullable: members created before this feature shipped have none yet and
+  // can't re-login under their name until an owner/admin resets it (see
+  // POST /team-members/:id/reset-password) - proves identity beyond just
+  // typing the right display name, and lets anyone reclaim access after a
+  // reinstall by joining again with the same name + password.
+  passwordHash: text("password_hash"),
   createdAt: text("created_at")
     .notNull()
     .default(sql`(current_timestamp)`),

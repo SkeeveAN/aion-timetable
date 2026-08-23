@@ -3,6 +3,7 @@ import { LazyStore } from "@tauri-apps/plugin-store";
 import type {
   CreateTeamRequest,
   JoinTeamRequest,
+  OwnerLoginRequest,
   TeamAuthResponse,
   TeamInfo,
   MemberInfo,
@@ -75,6 +76,16 @@ export function useAuth() {
     [api, persist]
   );
 
+  const ownerLogin = useCallback(
+    async (request: OwnerLoginRequest) => {
+      const res = await api.post<TeamAuthResponse>("/teams/login", request, {
+        auth: false,
+      });
+      await persist(res);
+    },
+    [api, persist]
+  );
+
   const leaveTeam = useCallback(async () => {
     setAccessToken(null);
     setTeam(null);
@@ -92,6 +103,7 @@ export function useAuth() {
     api,
     createTeam,
     joinTeam,
+    ownerLogin,
     leaveTeam,
   };
 }

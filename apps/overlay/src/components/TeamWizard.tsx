@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import type { CreateTeamRequest, JoinTeamRequest, LanguageCode } from "@aion-timetable/shared";
+import type {
+  CreateTeamRequest,
+  JoinTeamRequest,
+  LanguageCode,
+  OwnerLoginRequest,
+} from "@aion-timetable/shared";
 import { t } from "../lib/uiStrings";
 
 interface Props {
   language: LanguageCode;
   onCreate: (request: CreateTeamRequest) => Promise<void>;
   onJoin: (request: JoinTeamRequest) => Promise<void>;
+  onOwnerLogin: (request: OwnerLoginRequest) => Promise<void>;
 }
 
-export function TeamWizard({ language, onCreate, onJoin }: Props) {
+export function TeamWizard({ language, onCreate, onJoin, onOwnerLogin }: Props) {
   const strings = t(language);
-  const [mode, setMode] = useState<"create" | "join">("create");
+  const [mode, setMode] = useState<"create" | "join" | "login">("create");
   const [displayName, setDisplayName] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -33,11 +39,19 @@ export function TeamWizard({ language, onCreate, onJoin }: Props) {
     try {
       if (mode === "create") {
         await onCreate({ name, description, password, displayName });
+      } else if (mode === "join") {
+        await onJoin({ inviteCode, displayName, password });
       } else {
-        await onJoin({ inviteCode, displayName });
+        await onOwnerLogin({ inviteCode, password });
       }
     } catch {
-      setError(mode === "create" ? strings.teamCreateError : strings.teamJoinError);
+      setError(
+        mode === "create"
+          ? strings.teamCreateError
+          : mode === "join"
+            ? strings.teamJoinError
+            : strings.teamLoginError
+      );
     } finally {
       setLoading(false);
     }
@@ -58,10 +72,16 @@ export function TeamWizard({ language, onCreate, onJoin }: Props) {
         >
           {strings.teamJoinTab}
         </button>
+        <button
+          className={mode === "login" ? "tab active" : "tab"}
+          onClick={() => setMode("login")}
+        >
+          {strings.teamLoginTab}
+        </button>
       </div>
 
       <form className="wizard-form" onSubmit={handleSubmit}>
-        {mode === "create" ? (
+        {mode === "create" && (
           <>
             <input
               placeholder={strings.teamNamePlaceholder}
@@ -81,25 +101,65 @@ export function TeamWizard({ language, onCreate, onJoin }: Props) {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <input
+              placeholder={strings.teamDisplayNamePlaceholder}
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              required
+            />
           </>
-        ) : (
-          <input
-            placeholder={strings.teamInviteCodePlaceholder}
-            value={inviteCode}
-            onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
-            required
-          />
         )}
 
-        <input
-          placeholder={strings.teamDisplayNamePlaceholder}
-          value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
-          required
-        />
+        {mode === "join" && (
+          <>
+            <input
+              placeholder={strings.teamInviteCodePlaceholder}
+              value={inviteCode}
+              onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
+              required
+            />
+            <input
+              placeholder={strings.teamDisplayNamePlaceholder}
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder={strings.teamMemberPasswordPlaceholder}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </>
+        )}
+
+        {mode === "login" && (
+          <>
+            <input
+              placeholder={strings.teamInviteCodePlaceholder}
+              value={inviteCode}
+              onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
+              required
+            />
+            <input
+              type="password"
+              placeholder={strings.teamPasswordPlaceholder}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </>
+        )}
 
         <button type="submit" disabled={loading}>
-          {loading ? "..." : mode === "create" ? strings.teamCreateButton : strings.teamJoinButton}
+          {loading
+            ? "..."
+            : mode === "create"
+              ? strings.teamCreateButton
+              : mode === "join"
+                ? strings.teamJoinButton
+                : strings.teamOwnerLoginButton}
         </button>
         {error && <span className="login-error">{error}</span>}
       </form>

@@ -106,6 +106,7 @@ export default function App() {
           language={settings.language}
           onCreate={auth.createTeam}
           onJoin={auth.joinTeam}
+          onOwnerLogin={auth.ownerLogin}
         />
       )}
 
