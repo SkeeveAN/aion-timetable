@@ -5,6 +5,7 @@ import { currentOrNextOccurrence, formatCountdown, formatLocalTime } from "../li
 import { matchesLevel } from "../lib/level";
 import { categoryLabel } from "../lib/categoryLabels";
 import { riftLabel } from "../lib/riftZones";
+import { groupByFamily } from "../lib/eventGroups";
 import { t } from "../lib/uiStrings";
 
 interface Props {
@@ -26,7 +27,7 @@ export function ScheduleList({
   const now = new Date();
 
   const upcoming = useMemo(() => {
-    return schedule.events
+    const withOccurrence = schedule.events
       .filter((e) => e.category === activeCategory && matchesLevel(e, myLevel))
       .map((e) => ({
         event: e,
@@ -37,8 +38,16 @@ export function ScheduleList({
           schedule.serverTime.offsetMinutes,
           now
         ),
-      }))
-      .sort((a, b) => a.occurrence.start.getTime() - b.occurrence.start.getTime())
+      }));
+
+    return groupByFamily(
+      withOccurrence,
+      (i) => i.event,
+      (i) => i.occurrence.start.getTime()
+    )
+      .sort(
+        (a, b) => a.items[0].occurrence.start.getTime() - b.items[0].occurrence.start.getTime()
+      )
       .slice(0, 8);
   }, [schedule, activeCategory, myLevel]);
 
@@ -57,31 +66,35 @@ export function ScheduleList({
       </div>
 
       <ul className="event-items">
-        {upcoming.map(({ event, occurrence }) => (
-          <li
-            key={`${event.id}-${occurrence.start.getTime()}`}
-            className={occurrence.isActive ? "event-item active" : "event-item"}
-          >
-            <span className="event-name">
-              {activeCategory === "rifts"
-                ? riftLabel(event, schedule.events, strings.riftFromToTemplate)
-                : event.displayName}
-            </span>
-            <span className="event-time">
-              {occurrence.isActive ? (
-                <>
-                  {strings.upcomingRunning} &middot; {formatCountdown(occurrence.end, now)}
-                </>
-              ) : (
-                <>
-                  {event.startTime} {strings.scheduleServerSuffix} &middot;{" "}
-                  {formatLocalTime(occurrence.start)} {strings.scheduleLocalSuffix} &middot;{" "}
-                  {formatCountdown(occurrence.start, now)}
-                </>
-              )}
-            </span>
-          </li>
-        ))}
+        {upcoming.map((group) => {
+          const { event, occurrence } = group.items[0];
+          const name =
+            activeCategory === "rifts" && group.items.length === 1
+              ? riftLabel(event, schedule.events, strings.riftFromToTemplate)
+              : group.displayName;
+
+          return (
+            <li
+              key={`${group.items.map((i) => i.event.id).join("-")}-${occurrence.start.getTime()}`}
+              className={occurrence.isActive ? "event-item active" : "event-item"}
+            >
+              <span className="event-name">{name}</span>
+              <span className="event-time">
+                {occurrence.isActive ? (
+                  <>
+                    {strings.upcomingRunning} &middot; {formatCountdown(occurrence.end, now)}
+                  </>
+                ) : (
+                  <>
+                    {event.startTime} {strings.scheduleServerSuffix} &middot;{" "}
+                    {formatLocalTime(occurrence.start)} {strings.scheduleLocalSuffix} &middot;{" "}
+                    {formatCountdown(occurrence.start, now)}
+                  </>
+                )}
+              </span>
+            </li>
+          );
+        })}
         {upcoming.length === 0 && <li className="event-empty">{strings.scheduleEmpty}</li>}
       </ul>
     </div>

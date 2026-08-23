@@ -79,6 +79,9 @@ const OFFICIAL_TRANSLATIONS: { canonicalName: string; language: string; translat
   { canonicalName: "Temple of Scales", language: "zh", translatedName: "古代龙神殿" },
   { canonicalName: "Miren/Krotan/Kysis", language: "ru", translatedName: "Ра-Мирэн/Кротан/Ткисас" },
   { canonicalName: "Miren/Krotan/Kysis", language: "zh", translatedName: "拉米兰/克罗坦/德奇沙斯" },
+  // Confirmed directly by the user (same confidence tier as Dabra/Zumita above).
+  { canonicalName: "Siel's Western", language: "de", translatedName: "Siel's West" },
+  { canonicalName: "Siel's Eastern", language: "de", translatedName: "Siel's Ost" },
   // Rift zones - DE/FR keep the English name except Heiron (RU-only difference below applies to all)
   { canonicalName: "Heiron", language: "ru", translatedName: "Интердика" },
   { canonicalName: "Eltnen", language: "ru", translatedName: "Элтенен" },
