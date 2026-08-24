@@ -19,7 +19,7 @@ packages/
 - **Datenquelle Zeitplan:** Ein Playwright-Scraper liest periodisch die Wochenansicht von `originaion.com/schedule` (inkl. der aktuellen Server-Zeitzone) aus und speichert sie im Backend. Die Tabs auf der Zielseite sind rein clientseitig, daher ein echter Headless-Browser statt einfachem HTTP-Fetch.
 - **Team-Modell:** Kein klassisches Login. Eine Person erstellt ein Team (Name, Beschreibung, Passwort) und erhält einen Einladungscode; weitere Mitglieder treten mit diesem Code und einem Anzeigenamen bei. Kills und Kommentare sind pro Team isoliert (`teamId`), der Team-Owner kann Anzeigenamen von Mitgliedern nachträglich ändern.
 - **Standalone- vs. Team-Modus:** Ohne Team-Beitritt zeigt die App nur den öffentlichen Zeitplan (`GET /schedule`, kein Login nötig). Mit Team-Beitritt kommen Live-Kommentare und die Weltboss-Karte via WebSocket dazu.
-- **Level-Filterung:** Dredgion/Arena-Instanzen haben Level-Anforderungen. Bestätigt für originaion.com: Engulfed Ophidan Bridge, Iron Wall Warfront, Kamar Battlefield und Arena of Glory (4er alle-gegen-alle, nur oberstes Bracket) sind reines Endgame mit 61–65; Terath Dredgion, Arena of Chaos (10er alle-gegen-alle), Arena of Discipline (1v1) und Arena of Harmony (3v3) queuen dagegen in eines von vier 5er-Level-Brackets (46–50/51–55/56–60/61–65) – Terath Dredgion läuft dabei je Bracket unter einem anderen Namen – und sind daher im gesamten Bereich 46–65 zugänglich. Die App blendet Instanzen komplett aus, die nicht zum in den Einstellungen hinterlegten eigenen Level passen.
+- **Level-Filterung:** Dredgion/Arena-Instanzen haben Level-Anforderungen. Bestätigt für originaion.com: Engulfed Ophidan Bridge, Iron Wall Warfront, Kamar Battlefield und Arena of Glory (4er alle-gegen-alle, nur oberstes Bracket) sind reines Endgame mit 61–65; Terath Dredgion, Arena of Chaos (10er alle-gegen-alle), Arena of Discipline (1v1) und Arena of Harmony (3v3) queuen dagegen in eines von vier 5er-Level-Brackets (46–50/51–55/56–60/61–65) – Terath Dredgion läuft dabei je Bracket unter einem anderen Namen – und sind daher im gesamten Bereich 46–65 zugänglich. Die App zeigt den Level-Bereich direkt neben jedem Termin an, anstatt Termine nach einem eingestellten Level auszublenden.
 
 ## Voraussetzungen
 
@@ -83,7 +83,7 @@ Da das Fenster bewusst ohne Titelleiste/Schließen-Button läuft, gibt es zusät
 ## Sonstiges Verhalten
 
 - **Erststart:** Beim allerersten Start öffnet sich die App automatisch im Interaktions- und Settings-Modus, damit neue Nutzer sie sofort platzieren und konfigurieren können, ohne die Hotkeys schon zu kennen.
-- **Reset:** Alle Einstellungen (Level, Farbe, Team-Zugehörigkeit, Erststart-Status) liegen als JSON-Dateien im Tauri-App-Datenverzeichnis (`settings.json`, `auth.json`). Löschen dieser Dateien setzt die App vollständig zurück.
+- **Reset:** Alle Einstellungen (Farbe, Team-Zugehörigkeit, Erststart-Status) liegen als JSON-Dateien im Tauri-App-Datenverzeichnis (`settings.json`, `auth.json`). Löschen dieser Dateien setzt die App vollständig zurück.
 - **Auto-Beenden:** Die App überwacht den AION-Client-Prozess (`aion.bin`). Sobald der Client einmal lief und danach beendet wird, schließt sich die Overlay-App automatisch mit.
 - **Auto-Update:** Bei jedem Start prüft die App im Hintergrund die neueste GitHub Release, lädt ein verfügbares Update herunter, installiert es und startet neu – ganz ohne Dialoge oder Klicks.
 

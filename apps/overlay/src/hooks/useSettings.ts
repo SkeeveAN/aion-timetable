@@ -5,8 +5,6 @@ import type { LanguageCode } from "@aion-timetable/shared";
 export interface OverlaySettings {
   fontSize: number;
   textColor: string;
-  /** null = not set, don't filter by level */
-  myLevel: number | null;
   /** false until the first-run setup flow has shown itself once */
   onboarded: boolean;
   language: LanguageCode;
@@ -15,7 +13,6 @@ export interface OverlaySettings {
 const DEFAULT_SETTINGS: OverlaySettings = {
   fontSize: 14,
   textColor: "#ffffff",
-  myLevel: null,
   onboarded: false,
   language: "de",
 };

@@ -19,7 +19,7 @@ packages/
 - **Fonte dati del programma:** Uno scraper Playwright legge periodicamente la vista settimanale di `originaion.com/schedule` (incluso il fuso orario attuale del server) e la salva nel backend. Le tab di quella pagina sono puramente lato client, quindi serve un vero browser headless invece di una semplice richiesta HTTP.
 - **Modello di team:** Nessun login classico. Una persona crea un team (nome, descrizione, password) e ottiene un codice di invito; gli altri membri si uniscono con quel codice e un nome visualizzato. Le uccisioni e i commenti sono isolati per team (`teamId`); il proprietario del team può rinominare i membri in seguito.
 - **Modalità standalone vs. team:** Senza unirsi a un team, l'app mostra solo il programma pubblico (`GET /schedule`, nessun login richiesto). Unendosi a un team si aggiungono commenti live e la bacheca dei boss mondiali via WebSocket.
-- **Filtro per livello:** Le istanze dredgion/arena hanno requisiti di livello. Confermato per originaion.com: Engulfed Ophidan Bridge, Iron Wall Warfront, Kamar Battlefield e Arena of Glory (free-for-all a 4, solo la fascia più alta) sono esclusivamente di endgame con 61–65; Terath Dredgion, Arena of Chaos (free-for-all a 10), Arena of Discipline (1v1) e Arena of Harmony (3v3) invece si mettono in coda in una di quattro fasce di 5 livelli (46–50/51–55/56–60/61–65) — Terath Dredgion viene eseguito con un nome diverso per ciascuna fascia — e sono quindi accessibili nell'intero intervallo 46–65. L'app nasconde completamente le istanze che non corrispondono al livello impostato.
+- **Filtro per livello:** Le istanze dredgion/arena hanno requisiti di livello. Confermato per originaion.com: Engulfed Ophidan Bridge, Iron Wall Warfront, Kamar Battlefield e Arena of Glory (free-for-all a 4, solo la fascia più alta) sono esclusivamente di endgame con 61–65; Terath Dredgion, Arena of Chaos (free-for-all a 10), Arena of Discipline (1v1) e Arena of Harmony (3v3) invece si mettono in coda in una di quattro fasce di 5 livelli (46–50/51–55/56–60/61–65) — Terath Dredgion viene eseguito con un nome diverso per ciascuna fascia — e sono quindi accessibili nell'intero intervallo 46–65. L'app mostra l'intervallo di livello accanto a ogni evento invece di nascondere gli eventi in base a un livello impostato.
 
 ## Prerequisiti
 
@@ -83,7 +83,7 @@ Poiché la finestra intenzionalmente non ha barra del titolo/pulsante di chiusur
 ## Altri comportamenti
 
 - **Primo avvio:** Al primissimo avvio, l'app si apre automaticamente in modalità interattiva + impostazioni, così i nuovi utenti possono posizionarla e configurarla immediatamente senza già conoscere le scorciatoie.
-- **Reset:** Tutte le impostazioni (livello, colore, appartenenza al team, stato del primo avvio) risiedono come file JSON nella directory dati dell'app Tauri (`settings.json`, `auth.json`). Eliminare questi file resetta completamente l'app.
+- **Reset:** Tutte le impostazioni (colore, appartenenza al team, stato del primo avvio) risiedono come file JSON nella directory dati dell'app Tauri (`settings.json`, `auth.json`). Eliminare questi file resetta completamente l'app.
 - **Chiusura automatica:** L'app monitora il processo del client AION (`aion.bin`). Una volta che il client è stato visto in esecuzione e poi si chiude, anche l'app overlay si chiude automaticamente.
 - **Aggiornamento automatico:** Ad ogni avvio, l'app controlla in background l'ultima GitHub Release, scarica e installa un aggiornamento se disponibile, poi si riavvia - nessuna finestra di dialogo, nessun clic necessario.
 

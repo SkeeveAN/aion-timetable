@@ -19,7 +19,7 @@ packages/
 - **Program veri kaynağı:** Bir Playwright scraper'ı periyodik olarak `originaion.com/schedule` sayfasının haftalık görünümünü (mevcut sunucu saat dilimi dahil) okuyup backend'de saklar. Bu sayfadaki sekmeler tamamen istemci taraflı olduğu için basit bir HTTP isteği yerine gerçek bir headless tarayıcı gerekir.
 - **Takım modeli:** Klasik giriş yok. Bir kişi bir takım oluşturur (isim, açıklama, şifre) ve bir davet kodu alır; diğer üyeler bu kod ve bir görünen adla katılır. Öldürmeler ve yorumlar takıma göre ayrılmıştır (`teamId`); takım sahibi daha sonra üyelerin adını değiştirebilir.
 - **Bağımsız mod vs. takım modu:** Bir takıma katılmadan uygulama yalnızca herkese açık programı gösterir (`GET /schedule`, giriş gerekmez). Bir takıma katılmak canlı yorumları ve dünya boss panosunu WebSocket üzerinden ekler.
-- **Seviye filtreleme:** Dredgion/arena bölümlerinin seviye gereksinimleri vardır. originaion.com için doğrulanmıştır: Engulfed Ophidan Bridge, Iron Wall Warfront, Kamar Battlefield ve Arena of Glory (4 kişilik herkese karşı herkes, sadece en yüksek dilim) sadece endgame'de 61–65 ile kullanılabilir; Terath Dredgion, Arena of Chaos (10 kişilik herkese karşı herkes), Arena of Discipline (1v1) ve Arena of Harmony (3v3) ise dört 5-seviyelik dilimden birine (46–50/51–55/56–60/61–65) sıraya girer — Terath Dredgion her dilimde farklı bir isim altında çalışır — ve bu nedenle 46–65 aralığının tamamında erişilebilirdir. Uygulama, ayarlarda belirlenen seviyeye uymayan bölümleri tamamen gizler.
+- **Seviye filtreleme:** Dredgion/arena bölümlerinin seviye gereksinimleri vardır. originaion.com için doğrulanmıştır: Engulfed Ophidan Bridge, Iron Wall Warfront, Kamar Battlefield ve Arena of Glory (4 kişilik herkese karşı herkes, sadece en yüksek dilim) sadece endgame'de 61–65 ile kullanılabilir; Terath Dredgion, Arena of Chaos (10 kişilik herkese karşı herkes), Arena of Discipline (1v1) ve Arena of Harmony (3v3) ise dört 5-seviyelik dilimden birine (46–50/51–55/56–60/61–65) sıraya girer — Terath Dredgion her dilimde farklı bir isim altında çalışır — ve bu nedenle 46–65 aralığının tamamında erişilebilirdir. Uygulama, ayarlanan bir seviyeye göre etkinlikleri gizlemek yerine her etkinliğin yanında seviye aralığını gösterir.
 
 ## Ön koşullar
 
@@ -83,7 +83,7 @@ Pencerede kasıtlı olarak başlık çubuğu/kapatma düğmesi olmadığından, 
 ## Diğer davranışlar
 
 - **İlk başlatma:** İlk başlatmada uygulama otomatik olarak etkileşimli + ayarlar modunda açılır, böylece yeni kullanıcılar kısayolları henüz bilmeden onu hemen konumlandırıp yapılandırabilir.
-- **Sıfırlama:** Tüm ayarlar (seviye, renk, takım üyeliği, ilk başlatma durumu) Tauri uygulama veri dizininde (`settings.json`, `auth.json`) JSON dosyaları olarak bulunur. Bu dosyaları silmek uygulamayı tamamen sıfırlar.
+- **Sıfırlama:** Tüm ayarlar (renk, takım üyeliği, ilk başlatma durumu) Tauri uygulama veri dizininde (`settings.json`, `auth.json`) JSON dosyaları olarak bulunur. Bu dosyaları silmek uygulamayı tamamen sıfırlar.
 - **Otomatik kapanma:** Uygulama AION istemci sürecini (`aion.bin`) izler. İstemci bir kez çalıştığı görüldükten sonra kapatılırsa, overlay uygulaması da otomatik olarak kapanır.
 - **Otomatik güncelleme:** Uygulama her başlatıldığında arka planda en son GitHub Release'i kontrol eder, varsa bir güncellemeyi indirip yükler ve ardından yeniden başlar - hiçbir iletişim kutusu veya tıklama gerekmez.
 

@@ -2,8 +2,8 @@ import { useMemo } from "react";
 import type { LanguageCode, ScheduleCategory, ScheduleResponse } from "@aion-timetable/shared";
 import { SCHEDULE_CATEGORIES } from "@aion-timetable/shared";
 import { currentOrNextOccurrence, formatCountdown, formatLocalTime } from "../lib/time";
-import { matchesLevel } from "../lib/level";
 import { categoryLabel } from "../lib/categoryLabels";
+import { levelRangeLabel } from "../lib/level";
 import { riftLabel } from "../lib/riftZones";
 import { groupByFamily } from "../lib/eventGroups";
 import { t } from "../lib/uiStrings";
@@ -12,7 +12,6 @@ interface Props {
   schedule: ScheduleResponse;
   activeCategory: ScheduleCategory;
   onCategoryChange: (category: ScheduleCategory) => void;
-  myLevel: number | null;
   language: LanguageCode;
 }
 
@@ -20,7 +19,6 @@ export function ScheduleList({
   schedule,
   activeCategory,
   onCategoryChange,
-  myLevel,
   language,
 }: Props) {
   const strings = t(language);
@@ -28,7 +26,7 @@ export function ScheduleList({
 
   const upcoming = useMemo(() => {
     const withOccurrence = schedule.events
-      .filter((e) => e.category === activeCategory && matchesLevel(e, myLevel))
+      .filter((e) => e.category === activeCategory)
       .map((e) => ({
         event: e,
         occurrence: currentOrNextOccurrence(
@@ -49,7 +47,7 @@ export function ScheduleList({
         (a, b) => a.items[0].occurrence.start.getTime() - b.items[0].occurrence.start.getTime()
       )
       .slice(0, 8);
-  }, [schedule, activeCategory, myLevel]);
+  }, [schedule, activeCategory]);
 
   return (
     <div className="schedule-list">
@@ -72,6 +70,7 @@ export function ScheduleList({
             activeCategory === "rifts" && group.items.length === 1
               ? riftLabel(event, schedule.events, strings.riftFromToTemplate)
               : group.displayName;
+          const level = levelRangeLabel(event);
 
           return (
             <li
@@ -79,6 +78,7 @@ export function ScheduleList({
               className={occurrence.isActive ? "event-item active" : "event-item"}
             >
               <span className="event-name">{name}</span>
+              {level && <span className="event-level">{level}</span>}
               <span className="event-time">
                 {occurrence.isActive ? (
                   <>

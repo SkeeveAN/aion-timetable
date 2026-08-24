@@ -19,7 +19,7 @@ packages/
 - **Schedule data source:** A Playwright scraper periodically reads the weekly view of `originaion.com/schedule` (including the current server time zone) and stores it in the backend. The tabs on that page are purely client-side, so a real headless browser is needed rather than a plain HTTP fetch.
 - **Team model:** No classic login. One person creates a team (name, description, password) and gets an invite code; other members join with that code and a display name. Kills and comments are isolated per team (`teamId`); the team owner can rename members afterwards.
 - **Standalone vs. team mode:** Without joining a team, the app only shows the public schedule (`GET /schedule`, no login required). Joining a team adds live comments and the world boss board via WebSocket.
-- **Level filtering:** Dredgion/arena instances have level requirements. Confirmed for originaion.com: Engulfed Ophidan Bridge, Iron Wall Warfront, Kamar Battlefield and Arena of Glory (4-man free-for-all, top bracket only) are endgame-only at 61–65; Terath Dredgion, Arena of Chaos (10-man free-for-all), Arena of Discipline (1v1) and Arena of Harmony (3v3) instead queue into one of four 5-level brackets (46–50/51–55/56–60/61–65) — Terath Dredgion runs under a different in-game name per bracket — and are therefore accessible across the full 46–65 range. The app completely hides instances that don't match the level set in its settings.
+- **Level filtering:** Dredgion/arena instances have level requirements. Confirmed for originaion.com: Engulfed Ophidan Bridge, Iron Wall Warfront, Kamar Battlefield and Arena of Glory (4-man free-for-all, top bracket only) are endgame-only at 61–65; Terath Dredgion, Arena of Chaos (10-man free-for-all), Arena of Discipline (1v1) and Arena of Harmony (3v3) instead queue into one of four 5-level brackets (46–50/51–55/56–60/61–65) — Terath Dredgion runs under a different in-game name per bracket — and are therefore accessible across the full 46–65 range. The app shows each event's level range next to it instead of hiding events by a configured level.
 
 ## Prerequisites
 
@@ -83,7 +83,7 @@ Since the window intentionally has no title bar/close button, there's also a **t
 ## Other behavior
 
 - **First launch:** On the very first launch, the app automatically opens in interactive + settings mode so new users can immediately position and configure it without already knowing the hotkeys.
-- **Reset:** All settings (level, color, team membership, first-launch status) live as JSON files in the Tauri app data directory (`settings.json`, `auth.json`). Deleting these files fully resets the app.
+- **Reset:** All settings (color, team membership, first-launch status) live as JSON files in the Tauri app data directory (`settings.json`, `auth.json`). Deleting these files fully resets the app.
 - **Auto-quit:** The app watches the AION client process (`aion.bin`). Once the client has been seen running and then closes, the overlay app quits automatically too.
 - **Auto-update:** On every launch, the app silently checks the latest GitHub Release, downloads and installs an update if one is available, then restarts - no dialogs, nothing to click.
 

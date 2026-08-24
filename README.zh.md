@@ -19,7 +19,7 @@ packages/
 - **日程数据来源:** 一个 Playwright 爬虫定期读取 `originaion.com/schedule` 的每周视图(包括当前服务器时区)并存入 backend。该页面的标签页完全是客户端渲染,因此需要真正的无头浏览器,而不是简单的 HTTP 请求。
 - **团队模型:** 没有传统登录。一人创建团队(名称、描述、密码)并获得邀请码;其他成员使用该邀请码和一个显示名称加入。击杀记录和评论按团队隔离(`teamId`);团队所有者之后可以重命名成员。
 - **独立模式 vs. 团队模式:** 不加入团队时,应用只显示公开日程(`GET /schedule`,无需登录)。加入团队后,通过 WebSocket 增加实时评论和世界 Boss 面板。
-- **等级过滤:** Dredgion/竞技场副本有等级要求。已针对 originaion.com 确认: Engulfed Ophidan Bridge、Iron Wall Warfront、Kamar Battlefield 以及 Arena of Glory(4 人自由混战,仅限最高等级段)仅限 61–65 级的终局内容;而 Terath Dredgion、Arena of Chaos(10 人自由混战)、Arena of Discipline(1v1)和 Arena of Harmony(3v3)则会匹配进入四个 5 级等级段(46–50/51–55/56–60/61–65)之一 —— Terath Dredgion 在不同等级段下使用不同的游戏内名称 —— 因此在整个 46–65 范围内均可进入。应用会完全隐藏与设置中等级不匹配的副本。
+- **等级过滤:** Dredgion/竞技场副本有等级要求。已针对 originaion.com 确认: Engulfed Ophidan Bridge、Iron Wall Warfront、Kamar Battlefield 以及 Arena of Glory(4 人自由混战,仅限最高等级段)仅限 61–65 级的终局内容;而 Terath Dredgion、Arena of Chaos(10 人自由混战)、Arena of Discipline(1v1)和 Arena of Harmony(3v3)则会匹配进入四个 5 级等级段(46–50/51–55/56–60/61–65)之一 —— Terath Dredgion 在不同等级段下使用不同的游戏内名称 —— 因此在整个 46–65 范围内均可进入。应用会在每个事件旁显示其等级范围,而不再根据设置的等级隐藏事件。
 
 ## 前置条件
 
@@ -83,7 +83,7 @@ Backend URL 目前硬编码在 `apps/overlay/src/config.ts` 中,为 `https://tim
 ## 其他行为
 
 - **首次启动:** 首次启动时,应用会自动以交互 + 设置模式打开,以便新用户在还不了解快捷键的情况下,能立即定位和配置它。
-- **重置:** 所有设置(等级、颜色、团队归属、首次启动状态)都以 JSON 文件形式保存在 Tauri 应用数据目录中(`settings.json`、`auth.json`)。删除这些文件即可完全重置应用。
+- **重置:** 所有设置(颜色、团队归属、首次启动状态)都以 JSON 文件形式保存在 Tauri 应用数据目录中(`settings.json`、`auth.json`)。删除这些文件即可完全重置应用。
 - **自动退出:** 应用会监视 AION 客户端进程(`aion.bin`)。一旦客户端被检测到运行过之后又关闭,overlay 应用也会自动退出。
 - **自动更新:** 每次启动时,应用都会在后台检查最新的 GitHub Release,如有可用更新会自动下载并安装,然后重启 —— 无需任何对话框或点击。
 

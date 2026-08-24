@@ -99,6 +99,16 @@ body,
   white-space: nowrap;
 }
 
+.upcoming-level,
+.event-level {
+  font-size: 0.7em;
+  opacity: 0.7;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
 .pager {
   display: flex;
   justify-content: space-between;
@@ -228,6 +238,14 @@ body,
 .settings-header {
   display: flex;
   justify-content: space-between;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 6px;
 }
 
 .color-row {

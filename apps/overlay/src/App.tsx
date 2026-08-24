@@ -75,7 +75,6 @@ export default function App() {
       {schedule && page === 0 && (
         <UpcomingList
           schedule={schedule}
-          myLevel={settings.myLevel}
           language={settings.language}
         />
       )}
@@ -85,7 +84,6 @@ export default function App() {
           schedule={schedule}
           activeCategory={activeCategory}
           onCategoryChange={setActiveCategory}
-          myLevel={settings.myLevel}
           language={settings.language}
         />
       )}

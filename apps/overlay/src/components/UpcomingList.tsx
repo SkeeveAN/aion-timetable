@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import type { LanguageCode, ScheduleResponse } from "@aion-timetable/shared";
 import { currentOrNextOccurrence, formatCountdown, formatLocalTime } from "../lib/time";
-import { matchesLevel } from "../lib/level";
 import { categoryShortLabel } from "../lib/categoryLabels";
+import { levelRangeLabel } from "../lib/level";
 import { riftLabel } from "../lib/riftZones";
 import { groupByFamily } from "../lib/eventGroups";
 import { t } from "../lib/uiStrings";
@@ -11,17 +11,15 @@ const WINDOW_MS = 60 * 60_000;
 
 interface Props {
   schedule: ScheduleResponse;
-  myLevel: number | null;
   language: LanguageCode;
 }
 
-export function UpcomingList({ schedule, myLevel, language }: Props) {
+export function UpcomingList({ schedule, language }: Props) {
   const strings = t(language);
   const now = new Date();
 
   const upcoming = useMemo(() => {
     const withOccurrence = schedule.events
-      .filter((event) => matchesLevel(event, myLevel))
       .map((event) => ({
         event,
         occurrence: currentOrNextOccurrence(
@@ -45,7 +43,7 @@ export function UpcomingList({ schedule, myLevel, language }: Props) {
     ).sort(
       (a, b) => a.items[0].occurrence.start.getTime() - b.items[0].occurrence.start.getTime()
     );
-  }, [schedule, myLevel]);
+  }, [schedule]);
 
   return (
     <ul className="upcoming-list">
@@ -55,6 +53,7 @@ export function UpcomingList({ schedule, myLevel, language }: Props) {
           event.category === "rifts" && group.items.length === 1
             ? riftLabel(event, schedule.events, strings.riftFromToTemplate)
             : group.displayName;
+        const level = levelRangeLabel(event);
 
         return (
           <li
@@ -63,6 +62,7 @@ export function UpcomingList({ schedule, myLevel, language }: Props) {
           >
             <span className="upcoming-category">{categoryShortLabel(language, event.category)}</span>
             <span className="upcoming-name">{name}</span>
+            {level && <span className="upcoming-level">{level}</span>}
             <span className="upcoming-time">
               {occurrence.isActive ? (
                 <>

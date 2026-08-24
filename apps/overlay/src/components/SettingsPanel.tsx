@@ -22,9 +22,10 @@ export function SettingsPanel({ settings, onChange, onClose }: Props) {
         <button onClick={onClose}>{strings.settingsClose}</button>
       </div>
 
-      <label>
-        {strings.settingsLanguage}
+      <div className="settings-grid">
+        <label htmlFor="settings-language">{strings.settingsLanguage}</label>
         <select
+          id="settings-language"
           value={settings.language}
           onChange={(e) => onChange({ language: e.target.value as OverlaySettings["language"] })}
         >
@@ -34,25 +35,10 @@ export function SettingsPanel({ settings, onChange, onClose }: Props) {
             </option>
           ))}
         </select>
-      </label>
 
-      <label>
-        {strings.settingsMyLevel}
+        <label htmlFor="settings-font-size">{strings.settingsFontSize} (px)</label>
         <input
-          type="number"
-          min={1}
-          max={65}
-          placeholder={strings.settingsMyLevelPlaceholder}
-          value={settings.myLevel ?? ""}
-          onChange={(e) =>
-            onChange({ myLevel: e.target.value === "" ? null : Number(e.target.value) })
-          }
-        />
-      </label>
-
-      <label>
-        {strings.settingsFontSize} (px)
-        <input
+          id="settings-font-size"
           type="number"
           min={MIN_FONT_SIZE}
           max={MAX_FONT_SIZE}
@@ -65,17 +51,18 @@ export function SettingsPanel({ settings, onChange, onClose }: Props) {
             });
           }}
         />
-      </label>
 
-      <div className="color-row">
-        {COLORS.map((color) => (
-          <button
-            key={color}
-            className={color === settings.textColor ? "swatch active" : "swatch"}
-            style={{ backgroundColor: color }}
-            onClick={() => onChange({ textColor: color })}
-          />
-        ))}
+        <span>{strings.settingsTextColor}</span>
+        <div className="color-row">
+          {COLORS.map((color) => (
+            <button
+              key={color}
+              className={color === settings.textColor ? "swatch active" : "swatch"}
+              style={{ backgroundColor: color }}
+              onClick={() => onChange({ textColor: color })}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
